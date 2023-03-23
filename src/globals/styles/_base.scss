@@ -11,7 +11,6 @@ $background-dark_lightest: #3e8df7; // Btn background ?
 $font-color_primary: #fcfcfd;
 $font-color_secondary: #95989e;
 
-
 // COLORS - LIGHT -- later on
 
 // SOME SPACING VARIABLES
@@ -21,3 +20,18 @@ $font-family: 'Montserrat', sans-serif;
 $font-weight_light: 300;
 $font-weight_regular: 400;
 $font-weight_bold: 500;
+
+*,
+*::before,
+*::after,
+html {
+  box-sizing: border-box;
+};
+
+body {
+    color: $font-color_primary;
+    background-color: $background-dark_darkest;
+    font-family: $font-family;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+};
