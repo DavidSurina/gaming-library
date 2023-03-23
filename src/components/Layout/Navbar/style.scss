@@ -1,0 +1,9 @@
+@import 'globals/styles/main.scss';
+
+.navbar {
+    &-wrapper {
+        width: 100%;
+        height: 3rem;
+        background-color: $background-dark_dark;
+    }
+}
