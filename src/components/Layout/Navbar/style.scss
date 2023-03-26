@@ -2,8 +2,23 @@
 
 .navbar {
     &-wrapper {
+        @include flex-row;
         width: 100%;
-        height: 3rem;
+        // height: 3rem;
         background-color: $background-dark_dark;
+        color: $font-color_secondary;
+        font-size: 24px;
+    }
+
+    &-link {
+        padding: 1rem;
+        transition: all 0.2s;
+        border: 3px solid $background-dark_dark;
+        @include link;
+
+        &:hover {
+            color: $background-dark_lightest;
+            border-bottom: 3px solid $background-dark_lightest;
+        }
     }
 }
