@@ -1,0 +1,11 @@
+@use '/src/globals/styles/mixins' as m; 
+@use '/src/globals/styles/base' as b;
+
+.top-games {
+    &_wrapper {
+        @use flex-row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+    }
+}
