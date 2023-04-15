@@ -1,3 +1,5 @@
+import GameLibrary from "pages/GameLibrary/GameLibrary";
+import Home from "pages/Home/Home";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
@@ -9,8 +11,8 @@ function MainRoute() {
     <>
       <Routes>
         <Route index element={<div>Home route</div>} />
-        <Route path={HOME_ROUTE} element={<div>Home route</div>} />
-        <Route path={LIBRARY_ROUTE} element={<div>Libary</div>} />
+        <Route path={HOME_ROUTE} element={<Home />} />
+        <Route path={LIBRARY_ROUTE} element={<GameLibrary />} />
       </Routes>
     </>
   );
