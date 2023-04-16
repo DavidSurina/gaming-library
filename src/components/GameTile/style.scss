@@ -1,0 +1,13 @@
+@use '/src/globals/styles/mixins' as m; 
+@use '/src/globals/styles/base' as b;
+
+
+.tile {
+    &-wrapper {
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border: 1px solid b.$background-dark_lightest;
+    }
+}

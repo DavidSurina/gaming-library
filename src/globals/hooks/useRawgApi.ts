@@ -1,3 +1,6 @@
+import React from "react";
+import axios from "axios";
+
 function useRawgApi() {
   const baseGamingUrl = "https://api.rawg.io/api/";
 
@@ -7,11 +10,10 @@ function useRawgApi() {
     process.env.REACT_APP_GAMING_LIBRARY_API_KEY as string
   }`;
 
-  const getTrendingGames = async () => {
-    const res = await fetch(trendingGamesUrl, {
-      method: "GET",
-    });
-    return res.json;
+  const getTrendingGames = async <T>(): Promise<T> => {
+    const res = await axios.get(trendingGamesUrl);
+    console.log(res);
+    return res.data;
   };
 
   return {
