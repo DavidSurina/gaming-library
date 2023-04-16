@@ -1,29 +1,31 @@
-import React, { ReactNode, useMemo, useContext, createContext } from "react";
+import React, { ReactNode, useContext, createContext } from "react";
 
 type AppContextPropsType = {
   children: ReactNode;
 };
 
 export type AppContextType = {
-  values: any;
+  value: string;
 };
 
 const defaultContextValue: AppContextType = {
-  values: "test",
+  value: "",
 };
 
 export const AppContext = createContext(defaultContextValue);
 
 function AppContextProvider(props: AppContextPropsType) {
   const { children } = props;
-  const values = "test2";
+  const value = "test";
 
-  const context = useMemo((): AppContextType => {
+  const context = (): AppContextType => {
     return {
-      values,
+      value,
     };
-  }, [values]);
-  return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
+  };
+  return (
+    <AppContext.Provider value={context()}>{children}</AppContext.Provider>
+  );
 }
 
 export const useAppContext = (): AppContextType => useContext(AppContext);
