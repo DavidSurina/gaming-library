@@ -1,4 +1,4 @@
-@use './base' as b;
+@use './constants' as c;
 
 @mixin flex-row {
     display: flex;
@@ -12,7 +12,7 @@
 
 
 @mixin link {
-    color: b.$font-color_secondary;
+    color: c.$font-color_secondary;
     text-decoration: none;
     &:visited {
         color: inherit;

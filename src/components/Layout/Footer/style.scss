@@ -1,5 +1,5 @@
 @use '/src/globals/styles/mixins' as m; 
-@use '/src/globals/styles/base' as b;
+@use '/src/globals/styles/constants' as c;
 
 .footer {
     &-wrapper {
@@ -9,6 +9,6 @@
         position: absolute;
         bottom: 0;
         align-self: flex-end;
-        background-color: b.$background-dark_dark;
+        background-color: c.$background-dark_dark;
     }
 }

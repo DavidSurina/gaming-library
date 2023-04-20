@@ -1,5 +1,5 @@
 @use '/src/globals/styles/mixins' as m; 
-@use '/src/globals/styles/base' as b;
+@use '/src/globals/styles/constants' as c;
 
 
 .tile {
@@ -8,6 +8,6 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        border: 1px solid b.$background-dark_lightest;
+        border: 1px solid c.$background-dark_lightest;
     }
 }
