@@ -1,11 +1,9 @@
 @use '/src/globals/styles/mixins' as m; 
 @use '/src/globals/styles/constants' as c;
 
-.top-games {
-    &_wrapper {
-        @use flex-row;
-        flex-wrap: wrap;
-        width: 100%;
-        gap: 20px;
-    }
+.tiles-wrapper {
+    @include m.flex-row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
 }
