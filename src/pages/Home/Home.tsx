@@ -2,11 +2,12 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useRawgApi from "globals/hooks/useRawgApi";
 import GameTile from "components/GameTile/GameTile";
+import { Game, GamesResults } from "globals/types/gameTypes";
 
 function Home() {
   const { getTrendingGames } = useRawgApi();
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<GamesResults>({
     queryKey: ["trendingGames"],
     queryFn: getTrendingGames,
   });
@@ -16,8 +17,8 @@ function Home() {
   return (
     <section>
       <div className="top-games_wrapper">
-        {data.result &&
-          data.result.map((item: unknown) => {
+        {data?.results &&
+          data.results.map((item: Game) => {
             return <GameTile name={item?.name as string} />;
           })}
       </div>
