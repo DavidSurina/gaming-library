@@ -38,3 +38,8 @@ export type GamesResults = {
   next: string;
   results: Game[];
 };
+
+export type GameParams = {
+  kdates: string;
+  ordering: string;
+};
