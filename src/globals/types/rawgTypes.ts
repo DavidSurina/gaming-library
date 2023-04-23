@@ -40,6 +40,9 @@ export type GamesResults = {
 };
 
 export type GameParams = {
+  dates: string;
   kdates: string;
   ordering: string;
+  metacritic: string;
+  exclude_additions: string;
 };
