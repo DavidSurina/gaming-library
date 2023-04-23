@@ -1,16 +1,24 @@
 import React from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
+import { DETAIL_ROUTE } from "MainRoute";
+import { Game } from "globals/types/rawgTypes";
 
 type PropTypes = {
-  name: string;
+  game: Game;
 };
 
 function GameTile(props: PropTypes) {
-  const { name } = props;
+  const {
+    game: { name, id },
+  } = props;
 
   return (
     <div className="tile-wrapper">
       <h2>{name}</h2>
+      <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
+        Details
+      </Link>
     </div>
   );
 }

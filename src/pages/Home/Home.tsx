@@ -20,9 +20,7 @@ function Home() {
     <section className="tiles-wrapper">
       {data?.results &&
         data.results.map((item: Game) => {
-          return (
-            <GameTile name={item?.name as string} key={`${id}${item.name}`} />
-          );
+          return <GameTile game={item} key={`${id}${item.name}`} />;
         })}
     </section>
   );

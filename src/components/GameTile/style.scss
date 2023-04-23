@@ -4,10 +4,15 @@
 
 .tile {
     &-wrapper {
+        padding: 1rem;
+        flex-basis: 300px;
         max-width: 350px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         border: 1px solid c.$background-dark_lightest;
+    }
+    &-link {
+        @include m.link;
     }
 }
