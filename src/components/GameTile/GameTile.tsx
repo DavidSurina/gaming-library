@@ -10,15 +10,20 @@ type PropTypes = {
 
 function GameTile(props: PropTypes) {
   const {
-    game: { name, id },
+    game: { name, id, background_image },
   } = props;
 
   return (
     <div className="tile-wrapper">
-      <h2>{name}</h2>
-      <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
-        Details
-      </Link>
+      <div className="tile-left">
+        <img className="tile-image" src={background_image} alt="game-image" />
+      </div>
+      <div className="tile-right">
+        <h3>{name}</h3>
+        <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
+          Details
+        </Link>
+      </div>
     </div>
   );
 }

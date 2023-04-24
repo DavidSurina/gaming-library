@@ -5,14 +5,24 @@
 .tile {
     &-wrapper {
         padding: 1rem;
-        flex-basis: 300px;
-        max-width: 350px;
+        flex-basis: 400px;
+        max-width: 450px;
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        flex-direction: row;
+        justify-content: space-between;
         border: 1px solid c.$background-dark_lightest;
     }
     &-link {
         @include m.link;
+    }
+    &-left {
+        width: 50%,
+    }
+
+    &-right {
+
+    }
+    &-image {
+        width: 100%,
     }
 }
