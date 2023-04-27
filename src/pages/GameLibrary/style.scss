@@ -1,0 +1,25 @@
+@use '/src/globals/styles/mixins' as m; 
+@use '/src/globals/styles/constants' as c;
+
+.tiles-wrapper {
+    @include m.flex-row;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 25px;
+
+    &:hover > .tile-wrapper:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        z-index: 10;
+      }
+    &:hover > .tile-wrapper:not(:hover) {
+        opacity: 0.5;
+      }
+}
+
+.filtering-wrapper {
+  background-color: c.$background-dark_light;
+  width: 100%;
+  min-height: 20vh;
+}

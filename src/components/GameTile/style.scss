@@ -4,25 +4,38 @@
 
 .tile {
     &-wrapper {
-        padding: 1rem;
         flex-basis: 400px;
         max-width: 450px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
-        border: 1px solid c.$background-dark_lightest;
+        flex-grow: 1;
+        background-color: c.$background-dark_light;
+        border-radius: 10px;
+        transition: all .2s ease-in-out;
     }
+    &-top {
+        width: 100%;
+        height: 70%;
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+
+        & img {
+            width: 100%;
+            transform: scale(1.4);
+        }
+    }
+
+    &-bottom {
+        @include m.flex-col;
+        flex-grow: 1;
+        justify-content: flex-start;
+        padding: 1rem;
+    }
+
     &-link {
         @include m.link;
-    }
-    &-left {
-        width: 50%,
-    }
-
-    &-right {
-
-    }
-    &-image {
-        width: 100%,
+        align-self: flex-end;
+        padding-bottom: 0.5rem;
     }
 }

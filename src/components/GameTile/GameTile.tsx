@@ -15,14 +15,14 @@ function GameTile(props: PropTypes) {
 
   return (
     <div className="tile-wrapper">
-      <div className="tile-left">
-        <img className="tile-image" src={background_image} alt="game-image" />
+      <div className="tile-top">
+        <img className="tile-image" src={background_image} alt="game-img" />
       </div>
-      <div className="tile-right">
-        <h3>{name}</h3>
+      <div className="tile-bottom">
         <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
           Details
         </Link>
+        <h3>{name}</h3>
       </div>
     </div>
   );
