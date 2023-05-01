@@ -2,9 +2,9 @@
 @use '/src/globals/styles/constants' as c;
 
 .tiles-wrapper {
-    @include m.flex-row;
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     margin: 2rem auto;
-    flex-wrap: wrap;
     width: 100%;
     gap: 25px;
 
