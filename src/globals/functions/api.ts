@@ -1,5 +1,4 @@
 import axios from "axios";
-import { trendingGamesParams } from "globals/rawgParams";
 import { GamesResults } from "globals/types/rawgTypes";
 
 export const baseRawgUrl = "https://api.rawg.io/api";
@@ -23,20 +22,23 @@ export function formatParams(paramsObj: Record<string, string>) {
 
 export const getRawgData = async (
   url: string,
-  _params: Record<string, string>
+  _params?: Record<string, string>
 ) => {
-  const params = formatParams(_params);
-  return await rawgClient.get<GamesResults>(
-    baseRawgUrl +
-      url +
-      "?key=" +
-      process.env.REACT_APP_GAMING_LIBRARY_API_KEY +
-      params
-  );
+  let params = "";
+  if (_params) {
+    params = formatParams(_params);
+  }
+
+  const urlString = _params
+    ? url + "?key=" + process.env.REACT_APP_GAMING_LIBRARY_API_KEY + params
+    : `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
+
+  return await rawgClient.get<GamesResults>(urlString);
 };
 
-const getBestGames = async () => {
-  const response = await getRawgData("/games", trendingGamesParams);
+const getBestGames = async (url: string) => {
+  console.log(url);
+  const response = await getRawgData(url);
   return response.data;
 };
 
