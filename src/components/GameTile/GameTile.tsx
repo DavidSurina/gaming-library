@@ -18,10 +18,10 @@ function GameTile(props: PropTypes) {
       <div className="tile-top">
         <img className="tile-image" src={background_image} alt="game-img" />
       </div>
+      <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
+        Details
+      </Link>
       <div className="tile-bottom">
-        <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
-          Details
-        </Link>
         <h3>{name}</h3>
       </div>
     </div>
