@@ -27,7 +27,13 @@ function GameLibrary() {
     });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(() => fetchNextPage());
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          fetchNextPage();
+        }
+      });
+    });
 
     if (gameRef.current) {
       observer.observe(gameRef.current);
@@ -36,9 +42,9 @@ function GameLibrary() {
     return () => {
       observer.disconnect();
     };
-  }, [gameRef]);
+  }, [gameRef, isLoading]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
   return (
