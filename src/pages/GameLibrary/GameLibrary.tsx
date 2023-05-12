@@ -1,4 +1,4 @@
-import React, { useId, Fragment, useRef, useEffect } from "react";
+import React, { useId, useRef, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import GameTile from "components/GameTile/GameTile";
 import { Game, GamesResults } from "globals/types/rawgTypes";
@@ -21,7 +21,6 @@ function GameLibrary() {
       queryKey: ["bestGames", initialUrl],
       queryFn: ({ pageParam = initialUrl }) => getBestGames(pageParam),
       getNextPageParam: (lastPage) => {
-        console.log(lastPage);
         return lastPage.next;
       },
     });
@@ -39,7 +38,6 @@ function GameLibrary() {
       },
       {
         rootMargin: "0px 0px 400px 0px",
-        threshold: 0,
       }
     );
 
@@ -67,9 +65,9 @@ function GameLibrary() {
               return <GameTile game={game} key={`${id}${game.name}`} />;
             });
           })}
-          <span ref={gameRef} />
         </div>
       )}
+      {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
       {!hasNextPage && <div>No more entries</div>}
     </section>
