@@ -16,7 +16,7 @@ function GameLibrary() {
   const gameRef = useRef<HTMLDivElement>(null);
   const { getBestGames } = RawgApiService;
   const initialUrl = `${rawgSubUrls.game}?${formatParams(trendingGamesParams)}`;
-  const { data, isLoading, error, fetchNextPage, isFetching, isFetched } =
+  const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
       queryKey: ["bestGames", initialUrl],
       queryFn: ({ pageParam = initialUrl }) => getBestGames(pageParam),
@@ -31,7 +31,7 @@ function GameLibrary() {
       (entries) => {
         entries.forEach((entry) => {
           console.log(entry);
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && hasNextPage) {
             console.log("gets fetched");
             fetchNextPage();
           }
@@ -50,7 +50,7 @@ function GameLibrary() {
     return () => {
       observer.disconnect();
     };
-  }, [gameRef.current, isLoading, isFetched]);
+  }, [gameRef.current, isLoading, hasNextPage]);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>{`Request Failed - ${error}`}</div>;
@@ -70,7 +70,8 @@ function GameLibrary() {
           <span ref={gameRef} />
         </div>
       )}
-      <div>{isFetching && <LoadingSpinner />}</div>
+      {isFetching && <LoadingSpinner />}
+      {!hasNextPage && <div>No more entries</div>}
     </section>
   );
 }
