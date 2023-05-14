@@ -15,6 +15,6 @@
     color: c.$font-color_secondary;
     text-decoration: none;
     &:visited {
-        color: inherit;
+        color: c.$font-color_secondary;
     }
 }
