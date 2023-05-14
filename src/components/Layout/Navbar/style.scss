@@ -4,8 +4,9 @@
 .navbar {
     &-wrapper {
         @include m.flex-row;
+        align-items: center;
         width: 100%;
-        // height: 3rem;
+        height: c.$nav-height;
         background-color: c.$background-dark_dark;
         color: c.$font-color_secondary;
         font-size: 24px;

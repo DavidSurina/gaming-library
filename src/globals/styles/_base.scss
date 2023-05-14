@@ -17,12 +17,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 };
 
-#root {
-    min-height: 100vh;
-}
 
 main {
     display: flex;
     direction: column;
+    min-height: calc(max(100vh - (c.$footer-min-height + c.$nav-height)));
     padding: 2%;
 }
