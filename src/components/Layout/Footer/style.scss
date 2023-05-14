@@ -5,7 +5,7 @@
     &-wrapper {
         @include m.flex-row;
         width: 100%;
-        height: 3rem;
+        height: c.$footer-min-height;
         margin-top: auto;
         background-color: c.$background-dark_dark;
     }

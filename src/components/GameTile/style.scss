@@ -18,6 +18,10 @@
         min-height: 220px;
         overflow: hidden;
         border-radius: 10px 10px 0 0;
+        background-image: url('../../../public/img/rawg-img-placeholder.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
 
         & img {
         width: 100%;
