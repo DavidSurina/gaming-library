@@ -30,7 +30,8 @@ function GameLibrary() {
       (entries) => {
         entries.forEach((entry) => {
           console.log(entry);
-          if (entry.isIntersecting && hasNextPage) {
+          if (!hasNextPage) return;
+          if (entry.isIntersecting) {
             console.log("gets fetched");
             fetchNextPage();
           }
@@ -41,7 +42,7 @@ function GameLibrary() {
       }
     );
 
-    if (gameRef.current) {
+    if (gameRef.current && hasNextPage) {
       observer.observe(gameRef.current);
     }
 
@@ -69,7 +70,9 @@ function GameLibrary() {
       )}
       {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
-      {!hasNextPage && <div>No more entries</div>}
+      {!hasNextPage && !isFetching && (
+        <div style={{ textAlign: "center" }}>No more entries</div>
+      )}
     </section>
   );
 }
