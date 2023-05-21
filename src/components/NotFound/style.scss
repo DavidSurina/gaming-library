@@ -12,7 +12,6 @@
         transition: border-bottom 200ms;
 
         & a{
-            @include m.link;
             margin: 1rem 0;
             transition: color 300;
             

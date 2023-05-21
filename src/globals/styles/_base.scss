@@ -20,5 +20,9 @@ main {
 }
 
 button, link {
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+a {
+    text-decoration: none !important;
 }
