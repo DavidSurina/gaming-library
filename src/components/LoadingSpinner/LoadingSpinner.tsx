@@ -1,16 +1,15 @@
 import React from "react";
-import "./style.scss";
+import { Spinner, Container } from "react-bootstrap";
 
 function LoadingSpinner() {
   return (
-    <div className="wrapper">
-      <div className="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Container fluid className="d-flex justify-content-center">
+      <Spinner
+        animation="border"
+        variant="secondary"
+        style={{ width: 60, height: 60 }}
+      />
+    </Container>
   );
 }
 
