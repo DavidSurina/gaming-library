@@ -19,6 +19,7 @@
 
 .img-container {
     width: 100%;
+    position: relative;
     max-height: 220px;
     min-height: 220px;
     overflow: hidden;
@@ -28,11 +29,12 @@
     background-repeat: no-repeat;
     background-position: center;
     & img {
-        width: 100%;
         min-width: 400px;
-        height: 100%;
-        object-fit: cover;
-        transform: scale(1.1);
-        align-self: center;
+        max-width: 470px;
+        min-height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
     }
 }

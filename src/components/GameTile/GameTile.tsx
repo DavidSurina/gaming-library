@@ -18,7 +18,7 @@ function GameTile(props: PropTypes) {
   return (
     <Card>
       <div className="img-container">
-        <Card.Img variant="top" src={background_image} alt="game-img" />
+        <Image src={background_image} alt="game-img" />
       </div>
       <Card.Body>
         <Card.Link
