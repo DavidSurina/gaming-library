@@ -22,7 +22,7 @@ function GameTile(props: PropTypes) {
         Details
       </Link>
       <div className="tile-bottom">
-        <h3>{name}</h3>
+        <h5>{name}</h5>
       </div>
     </div>
   );

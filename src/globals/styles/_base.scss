@@ -10,18 +10,13 @@ html {
 };
 
 body {
-    color: c.$font-color_primary;
-    background-color: c.$background-dark_darkest;
-    font-family: c.$font-family;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 };
 
 main {
-    display: flex;
-    direction: column;
     min-height: calc(max(100vh - (c.$footer-min-height + c.$nav-height)));
-    padding: 2%;
+    padding: min(200px, 2%); // TODO add units that Michal mentioned instead of percentages
 }
 
 button, link {

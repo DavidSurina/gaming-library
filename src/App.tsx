@@ -1,4 +1,5 @@
 import React from "react";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
 import MainLayout from "components/Layout/MainLayout/MainLayout";
 import MainRoute from "MainRoute";
 import AppContextProvider from "globals/contexts/AppContext";
@@ -14,19 +15,21 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-          <QueryClientProvider client={queryClient}>
-            <AppContextProvider>
-              <MainLayout>
-                <MainRoute />
-              </MainLayout>
-            </AppContextProvider>
-          </QueryClientProvider>
-        </ErrorBoundary>
-      )}
-    </QueryErrorResetBoundary>
+    <ThemeProvider>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
+            <QueryClientProvider client={queryClient}>
+              <AppContextProvider>
+                <MainLayout>
+                  <MainRoute />
+                </MainLayout>
+              </AppContextProvider>
+            </QueryClientProvider>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+    </ThemeProvider>
   );
 }
 

@@ -13,11 +13,11 @@ function MainRoute() {
   return (
     <>
       <Routes>
-        <Route path="*" element={<NotFound />} />
         <Route index path={HOME_ROUTE} element={<Home />} />
         <Route path={HOME_ROUTE} element={<Home />} />
         <Route path={LIBRARY_ROUTE} element={<GameLibrary />} />
         <Route path={`${DETAIL_ROUTE}/:id`} element={<GameDetail />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

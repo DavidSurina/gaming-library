@@ -1,10 +1,14 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
 function Home() {
   return (
-    <section style={{ minHeight: "85vh" }}>
-      <h1>Home</h1>
-    </section>
+    <Container fluid="true" className="vh-100">
+      <Row>
+        <h1>Home</h1>
+      </Row>
+    </Container>
   );
 }
 

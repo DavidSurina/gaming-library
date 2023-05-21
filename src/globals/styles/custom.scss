@@ -1,0 +1,13 @@
+@use '/src/globals/styles/constants' as c;
+@import './base';
+
+$primary:  c.$background-dark_darkest;
+$secondary: c.$background-dark_lightest;
+$text-primary: c.$font-color_primary;
+$text-secondary: c.$font-color_secondary;
+$bg-primary: c.$background-dark_darkest;
+$bg-secondary: c.$background-dark_darker;
+$body-bg: c.$background-dark_darkest;
+$body-color: c.$font-color_primary;
+    
+@import '../../../node_modules/bootstrap/scss/bootstrap';
