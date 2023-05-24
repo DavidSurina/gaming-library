@@ -20,10 +20,7 @@ export function formatParams(paramsObj: Record<string, string>) {
     .join("");
 }
 
-export const getRawgData = async (
-  url: string,
-  _params?: Record<string, string>
-) => {
+const getRawgData = async (url: string, _params?: Record<string, string>) => {
   let params = "";
   if (_params) {
     params = formatParams(_params);
@@ -33,15 +30,10 @@ export const getRawgData = async (
     ? url + "?key=" + process.env.REACT_APP_GAMING_LIBRARY_API_KEY + params
     : `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
 
-  return await rawgClient.get<GamesResults>(urlString);
-};
-
-const getBestGames = async (url: string) => {
-  console.log(url);
-  const response = await getRawgData(url);
+  const response = await rawgClient.get<GamesResults>(urlString);
   return response.data;
 };
 
 export const RawgApiService = {
-  getBestGames,
+  getRawgData,
 };
