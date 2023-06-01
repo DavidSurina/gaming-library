@@ -65,7 +65,7 @@ function GameLibrary() {
   }, [gameRef.current, isLoading, hasNextPage]);
 
   if (error) return <div>{`Request Failed - ${error}`}</div>;
-  console.log(data);
+
   return (
     <section>
       <div className="filtering-wrapper">
@@ -77,6 +77,7 @@ function GameLibrary() {
         >
           <option value="bestGames">Best Games</option>
           <option value="latestReleases">Latest Releases</option>
+          <option value="upcomingGames">Upcoming Releases</option>
         </Form.Select>
         <SearchInput />
       </div>

@@ -1,19 +1,12 @@
 import React, {
-  ReactNode,
   useContext,
   createContext,
   useState,
   Dispatch,
   SetStateAction,
 } from "react";
-import {
-  RawgApiService,
-  formatParams,
-  rawgSubUrls,
-} from "globals/functions/api";
+import { formatParams, rawgSubUrls } from "globals/functions/api";
 import { rawgParams } from "globals/rawgParams";
-import { GameParams, GamesResults } from "globals/types/rawgTypes";
-import { useInfiniteQuery } from "@tanstack/react-query";
 
 type LibContextPropType = {
   children: JSX.Element;

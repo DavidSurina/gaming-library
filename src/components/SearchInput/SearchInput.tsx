@@ -13,7 +13,7 @@ function SearchInput() {
     setQueryParams((prevState) => ({
       ...prevState,
       queryKey: "gameSearch",
-      params: `search=${input}&ordering=-metacritic`,
+      params: `search=${input}`,
     }));
   };
 
@@ -27,7 +27,12 @@ function SearchInput() {
           onInput={(e) => setInput(e.currentTarget.value)}
         />
       </FloatingLabel>
-      <Button type="button" variant="outline-secondary" onClick={handleClick}>
+      <Button
+        type="button"
+        variant="outline-secondary"
+        onClick={handleClick}
+        disabled={input.length === 0}
+      >
         Search
       </Button>
     </InputGroup>
