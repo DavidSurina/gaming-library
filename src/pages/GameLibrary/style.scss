@@ -21,7 +21,10 @@
 }
 
 .filtering-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 1rem;
   background-color: c.$background-dark_light;
   width: 100%;
-  min-height: 20vh;
 }
