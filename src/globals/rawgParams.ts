@@ -23,27 +23,27 @@ const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
 const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
 const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
-const bestGames: Partial<GameParams> = {
+const best_games: Partial<GameParams> = {
   ordering: "-rating",
   metacritic: "90,100",
   dates: `1990,${currentDate}`,
   exclude_additions: "true",
 };
 
-const latestReleases: Partial<GameParams> = {
+const latest_releases: Partial<GameParams> = {
   ordering: "-released",
   metacritic: "50,100",
   dates: `${lastYear},${currentDate}`,
   // exclude_additions: "true",
 };
 
-const upcomingGames: Partial<GameParams> = {
+const upcoming_games: Partial<GameParams> = {
   ordering: "-added",
   dates: `${currentDate},${nextYear}`,
 };
 
 export const rawgParams = {
-  bestGames,
-  latestReleases,
-  upcomingGames,
+  best_games,
+  latest_releases,
+  upcoming_games,
 };

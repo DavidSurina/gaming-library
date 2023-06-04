@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Button, Form, InputGroup, FloatingLabel } from "react-bootstrap";
+
 import { useLibContext } from "globals/contexts/LibraryContext";
 
-export const gameSearchQueryKey = "gameSearch";
-
 function SearchInput() {
-  const { setQueryParams } = useLibContext();
+  const { setCurrentQuery } = useLibContext();
   const [input, setInput] = useState("");
 
   const handleClick = () => {
     console.log("fired");
-    setQueryParams((prevState) => ({
+    setCurrentQuery((prevState) => ({
       ...prevState,
-      queryKey: "gameSearch",
+      queryKey: `gameSearch=${input}`,
       params: `search=${input}`,
     }));
   };
