@@ -1,25 +1,32 @@
-import React, { useId, useRef, useEffect } from "react";
+import React, { useId, useRef, useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
+
+import { Form } from "react-bootstrap";
 import GameTile from "components/GameTile/GameTile";
-import { Game, GamesResults } from "globals/types/rawgTypes";
-import "./style.scss";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+
 import {
   RawgApiService,
   formatParams,
   rawgSubUrls,
 } from "globals/functions/api";
-import { trendingGamesParams } from "globals/rawgParams";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import { Game, GameParams, GamesResults } from "globals/types/rawgTypes";
+import "./style.scss";
+import { rawgParams } from "globals/rawgParams";
 
 function GameLibrary() {
   const id = useId();
   const gameRef = useRef<HTMLDivElement>(null);
-  const { getBestGames } = RawgApiService;
-  const initialUrl = `${rawgSubUrls.game}?${formatParams(trendingGamesParams)}`;
+  const { getRawgData } = RawgApiService;
+  const [selectValue, setSelectValue] = useState("bestGames");
+  console.log(selectValue);
+  const initialUrl = `${rawgSubUrls.game}?${formatParams(
+    rawgParams[`${selectValue}` as keyof typeof rawgParams]
+  )}`;
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
-      queryKey: ["bestGames", initialUrl],
-      queryFn: ({ pageParam = initialUrl }) => getBestGames(pageParam),
+      queryKey: [selectValue, initialUrl],
+      queryFn: ({ pageParam = initialUrl }) => getRawgData(pageParam),
       getNextPageParam: (lastPage) => {
         return lastPage.next;
       },
@@ -29,7 +36,6 @@ function GameLibrary() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log(entry);
           if (!hasNextPage) return;
           if (entry.isIntersecting) {
             console.log("gets fetched");
@@ -57,7 +63,14 @@ function GameLibrary() {
   return (
     <section>
       <div className="filtering-wrapper">
-        <h3>Filtering...</h3>
+        <Form.Select
+          size="lg"
+          style={{ width: "50%", margin: "1rem" }}
+          onChange={(e) => setSelectValue(e.target.value)}
+        >
+          <option value="bestGames">Best Games</option>
+          <option value="latestReleases">Latest Releases</option>
+        </Form.Select>
       </div>
       {data?.pages && (
         <div className="tiles-wrapper">

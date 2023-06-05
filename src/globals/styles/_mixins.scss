@@ -9,12 +9,3 @@
     display: flex;
     flex-direction: column;
 }
-
-
-@mixin link {
-    color: c.$font-color_secondary;
-    text-decoration: none;
-    &:visited {
-        color: c.$font-color_secondary;
-    }
-}

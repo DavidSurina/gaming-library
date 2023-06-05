@@ -1,8 +1,10 @@
 import React from "react";
-import "./style.scss";
 import { Link } from "react-router-dom";
+import { Image, Card } from "react-bootstrap";
+
 import { DETAIL_ROUTE } from "MainRoute";
 import { Game } from "globals/types/rawgTypes";
+import "./style.scss";
 
 type PropTypes = {
   game: Game;
@@ -14,17 +16,21 @@ function GameTile(props: PropTypes) {
   } = props;
 
   return (
-    <div className="tile-wrapper">
-      <div className="tile-top">
-        <img className="tile-image" src={background_image} alt="game-img" />
+    <Card>
+      <div className="img-container">
+        <Image src={background_image} alt="game-img" />
       </div>
-      <Link to={`${DETAIL_ROUTE}/${id}`} className="tile-link">
-        Details
-      </Link>
-      <div className="tile-bottom">
-        <h3>{name}</h3>
-      </div>
-    </div>
+      <Card.Body>
+        <Card.Link
+          as={Link}
+          to={`${DETAIL_ROUTE}/${id}`}
+          className="text-right"
+        >
+          Details
+        </Card.Link>
+        <Card.Title>{name}</Card.Title>
+      </Card.Body>
+    </Card>
   );
 }
 

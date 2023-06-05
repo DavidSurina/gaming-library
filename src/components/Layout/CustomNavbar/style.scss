@@ -1,0 +1,32 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.navbar {
+    padding: 0;
+}
+
+.navbar-brand {
+    color: c.$font-color_primary;
+    font-size: x-large;
+    &:hover {
+        color: c.$font-color_primary;
+    }
+    &.active {
+        color: c.$font-color_primary;
+    }
+}
+
+.navbar-nav {
+    .nav-link.active {
+        color: c.$background-dark_lightest;
+        border-bottom: 3px solid c.$background-dark_lightest;
+    }
+}
+
+.nav-link {
+    font-size: large;
+    color: c.$font-color_secondary;
+    &:hover {
+        color: c.$background-dark_lightest;
+    }
+}
