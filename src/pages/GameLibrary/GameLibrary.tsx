@@ -1,36 +1,49 @@
-import React, { useId, useRef, useEffect, useState } from "react";
+import React, { useId, useRef, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import {CurrentQueryType, useLibContext} from "globals/contexts/LibraryContext";
+import {UseSelectStateChange} from "downshift";
 
-import { Form } from "react-bootstrap";
 import GameTile from "components/GameTile/GameTile";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import Select from "../../components/Select/Select";
+import SearchInput from "components/SearchInput/SearchInput";
 
-import {
-  RawgApiService,
-  formatParams,
-  rawgSubUrls,
-} from "globals/functions/api";
-import { Game, GameParams, GamesResults } from "globals/types/rawgTypes";
-import "./style.scss";
+import { RawgApiService, formatParams } from "globals/functions/api";
+import { Game, GamesResults } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/rawgParams";
+import "./style.scss";
+
+function getSelectData(): CurrentQueryType[] {
+  return Object.entries(rawgParams).map(([key, value]) => {
+    return {
+      queryKey:key,
+      params: formatParams(value),
+    }
+  });
+};
 
 function GameLibrary() {
   const id = useId();
   const gameRef = useRef<HTMLDivElement>(null);
   const { getRawgData } = RawgApiService;
-  const [selectValue, setSelectValue] = useState("bestGames");
-  console.log(selectValue);
-  const initialUrl = `${rawgSubUrls.game}?${formatParams(
-    rawgParams[`${selectValue}` as keyof typeof rawgParams]
-  )}`;
+  const { currentQuery, setCurrentQuery, initialUrl } = useLibContext();
+
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
-      queryKey: [selectValue, initialUrl],
+      queryKey: [currentQuery.queryKey, initialUrl],
       queryFn: ({ pageParam = initialUrl }) => getRawgData(pageParam),
       getNextPageParam: (lastPage) => {
         return lastPage.next;
       },
     });
+
+  const handleSelect = (e: UseSelectStateChange<CurrentQueryType>) => {
+    setCurrentQuery((prevState) => ({
+      ...prevState,
+      queryKey: e.selectedItem?.queryKey as string,
+      params: e.selectedItem?.params as string,
+    }));
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,35 +70,31 @@ function GameLibrary() {
     };
   }, [gameRef.current, isLoading, hasNextPage]);
 
-  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
   return (
     <section>
       <div className="filtering-wrapper">
-        <Form.Select
-          size="lg"
-          style={{ width: "50%", margin: "1rem" }}
-          onChange={(e) => setSelectValue(e.target.value)}
-        >
-          <option value="bestGames">Best Games</option>
-          <option value="latestReleases">Latest Releases</option>
-        </Form.Select>
+        <Select items={getSelectData()} onSelectedItemChange={(e) => handleSelect(e)} />
+        <SearchInput />
       </div>
-      {data?.pages && (
+      {!isLoading && data?.pages && (
         <div className="tiles-wrapper">
-          {data.pages.map((group: GamesResults, dataIndex) => {
-            return group.results.map((game: Game, resultIndex) => {
+          {data.pages.map((group: GamesResults) => {
+            return group.results.map((game: Game) => {
               return <GameTile game={game} key={`${id}${game.name}`} />;
             });
           })}
+          {data?.pages[0].count === 0 && (
+            <div style={{ textAlign: "center" }}>No Results</div>
+          )}
+          {!hasNextPage && !isFetching && data?.pages[0]?.count > 0 && (
+            <div style={{ textAlign: "center" }}>No more entries</div>
+          )}
         </div>
       )}
       {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
-      {!hasNextPage && !isFetching && (
-        <div style={{ textAlign: "center" }}>No more entries</div>
-      )}
     </section>
   );
 }
