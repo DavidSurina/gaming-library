@@ -17,20 +17,20 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
         getItemProps } = useSelect({...props});
 
     return (
-        <div className="p-3 w-50" style={{zIndex: 9999}}>
+        <div className="w-20 m-auto justify-content-center" style={{ zIndex: 9999}}>
             <div className="p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-1" {...getToggleButtonProps()} style={{width: selectWidth}}>
                 <span className="text-capitalize">{selectedItem ? formatSelectLabel(selectedItem.queryKey) : 'Elements'}</span>
                 <span className="px-2">{isOpen ? <ChevronUp/> : <ChevronDown />}</span>
             </div>
             <ul
-                className={`position-absolute bg-body mt-1 shadow-sm overflow-scroll p-0 ${
+                className={`position-absolute bg-body mt-1 shadow-sm overflow-auto p-0 ${
                     !isOpen && 'hidden'
                 }`}
                 style={{width: selectWidth}}
                 {...getMenuProps()}
             >
                 {isOpen && items.map((item, index) => (
-                    <li className={`${highlightedIndex === index && 'bg-secondary'} ${selectedItem === item && 'fw-bold'} py-2 px-3 shadow-sm flex-column flex-col`}
+                    <li className={`${highlightedIndex === index && 'bg-secondary'} ${selectedItem === item && 'fw-bold'} py-2 px-3 shadow-sm flex-col`}
                         key={`${item.queryKey}${index}`}
                         {...getItemProps({item, index})}
                     >
