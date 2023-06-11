@@ -5,22 +5,25 @@
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
+    justify-content: space-around;
     background-color: c.$background-dark_light;
     border-radius: 10px;
     transition: all .2s ease-in-out;
+
+    &-title {
+        margin: 0;
+        padding: 1.5rem 1rem;
+    }
 
     &-body {
         display: flex;
         flex-direction: column;
         min-height: 100px;
-        padding: 1rem;
-        & a {
-            padding-bottom: 0.5rem;
-            align-self: flex-end;
-            justify-self: end;
-        }
+        padding: 0 1.3rem;
+    }
+    &-text {
+        color: c.$font-color_secondary;
+        font-size: small;
     }
 }
 
