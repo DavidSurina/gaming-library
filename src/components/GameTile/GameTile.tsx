@@ -16,21 +16,16 @@ function GameTile(props: PropTypes) {
   } = props;
 
   return (
-    <Card>
-      <div className="img-container">
-        <Image src={background_image} alt="game-img" />
-      </div>
-      <Card.Body>
-        <Card.Link
-          as={Link}
-          to={`${DETAIL_ROUTE}/${id}`}
-          className="text-right"
-        >
-          Details
-        </Card.Link>
-        <Card.Title>{name}</Card.Title>
-      </Card.Body>
-    </Card>
+    <Link to={`${DETAIL_ROUTE}/${id}`}>
+      <Card>
+        <div className="img-container">
+          <Image src={background_image} alt="game-img" />
+        </div>
+        <Card.Body>
+          <Card.Title>{name}</Card.Title>
+        </Card.Body>
+      </Card>
+    </Link>
   );
 }
 
