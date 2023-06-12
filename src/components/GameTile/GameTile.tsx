@@ -12,11 +12,11 @@ type PropTypes = {
 
 function GameTile(props: PropTypes) {
   const {
-    game: { name, id, background_image, platforms, released, metacritic },
+    game: { name, id, background_image, platforms, released, metacritic, slug },
   } = props;
 
   return (
-    <Link to={`${DETAIL_ROUTE}/${id}`}>
+    <Link to={`${DETAIL_ROUTE}/${slug}`}>
       <Card>
         <div className="img-container">
           <Image src={background_image} alt="game-img" />
