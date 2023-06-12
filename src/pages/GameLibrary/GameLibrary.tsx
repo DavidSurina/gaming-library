@@ -1,7 +1,11 @@
-import React, { useId, useRef, useEffect } from "react";
+import React, { useId, useRef, useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import {CurrentQueryType, useLibContext} from "globals/contexts/LibraryContext";
-import {UseSelectStateChange} from "downshift";
+import {
+  CurrentQueryType,
+  useLibContext,
+} from "globals/contexts/LibraryContext";
+import { UseSelectStateChange } from "downshift";
+import { Filter } from "react-bootstrap-icons";
 
 import GameTile from "components/GameTile/GameTile";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
@@ -12,21 +16,24 @@ import { RawgApiService, formatParams } from "globals/functions/api";
 import { Game, GamesResults } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/rawgParams";
 import "./style.scss";
+import FilterMenu from "../../components/FilterMenu/FilterMenu";
+import { Button } from "react-bootstrap";
 
 function getSelectData(): CurrentQueryType[] {
   return Object.entries(rawgParams).map(([key, value]) => {
     return {
-      queryKey:key,
+      queryKey: key,
       params: formatParams(value),
-    }
+    };
   });
-};
+}
 
 function GameLibrary() {
   const id = useId();
   const gameRef = useRef<HTMLDivElement>(null);
   const { getRawgData } = RawgApiService;
   const { currentQuery, setCurrentQuery, initialUrl } = useLibContext();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
@@ -36,6 +43,10 @@ function GameLibrary() {
         return lastPage.next;
       },
     });
+
+  const handleClose = () => {
+    setMenuOpen(false);
+  };
 
   const handleSelect = (e: UseSelectStateChange<CurrentQueryType>) => {
     setCurrentQuery((prevState) => ({
@@ -75,8 +86,18 @@ function GameLibrary() {
   return (
     <section>
       <div className="filtering-wrapper">
-        <Select items={getSelectData()} onSelectedItemChange={(e) => handleSelect(e)} />
+        <Select
+          items={getSelectData()}
+          onSelectedItemChange={(e) => handleSelect(e)}
+          initialSelectedItem={currentQuery}
+        />
         <SearchInput />
+        <Button
+          className="filtering-button"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <Filter size="25" />
+        </Button>
       </div>
       {!isLoading && data?.pages && (
         <div className="tiles-wrapper">
@@ -95,6 +116,7 @@ function GameLibrary() {
       )}
       {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
+      <FilterMenu open={menuOpen} handleClose={handleClose} />
     </section>
   );
 }
