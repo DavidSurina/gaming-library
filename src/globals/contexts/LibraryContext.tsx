@@ -44,8 +44,7 @@ function LibContextProvider(props: LibContextPropType) {
   const [subUrl, setSubUrl] = useState(rawgSubUrls.game);
   const [currentQuery, setCurrentQuery] = useState({
     queryKey: "best_games",
-    params: formatParams(rawgParams["best_games"]),
-
+    params: formatParams(rawgParams["Best Games"]),
   });
 
   const initialUrl = `${subUrl}?${currentQuery.params}`;
