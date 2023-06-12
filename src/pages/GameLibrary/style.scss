@@ -9,6 +9,7 @@
     width: 100%;
     min-height: 80vh;
     gap: 25px;
+  z-index: 400;
 
     &:hover > a > .card:hover {
         transform: scale(1.03);
@@ -28,11 +29,23 @@
 
 }
 
-.filtering-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  padding: 1rem;
-  background-color: c.$background-dark_light;
-  width: 100%;
+.filtering {
+  &-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    padding: 1rem;
+    background-color: c.$background-dark_light;
+    width: 100%;
+    z-index: 250;
+  }
+  &-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+  }
 }
