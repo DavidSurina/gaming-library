@@ -4,23 +4,22 @@ import { useQuery } from "@tanstack/react-query";
 import { RawgApiService, rawgSubUrls } from "../../globals/functions/api";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { Button } from "react-bootstrap";
+import { Game } from "../../globals/types/rawgTypes";
 
 function GameDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getRawgData } = RawgApiService;
   const param = `${rawgSubUrls.game}/${id}`;
-  console.log(id);
-  // TODO different type result on getGame query - create 2 fn getSingle/getMultiple ?
-  const { data, isLoading, error, isInitialLoading } = useQuery({
+
+  const { data, error, isInitialLoading } = useQuery<Game>({
     queryKey: [`game-${id}`],
-    queryFn: () => getRawgData(param, {}),
+    queryFn: () => getRawgData<Game>(param, {}),
   });
 
   if (isInitialLoading) {
     return <LoadingSpinner />;
   }
-  console.log(data);
 
   return (
     <section style={{ width: "100%" }}>
@@ -29,6 +28,7 @@ function GameDetail() {
       </Button>
       <div style={{ width: "100%", overflow: "hidden", maxHeight: "60vh" }}>
         <img
+          alt="game-img"
           src={data?.background_image}
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
