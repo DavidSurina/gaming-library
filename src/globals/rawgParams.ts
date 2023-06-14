@@ -103,7 +103,7 @@ export const platform = {
 export const publishers = {
   "Electronic Arts": "electronic-arts",
   "Square Enix": "square-enix",
-  "Ubisoft Enterntainment": "ubisoft-enterntainment",
+  "Ubisoft Entertainment": "ubisoft-entertainment",
   "Microsoft Studios": "microsoft-studios",
   SEGA: "sega-2",
   "2K Games": "2k-games",
