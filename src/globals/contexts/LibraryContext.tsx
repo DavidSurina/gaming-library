@@ -48,7 +48,6 @@ function LibContextProvider(props: LibContextPropType) {
   });
 
   const initialUrl = `${subUrl}?${currentQuery.params}`;
-
   const context = (): LibContextType => {
     return {
       setCurrentQuery,

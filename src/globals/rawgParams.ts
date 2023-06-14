@@ -64,7 +64,7 @@ export const genres = {
   card: "card",
 };
 
-export const platforms = {
+export const platform = {
   PC: "pc",
   "Playstation 5": "playstation5",
   "Xbox One": "xbox-one",

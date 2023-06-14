@@ -8,7 +8,7 @@ const formatSelectLabel = (value: string) => value.replace("_", " ");
 const selectWidth = "330px";
 
 function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
-  const { items, initialSelectedItem } = props;
+  const { items } = props;
   const {
     isOpen,
     selectedItem,
@@ -28,7 +28,7 @@ function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
         {...getToggleButtonProps()}
         style={{ width: selectWidth }}
       >
-        <span className="text-capitalize">
+        <span>
           {selectedItem
             ? formatSelectLabel(selectedItem?.queryKey as string)
             : ""}
