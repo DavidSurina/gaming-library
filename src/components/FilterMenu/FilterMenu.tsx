@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {
   CurrentQueryType,
@@ -39,7 +39,8 @@ function FilterMenu(props: PropTypes) {
     setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
   };
 
-  const onConfirm = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setCurrentQuery({
       queryKey: "filter",
       params: formatParams(filteringParams),
@@ -48,60 +49,62 @@ function FilterMenu(props: PropTypes) {
 
   // TODO change this to form
   return (
-    <Offcanvas
-      show={open}
-      onHide={handleClose}
-      placement="end"
-      backdrop={true}
-      className="bg-primary"
-    >
-      <Offcanvas.Header>
-        <Offcanvas.Title>Filtering</Offcanvas.Title>
-      </Offcanvas.Header>
-      <Offcanvas.Body>
-        <div className="d-flex flex-column justify-content-around py-3">
-          <label id="genres" className="pb-2">
-            Genre:
-          </label>
-          <Select
-            labelId="genres"
-            items={getSelectData(genres)}
-            onSelectedItemChange={(e) => onSelectItem(e, "genres")}
-          />
-        </div>
-        <div className="d-flex flex-column justify-content-around py-3">
-          <label id="platforms" className="pb-2">
-            Platforms:
-          </label>
-          <Select
-            labelId="platforms"
-            items={getSelectData(platform)}
-            onSelectedItemChange={(e) => onSelectItem(e, "platform")}
-          />
-        </div>
-        <div className="d-flex flex-column justify-content-around py-3">
-          <label id="publishers" className="pb-2">
-            Publishers:
-          </label>
-          <Select
-            labelId="publishers"
-            items={getSelectData(publishers)}
-            onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
-          />
-        </div>
-        <div className="d-flex flex-column justify-content-around py-3">
-          <div className="pb-2">Critic rating:</div>
-          {/*Select with multiple or input from user between 0-100*/}
-        </div>
-        <div className="d-flex flex-column justify-content-around py-3">
-          <div className="pb-2">Released:</div>
-          {/*Date range input*/}
-        </div>
-      </Offcanvas.Body>
-      <Button className="p-3" onClick={onConfirm}>
-        Confirm
-      </Button>
-    </Offcanvas>
+    <form onSubmit={handleSubmit}>
+      <Offcanvas
+        show={open}
+        onHide={handleClose}
+        placement="end"
+        backdrop={true}
+        className="bg-primary"
+      >
+        <Offcanvas.Header>
+          <Offcanvas.Title>Filtering</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div className="d-flex flex-column justify-content-around py-3">
+            <label id="genres" className="pb-2">
+              Genre:
+            </label>
+            <Select
+              labelId="genres"
+              items={getSelectData(genres)}
+              onSelectedItemChange={(e) => onSelectItem(e, "genres")}
+            />
+          </div>
+          <div className="d-flex flex-column justify-content-around py-3">
+            <label id="platforms" className="pb-2">
+              Platforms:
+            </label>
+            <Select
+              labelId="platforms"
+              items={getSelectData(platform)}
+              onSelectedItemChange={(e) => onSelectItem(e, "platform")}
+            />
+          </div>
+          <div className="d-flex flex-column justify-content-around py-3">
+            <label id="publishers" className="pb-2">
+              Publishers:
+            </label>
+            <Select
+              labelId="publishers"
+              items={getSelectData(publishers)}
+              onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
+            />
+          </div>
+          <div className="d-flex flex-column justify-content-around py-3">
+            <div className="pb-2">Critic rating:</div>
+            {/*Select with multiple or input from user between 0-100*/}
+          </div>
+          <div className="d-flex flex-column justify-content-around py-3">
+            <div className="pb-2">Released:</div>
+            {/*Date range input*/}
+          </div>
+        </Offcanvas.Body>
+        <Button type="submit" className="p-3">
+          Confirm
+        </Button>
+      </Offcanvas>
+    </form>
   );
 }
 
