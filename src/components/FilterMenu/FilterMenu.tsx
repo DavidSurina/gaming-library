@@ -9,21 +9,12 @@ import { genres, platform, publishers } from "../../globals/rawgParams";
 import { UseSelectStateChange } from "downshift";
 import { Button } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";
+import { getSelectData } from "../../globals/functions/helpers";
 
 interface PropTypes {
   open: boolean;
   handleClose: () => void;
 }
-
-function getSelectData(data: Record<string, string>): CurrentQueryType[] {
-  return Object.entries(data).map(([key, value]) => {
-    return {
-      queryKey: key,
-      params: value,
-    };
-  });
-}
-
 function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();

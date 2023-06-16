@@ -18,15 +18,7 @@ import { rawgParams } from "globals/rawgParams";
 import "./style.scss";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Button } from "react-bootstrap";
-
-function getSelectData(): CurrentQueryType[] {
-  return Object.entries(rawgParams).map(([key, value]) => {
-    return {
-      queryKey: key,
-      params: formatParams(value),
-    };
-  });
-}
+import { getSelectData } from "../../globals/functions/helpers";
 
 function GameLibrary() {
   const id = useId();
@@ -87,7 +79,7 @@ function GameLibrary() {
     <section>
       <div className="filtering-wrapper">
         <Select
-          items={getSelectData()}
+          items={getSelectData(rawgParams)}
           onSelectedItemChange={(e) => handleSelect(e)}
           initialSelectedItem={currentQuery}
         />
