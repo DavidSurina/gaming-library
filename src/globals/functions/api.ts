@@ -14,13 +14,21 @@ const rawgClient = axios.create({
   },
 });
 
-export function formatParams(paramsObj: Record<string, string>) {
+export function formatParams(paramsObj: Record<string, string | string[]>) {
   return Object.keys(paramsObj)
-    .map((param) => `&${param}=${paramsObj[param]}`)
+    .map((param) => {
+      if (paramsObj[param].length === 0) {
+        return "";
+      }
+      return `&${param}=${paramsObj[param]}`;
+    })
     .join("");
 }
 
-const getRawgData = async (url: string, _params?: Record<string, string>) => {
+async function getRawgData<T>(
+  url: string,
+  _params?: Record<string, string>
+): Promise<T> {
   let params = "";
   if (_params) {
     params = formatParams(_params);
@@ -29,10 +37,11 @@ const getRawgData = async (url: string, _params?: Record<string, string>) => {
   const urlString = _params
     ? url + "?key=" + process.env.REACT_APP_GAMING_LIBRARY_API_KEY + params
     : `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
-
-  const response = await rawgClient.get<GamesResults>(urlString);
+  console.log(urlString);
+  const response = await rawgClient.get<T>(urlString);
+  console.log(response);
   return response.data;
-};
+}
 
 export const RawgApiService = {
   getRawgData,

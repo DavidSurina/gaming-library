@@ -1,13 +1,38 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { RawgApiService, rawgSubUrls } from "../../globals/functions/api";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { Button } from "react-bootstrap";
+import { Game } from "../../globals/types/rawgTypes";
 
 function GameDetail() {
   const { id } = useParams();
-  // TODO: add call to get the game data
+  const navigate = useNavigate();
+  const { getRawgData } = RawgApiService;
+  const param = `${rawgSubUrls.game}/${id}`;
+
+  const { data, error, isInitialLoading } = useQuery<Game>({
+    queryKey: [`game-${id}`],
+    queryFn: () => getRawgData<Game>(param, {}),
+  });
+
+  if (isInitialLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
-    <section>
-      <h1>{id} Game</h1>
+    <section style={{ width: "100%" }}>
+      <Button type="button" onClick={() => navigate(-1)} style={{}}>
+        Back
+      </Button>
+      <div style={{ width: "100%", overflow: "hidden", maxHeight: "60vh" }}>
+        <img
+          alt="game-img"
+          src={data?.background_image}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
+      </div>
     </section>
   );
 }

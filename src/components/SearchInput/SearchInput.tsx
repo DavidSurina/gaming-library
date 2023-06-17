@@ -22,7 +22,7 @@ function SearchInput() {
           <FloatingLabel controlId="floatingInput" label="Find games">
             <Form.Control
               type="input"
-              placeholder="abcde"
+              placeholder="search"
               value={input}
               onInput={(e) => setInput(e.currentTarget.value)}
             />
