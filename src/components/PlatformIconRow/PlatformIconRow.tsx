@@ -6,24 +6,45 @@ import {
   Playstation,
   Xbox,
 } from "react-bootstrap-icons";
+import IconWrapper from "./IconWrapper";
 
 function PlatformIconRow(props: { platforms: Platforms[] }) {
   const { platforms } = props;
   const platformList = ["pc", "playstation", "xbox", "nintendo-switch"];
-  const size = 30;
+  const size = 25;
   let icons = platformList.map((p) => {
     const getPlatform = platforms.find((pl) => pl.platform.slug.includes(p));
 
     if (getPlatform) {
       switch (p) {
         case "pc":
-          return <PcDisplay className="mx-1" size={size} />;
+          return (
+            <IconWrapper
+              icon={<PcDisplay className="mx-1" size={size} color="white" />}
+              bgColor="black"
+            />
+          );
         case "playstation":
-          return <Playstation className="mx-2" size={size} />;
+          return (
+            <IconWrapper
+              icon={<Playstation className="mx-1" size={size} color="white" />}
+              bgColor="blue"
+            />
+          );
         case "xbox":
-          return <Xbox className="mx-2" size={size} />;
+          return (
+            <IconWrapper
+              icon={<Xbox size={size} color="green" />}
+              bgColor="white"
+            />
+          );
         case "nintendo-switch":
-          return <NintendoSwitch className="mx-2" size={size} />;
+          return (
+            <IconWrapper
+              icon={<NintendoSwitch size={size} color="red" />}
+              bgColor="white"
+            />
+          );
         default:
           return undefined;
       }
