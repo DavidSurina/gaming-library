@@ -11,9 +11,20 @@
     z-index: 100;
     transition: all .2s ease-in-out;
 
+    &-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem 1rem 0.5rem 1rem;
+        border: none;
+    }
+
     &-title {
         margin: 0;
-        padding: 1.5rem 1rem;
+
+        &-padding {
+            padding-bottom: 28px;
+        }
     }
 
     &-body {
@@ -27,6 +38,7 @@
         font-size: small;
     }
 }
+
 
 .img-container {
     width: 100%;

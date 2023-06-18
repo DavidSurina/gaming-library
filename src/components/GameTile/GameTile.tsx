@@ -6,6 +6,7 @@ import { DETAIL_ROUTE } from "MainRoute";
 import { Game } from "globals/types/rawgTypes";
 import "./style.scss";
 import PlatformIconRow from "../PlatformIconRow/PlatformIconRow";
+import clsx from "clsx";
 
 type PropTypes = {
   game: Game;
@@ -15,6 +16,7 @@ function GameTile(props: PropTypes) {
   const {
     game: { name, id, background_image, platforms, released, metacritic, slug },
   } = props;
+  let formattedName = name.split(":");
 
   return (
     <Link to={`${DETAIL_ROUTE}/${slug}`}>
@@ -22,7 +24,17 @@ function GameTile(props: PropTypes) {
         <div className="img-container">
           <Image src={background_image} alt="game-img" />
         </div>
-        <Card.Title>{name}</Card.Title>
+        <Card.Header>
+          <Card.Title
+            className={clsx({ ["card-title-padding"]: !formattedName[1] })}
+          >
+            {formattedName[0]}
+            {formattedName.length === 2 && ":"}
+          </Card.Title>
+          {formattedName[1] && (
+            <Card.Subtitle className="my-1">{formattedName[1]}</Card.Subtitle>
+          )}
+        </Card.Header>
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center py-1">
             <Card.Subtitle>Released:</Card.Subtitle>
