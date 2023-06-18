@@ -12,7 +12,7 @@ import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import Select from "../../components/Select/Select";
 import SearchInput from "components/SearchInput/SearchInput";
 
-import { RawgApiService, formatParams } from "globals/functions/api";
+import { RawgApiService } from "globals/functions/api";
 import { Game, GamesResults } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/rawgParams";
 import "./style.scss";

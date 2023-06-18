@@ -5,6 +5,7 @@ import { Image, Card } from "react-bootstrap";
 import { DETAIL_ROUTE } from "MainRoute";
 import { Game } from "globals/types/rawgTypes";
 import "./style.scss";
+import PlatformIconRow from "../PlatformIconRow/PlatformIconRow";
 
 type PropTypes = {
   game: Game;
@@ -31,10 +32,10 @@ function GameTile(props: PropTypes) {
             <Card.Subtitle>Critic rating:</Card.Subtitle>
             <Card.Text>{metacritic}/100</Card.Text>
           </div>
-          <div className="d-flex flex-column justify-content-between py-1">
+          <div className="d-flex flex-row justify-content-between py-1">
             <Card.Subtitle>Platforms:</Card.Subtitle>
             <Card.Text>
-              {platforms.map((p, index) => p.platform.name).join(", ")}
+              <PlatformIconRow platforms={platforms} />
             </Card.Text>
           </div>
         </Card.Body>
