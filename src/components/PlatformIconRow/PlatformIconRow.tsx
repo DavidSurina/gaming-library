@@ -8,8 +8,8 @@ import {
 } from "react-bootstrap-icons";
 import IconWrapper from "./IconWrapper";
 
-function PlatformIconRow(props: { platforms: Platforms[] }) {
-  const { platforms } = props;
+function PlatformIconRow(props: { platforms: Platforms[]; name: string }) {
+  const { platforms, name } = props;
   const platformList = ["pc", "playstation", "xbox", "nintendo-switch"];
   const size = 25;
   let icons = platformList.map((p) => {
@@ -20,6 +20,7 @@ function PlatformIconRow(props: { platforms: Platforms[] }) {
         case "pc":
           return (
             <IconWrapper
+              key={`pcDisplayIcon${name}`}
               icon={<PcDisplay className="mx-1" size={size} color="white" />}
               bgColor="black"
             />
@@ -27,6 +28,7 @@ function PlatformIconRow(props: { platforms: Platforms[] }) {
         case "playstation":
           return (
             <IconWrapper
+              key={`playstationIcon${name}`}
               icon={<Playstation className="mx-1" size={size} color="white" />}
               bgColor="blue"
             />
@@ -34,6 +36,7 @@ function PlatformIconRow(props: { platforms: Platforms[] }) {
         case "xbox":
           return (
             <IconWrapper
+              key={`xbox${name}`}
               icon={<Xbox size={size} color="green" />}
               bgColor="white"
             />
@@ -41,6 +44,7 @@ function PlatformIconRow(props: { platforms: Platforms[] }) {
         case "nintendo-switch":
           return (
             <IconWrapper
+              key={`nintendoSwitchIcon${name}`}
               icon={<NintendoSwitch size={size} color="red" />}
               bgColor="white"
             />
@@ -49,12 +53,13 @@ function PlatformIconRow(props: { platforms: Platforms[] }) {
           return undefined;
       }
     }
+    return undefined;
   });
 
   if (icons.length) {
     return (
       <div className="d-flex flex-row flex-grow-1 justify-content-end">
-        {icons.map((i) => i)}
+        {icons}
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { GamesResults } from "globals/types/rawgTypes";
 
 export const baseRawgUrl = "https://api.rawg.io/api";
 
@@ -37,9 +36,7 @@ async function getRawgData<T>(
   const urlString = _params
     ? url + "?key=" + process.env.REACT_APP_GAMING_LIBRARY_API_KEY + params
     : `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
-  console.log(urlString);
   const response = await rawgClient.get<T>(urlString);
-  console.log(response);
   return response.data;
 }
 

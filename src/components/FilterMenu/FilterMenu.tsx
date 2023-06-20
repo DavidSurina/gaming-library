@@ -7,9 +7,8 @@ import {
 import Select from "../Select/Select";
 import { genres, platform, publishers } from "../../globals/rawgParams";
 import { UseSelectStateChange } from "downshift";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";
-import { getSelectData } from "../../globals/functions/helpers";
 
 interface PropTypes {
   open: boolean;
@@ -32,8 +31,8 @@ function FilterMenu(props: PropTypes) {
   ) => {
     const { selectedItem } = e;
     const arr = [...filteringParams[`${label}`]];
-    if (!arr.includes(selectedItem?.params as string)) {
-      arr[0] = selectedItem?.params as string;
+    if (!arr.includes(selectedItem?.[1] as string)) {
+      arr[0] = selectedItem?.[1] as string;
     }
 
     setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
@@ -41,22 +40,19 @@ function FilterMenu(props: PropTypes) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCurrentQuery({
-      queryKey: "filter",
-      params: formatParams(filteringParams),
-    });
+    setCurrentQuery(["filter", formatParams(filteringParams)]);
   };
 
   // TODO change this to form
   return (
-    <form onSubmit={handleSubmit}>
-      <Offcanvas
-        show={open}
-        onHide={handleClose}
-        placement="end"
-        backdrop={true}
-        className="bg-primary"
-      >
+    <Offcanvas
+      show={open}
+      onHide={handleClose}
+      placement="end"
+      backdrop={true}
+      className="bg-primary"
+    >
+      <Form onSubmit={handleSubmit}>
         <Offcanvas.Header>
           <Offcanvas.Title>Filtering</Offcanvas.Title>
         </Offcanvas.Header>
@@ -67,7 +63,7 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="genres"
-              items={getSelectData(genres)}
+              items={Object.entries(genres)}
               onSelectedItemChange={(e) => onSelectItem(e, "genres")}
             />
           </div>
@@ -77,7 +73,7 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="platforms"
-              items={getSelectData(platform)}
+              items={Object.entries(platform)}
               onSelectedItemChange={(e) => onSelectItem(e, "platform")}
             />
           </div>
@@ -87,7 +83,7 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="publishers"
-              items={getSelectData(publishers)}
+              items={Object.entries(publishers)}
               onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
             />
           </div>
@@ -103,8 +99,8 @@ function FilterMenu(props: PropTypes) {
         <Button type="submit" className="p-3">
           Confirm
         </Button>
-      </Offcanvas>
-    </form>
+      </Form>
+    </Offcanvas>
   );
 }
 

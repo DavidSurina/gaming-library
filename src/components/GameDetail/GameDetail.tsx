@@ -12,7 +12,7 @@ function GameDetail() {
   const { getRawgData } = RawgApiService;
   const param = `${rawgSubUrls.game}/${id}`;
 
-  const { data, error, isInitialLoading } = useQuery<Game>({
+  const { data, isInitialLoading } = useQuery<Game>({
     queryKey: [`game-${id}`],
     queryFn: () => getRawgData<Game>(param, {}),
   });

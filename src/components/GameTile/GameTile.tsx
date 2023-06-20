@@ -14,7 +14,7 @@ type PropTypes = {
 
 function GameTile(props: PropTypes) {
   const {
-    game: { name, id, background_image, platforms, released, metacritic, slug },
+    game: { name, background_image, platforms, released, metacritic, slug },
   } = props;
   let formattedName = name.split(":");
 
@@ -26,7 +26,7 @@ function GameTile(props: PropTypes) {
         </div>
         <Card.Header>
           <Card.Title
-            className={clsx({ ["card-title-padding"]: !formattedName[1] })}
+            className={clsx({ "card-title-padding": !formattedName[1] })}
           >
             {formattedName[0]}
             {formattedName.length === 2 && ":"}
@@ -46,8 +46,8 @@ function GameTile(props: PropTypes) {
           </div>
           <div className="d-flex flex-row justify-content-between py-1">
             <Card.Subtitle>Platforms:</Card.Subtitle>
-            <Card.Text>
-              <PlatformIconRow platforms={platforms} />
+            <Card.Text as="div">
+              <PlatformIconRow name={name} platforms={platforms} />
             </Card.Text>
           </div>
         </Card.Body>

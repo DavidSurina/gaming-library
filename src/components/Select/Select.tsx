@@ -1,10 +1,7 @@
 import React from "react";
 import { useSelect, UseSelectProps } from "downshift";
 import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
-
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
-
-const formatSelectLabel = (value: string) => value.replace("_", " ");
 const selectWidth = "330px";
 
 function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
@@ -18,6 +15,7 @@ function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
     getItemProps,
   } = useSelect({ ...props });
 
+  const currentItem = selectedItem ? selectedItem : [];
   return (
     <div
       className="w-20 m-auto justify-content-center"
@@ -28,11 +26,7 @@ function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
         {...getToggleButtonProps()}
         style={{ width: selectWidth }}
       >
-        <span>
-          {selectedItem
-            ? formatSelectLabel(selectedItem?.queryKey as string)
-            : ""}
-        </span>
+        <span>{selectedItem ? currentItem[0] : ""}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
@@ -43,18 +37,20 @@ function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
         {...getMenuProps()}
       >
         {isOpen &&
-          items.map((item, index) => (
-            <li
-              style={isOpen && { zIndex: "auto" }}
-              className={`${highlightedIndex === index && "bg-secondary"} ${
-                selectedItem === item && "fw-bold"
-              } py-2 px-3 shadow-sm flex-col`}
-              key={`${item.queryKey}${index}`}
-              {...getItemProps({ item, index })}
-            >
-              <span>{item.queryKey}</span>
-            </li>
-          ))}
+          items.map((item, index) => {
+            return (
+              <li
+                style={isOpen && { zIndex: "auto" }}
+                className={`${highlightedIndex === index && "bg-secondary"} ${
+                  selectedItem === item && "fw-bold"
+                } py-2 px-3 shadow-sm flex-col`}
+                key={`${item[0]}${index}`}
+                {...getItemProps({ item, index })}
+              >
+                <span>{item[0]}</span>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

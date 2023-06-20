@@ -18,7 +18,6 @@ import { rawgParams } from "globals/rawgParams";
 import "./style.scss";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Button } from "react-bootstrap";
-import { getSelectData } from "../../globals/functions/helpers";
 
 function GameLibrary() {
   const id = useId();
@@ -26,10 +25,9 @@ function GameLibrary() {
   const { getRawgData } = RawgApiService;
   const { currentQuery, setCurrentQuery, initialUrl } = useLibContext();
   const [menuOpen, setMenuOpen] = useState(false);
-
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
-      queryKey: [currentQuery.queryKey, initialUrl],
+      queryKey: [currentQuery[0], initialUrl],
       queryFn: ({ pageParam = initialUrl }) => getRawgData(pageParam),
       getNextPageParam: (lastPage) => {
         return lastPage.next;
@@ -40,12 +38,9 @@ function GameLibrary() {
     setMenuOpen(false);
   };
 
-  const handleSelect = (e: UseSelectStateChange<CurrentQueryType>) => {
-    setCurrentQuery((prevState) => ({
-      ...prevState,
-      queryKey: e.selectedItem?.queryKey as string,
-      params: e.selectedItem?.params as string,
-    }));
+  const handleSelect = (e: UseSelectStateChange<[string, string]>) => {
+    const { selectedItem } = e;
+    setCurrentQuery(selectedItem as CurrentQueryType);
   };
 
   useEffect(() => {
@@ -79,7 +74,7 @@ function GameLibrary() {
     <section>
       <div className="filtering-wrapper">
         <Select
-          items={getSelectData(rawgParams)}
+          items={Object.entries(rawgParams)}
           onSelectedItemChange={(e) => handleSelect(e)}
           initialSelectedItem={currentQuery}
         />

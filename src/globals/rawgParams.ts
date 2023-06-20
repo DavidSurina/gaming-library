@@ -1,4 +1,5 @@
 import { GameParams } from "./types/rawgTypes";
+import { formatParams } from "./functions/api";
 
 const getCurrentMonth = function () {
   const month = new Date().getMonth() + 1;
@@ -115,7 +116,7 @@ export const publishers = {
 };
 
 export const rawgParams = {
-  "Best Games": best_games,
-  "Latest Releases": latest_releases,
-  "Upcoming Games": upcoming_games,
+  "Best Games": formatParams(best_games),
+  "Latest Releases": formatParams(latest_releases),
+  "Upcoming Games": formatParams(upcoming_games),
 };

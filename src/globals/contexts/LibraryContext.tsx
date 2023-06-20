@@ -5,17 +5,14 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { formatParams, rawgSubUrls } from "globals/functions/api";
+import { rawgSubUrls } from "globals/functions/api";
 import { rawgParams } from "globals/rawgParams";
 
 type LibContextPropType = {
   children: JSX.Element;
 };
 
-export type CurrentQueryType = {
-  queryKey: string;
-  params: string;
-};
+export type CurrentQueryType = [string, string];
 
 export type LibContextType = {
   initialUrl: string;
@@ -29,10 +26,7 @@ const defaultContextValue: LibContextType = {
   initialUrl: ``,
   subUrl: rawgSubUrls.game,
   setSubUrl: () => {},
-  currentQuery: {
-    queryKey: "",
-    params: "",
-  },
+  currentQuery: ["Best Games", rawgParams["Best Games"]],
   setCurrentQuery: () => {},
 };
 
@@ -42,16 +36,16 @@ function LibContextProvider(props: LibContextPropType) {
   const { children } = props;
 
   const [subUrl, setSubUrl] = useState(rawgSubUrls.game);
-  const [currentQuery, setCurrentQuery] = useState({
-    queryKey: "best_games",
-    params: formatParams(rawgParams["Best Games"]),
-  });
+  const [currentQuery, setCurrentQuery] = useState<CurrentQueryType>([
+    "Best Games",
+    rawgParams["Best Games"],
+  ]);
 
-  const initialUrl = `${subUrl}?${currentQuery.params}`;
+  const initialUrl = `${subUrl}?${currentQuery[1]}`;
   const context = (): LibContextType => {
     return {
-      setCurrentQuery,
       currentQuery,
+      setCurrentQuery,
       subUrl,
       setSubUrl,
       initialUrl,

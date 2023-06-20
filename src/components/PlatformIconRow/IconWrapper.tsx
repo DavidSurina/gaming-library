@@ -7,7 +7,7 @@ type PropTypes = {
 function IconWrapper(props: PropTypes) {
   const { icon, bgColor } = props;
   return (
-    <div
+    <span
       className="mx-1"
       style={{
         backgroundColor: bgColor,
@@ -16,7 +16,7 @@ function IconWrapper(props: PropTypes) {
       }}
     >
       {icon}
-    </div>
+    </span>
   );
 }
 
