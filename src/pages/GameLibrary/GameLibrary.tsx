@@ -70,13 +70,15 @@ function GameLibrary() {
 
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
+  const selectItems = Object.entries(rawgParams);
+
   return (
     <section>
       <div className="filtering-wrapper">
         <Select
-          items={Object.entries(rawgParams)}
+          items={selectItems}
           onSelectedItemChange={(e) => handleSelect(e)}
-          initialSelectedItem={currentQuery}
+          defaultSelectedItem={selectItems[0]}
         />
         <SearchInput />
         <Button
