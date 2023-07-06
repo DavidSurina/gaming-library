@@ -4,7 +4,7 @@ import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 const selectWidth = "330px";
 
-function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
+function Select(props: UseSelectProps<CurrentQueryType>) {
   const { items } = props;
   const {
     isOpen,
@@ -15,7 +15,6 @@ function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
     getItemProps,
   } = useSelect({ ...props });
 
-  const currentItem = selectedItem ? selectedItem : [];
   return (
     <div
       className="w-20 m-auto justify-content-center"
@@ -26,7 +25,7 @@ function Select(props: UseSelectProps<CurrentQueryType>, initialLabel: string) {
         {...getToggleButtonProps()}
         style={{ width: selectWidth }}
       >
-        <span>{selectedItem ? currentItem[0] : ""}</span>
+        <span>{selectedItem ? selectedItem[0] : ""}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
