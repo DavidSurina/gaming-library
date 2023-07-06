@@ -18,7 +18,7 @@ function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
   const [filteringParams, setFilteringParams] = useState<
-    Record<string, string[]>
+    Record<string, [string, string][]>
   >({
     genres: [],
     platform: [],
@@ -31,15 +31,15 @@ function FilterMenu(props: PropTypes) {
   ) => {
     const { selectedItem } = e;
     const arr = [...filteringParams[`${label}`]];
-    if (!arr.includes(selectedItem?.[1] as string)) {
-      arr[0] = selectedItem?.[1] as string;
+    if (!arr.length || (selectedItem && arr[0][1] !== selectedItem[1])) {
+      arr[0] = selectedItem as CurrentQueryType;
+      setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
     }
-
-    setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(filteringParams);
     setCurrentQuery(["filter", formatParams(filteringParams)]);
   };
 
@@ -63,6 +63,7 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="genres"
+              selectedItem={filteringParams.genres[0]}
               items={Object.entries(genres)}
               onSelectedItemChange={(e) => onSelectItem(e, "genres")}
             />
@@ -73,6 +74,7 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="platforms"
+              selectedItem={filteringParams.platform[0]}
               items={Object.entries(platform)}
               onSelectedItemChange={(e) => onSelectItem(e, "platform")}
             />
@@ -83,6 +85,7 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="publishers"
+              selectedItem={filteringParams.publishers[0]}
               items={Object.entries(publishers)}
               onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
             />
