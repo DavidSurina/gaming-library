@@ -90,8 +90,8 @@ function GameLibrary() {
       </div>
       {!isLoading && data?.pages && (
         <div className="tiles-wrapper">
-          {data.pages.map((group: GamesResults) => {
-            return group.results.map((game: Game) => {
+          {data.pages.map((group) => {
+            return group.results.map((game) => {
               return <GameTile game={game} key={`${id}${game.name}`} />;
             });
           })}
