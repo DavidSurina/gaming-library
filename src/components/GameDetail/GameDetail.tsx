@@ -20,7 +20,7 @@ function GameDetail() {
   if (isInitialLoading) {
     return <LoadingSpinner />;
   }
-
+  console.log(data);
   return (
     <section style={{ width: "100%" }}>
       <Button type="button" onClick={() => navigate(-1)} style={{}}>
@@ -33,6 +33,11 @@ function GameDetail() {
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
       </div>
+      <div>{`Publisher - ${data?.publishers[0].name}`}</div>
+      <div>{`Platforms - ${data?.platforms
+        .map((pl) => pl?.platform.name)
+        .join(", ")}`}</div>
+      <div>{`Genres - ${data?.genres.map((g) => g.name).join(", ")}`}</div>
     </section>
   );
 }
