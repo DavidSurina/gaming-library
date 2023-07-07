@@ -102,17 +102,22 @@ export const platform = {
 };
 
 export const publishers = {
+  "CD PROJEKT RED": "cd-projekt-red",
+  "Sony Computer Entertainment": "sony-computer-entertainment",
+  "Activision Blizzard": "activision-blizzard",
   "Electronic Arts": "electronic-arts",
   "Square Enix": "square-enix",
+  "Bethesda Softworks": "bethesda-softworks",
   "Ubisoft Entertainment": "ubisoft-entertainment",
   "Microsoft Studios": "microsoft-studios",
+  Nintendo: "nintendo",
+  Valve: "valve",
   SEGA: "sega-2",
   "2K Games": "2k-games",
-  "Bethesda Softworks": "bethesda-softworks",
   "Feral Interactive": "feral-interactive",
-  Valve: "valve",
   Capcom: "capcom",
-  Nintendo: "nintendo",
+  Konami: "konami",
+  "Bandai Namco Entertainment": "bandai-namco-entertainment",
 };
 
 export const rawgParams = {
