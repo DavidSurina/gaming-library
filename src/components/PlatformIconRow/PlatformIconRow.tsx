@@ -7,6 +7,7 @@ import {
   Xbox,
 } from "react-bootstrap-icons";
 import IconWrapper from "./IconWrapper";
+import { iconSize, platformList } from "./constants";
 
 type PropTypes = {
   platforms: Platforms[];
@@ -14,8 +15,6 @@ type PropTypes = {
 
 function PlatformIconRow(props: PropTypes) {
   const { platforms } = props;
-  const platformList = ["pc", "playstation", "xbox", "nintendo-switch"];
-  const size = 25;
   let icons = platformList.map((p) => {
     const getPlatform = platforms.find((pl) => pl.platform.slug.includes(p));
 
@@ -24,32 +23,36 @@ function PlatformIconRow(props: PropTypes) {
         case "pc":
           return (
             <IconWrapper
-              key={`pcDisplayIcon${name}`}
-              icon={<PcDisplay className="mx-1" size={size} color="white" />}
+              key={`pcDisplayIcon`}
+              icon={
+                <PcDisplay className="mx-1" size={iconSize} color="white" />
+              }
               bgColor="black"
             />
           );
         case "playstation":
           return (
             <IconWrapper
-              key={`playstationIcon${name}`}
-              icon={<Playstation className="mx-1" size={size} color="white" />}
+              key={`playstationIcon`}
+              icon={
+                <Playstation className="mx-1" size={iconSize} color="white" />
+              }
               bgColor="blue"
             />
           );
         case "xbox":
           return (
             <IconWrapper
-              key={`xbox${name}`}
-              icon={<Xbox size={size} color="green" />}
+              key={`xbox`}
+              icon={<Xbox size={iconSize} color="green" />}
               bgColor="white"
             />
           );
         case "nintendo-switch":
           return (
             <IconWrapper
-              key={`nintendoSwitchIcon${name}`}
-              icon={<NintendoSwitch size={size} color="red" />}
+              key={`nintendoSwitchIcon`}
+              icon={<NintendoSwitch size={iconSize} color="red" />}
               bgColor="white"
             />
           );

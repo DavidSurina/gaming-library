@@ -30,7 +30,7 @@ function FilterMenu(props: PropTypes) {
     label: string
   ) => {
     const { selectedItem } = e;
-    const arr = [...filteringParams[`${label}`]];
+    const arr = [...filteringParams[label]];
     if (!arr.length || (selectedItem && arr[0][1] !== selectedItem[1])) {
       arr[0] = selectedItem as CurrentQueryType;
       setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
