@@ -13,54 +13,59 @@ type PropTypes = {
   platforms: Platforms[];
 };
 
+type AttributeType = {
+  icon: JSX.Element | null;
+  bgColor: string;
+};
+
 function PlatformIconRow(props: PropTypes) {
   const { platforms } = props;
-  let icons = platformList.map((p) => {
-    const getPlatform = platforms.find((pl) => pl.platform.slug.includes(p));
 
-    if (getPlatform) {
+  let icons = platformList.map((p) => {
+    const findPlatform = platforms.find((pl) => pl.platform.slug.includes(p));
+
+    const attributes: AttributeType = {
+      icon: null,
+      bgColor: "",
+    };
+
+    if (!findPlatform) {
+      return undefined;
+    }
+
+    if (findPlatform) {
       switch (p) {
         case "pc":
-          return (
-            <IconWrapper
-              key={`pcDisplayIcon`}
-              icon={
-                <PcDisplay className="mx-1" size={iconSize} color="white" />
-              }
-              bgColor="black"
-            />
+          attributes.icon = (
+            <PcDisplay className="mx-1" size={iconSize} color="white" />
           );
+          attributes.bgColor = "black";
+          break;
         case "playstation":
-          return (
-            <IconWrapper
-              key={`playstationIcon`}
-              icon={
-                <Playstation className="mx-1" size={iconSize} color="white" />
-              }
-              bgColor="blue"
-            />
+          attributes.icon = (
+            <Playstation className="mx-1" size={iconSize} color="white" />
           );
+          attributes.bgColor = "blue";
+          break;
         case "xbox":
-          return (
-            <IconWrapper
-              key={`xbox`}
-              icon={<Xbox size={iconSize} color="green" />}
-              bgColor="white"
-            />
-          );
+          attributes.icon = <Xbox size={iconSize} color="green" />;
+          attributes.bgColor = "white";
+          break;
         case "nintendo-switch":
-          return (
-            <IconWrapper
-              key={`nintendoSwitchIcon`}
-              icon={<NintendoSwitch size={iconSize} color="red" />}
-              bgColor="white"
-            />
-          );
+          attributes.icon = <NintendoSwitch size={iconSize} color="red" />;
+          attributes.bgColor = "white";
+          break;
         default:
           return undefined;
       }
     }
-    return undefined;
+    return (
+      <IconWrapper
+        key={p}
+        icon={attributes.icon as JSX.Element}
+        bgColor={attributes.bgColor}
+      />
+    );
   });
 
   if (icons.length) {
