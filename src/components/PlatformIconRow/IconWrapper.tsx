@@ -8,11 +8,9 @@ function IconWrapper(props: PropTypes) {
   const { icon, bgColor } = props;
   return (
     <span
-      className="mx-1"
+      className="mx-1 p-1 rounded-circle"
       style={{
         backgroundColor: bgColor,
-        borderRadius: "50%",
-        padding: "4px",
       }}
     >
       {icon}
