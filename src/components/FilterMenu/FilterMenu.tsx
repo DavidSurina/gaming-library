@@ -39,7 +39,6 @@ function FilterMenu(props: PropTypes) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(filteringParams);
     setCurrentQuery(["filter", formatParams(filteringParams)]);
   };
 

@@ -20,7 +20,7 @@ function GameDetail() {
   if (isInitialLoading) {
     return <LoadingSpinner />;
   }
-  console.log(data);
+
   return (
     <section style={{ width: "100%" }}>
       <Button type="button" onClick={() => navigate(-1)} style={{}}>
