@@ -2,6 +2,7 @@ import React from "react";
 import { useSelect, UseSelectProps } from "downshift";
 import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
+import clsx from "clsx";
 const selectWidth = "330px";
 
 function Select(props: UseSelectProps<CurrentQueryType>) {
@@ -29,9 +30,12 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
-        className={`position-absolute bg-body mt-1 shadow-sm overflow-auto p-0 border border-white${
-          !isOpen && "hidden border-0"
-        }`}
+        className={clsx(
+          "position-absolute bg-body mt-1 shadow-sm overflow-auto p-0 border border-white",
+          {
+            "hidden border-0": !isOpen,
+          }
+        )}
         style={{ width: selectWidth, zIndex: "auto", maxHeight: "400px" }}
         {...getMenuProps()}
       >
@@ -40,9 +44,10 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
             return (
               <li
                 style={isOpen && { zIndex: "auto" }}
-                className={`${highlightedIndex === index && "bg-secondary"} ${
-                  selectedItem === item && "fw-bold"
-                } py-2 px-3 shadow-sm flex-col`}
+                className={clsx("py-2 px-3 shadow-sm flex-col", {
+                  "fw-bold": selectedItem === item,
+                  "bg-secondary": highlightedIndex === index,
+                })}
                 key={`${item[0]}${index}`}
                 {...getItemProps({ item, index })}
               >
