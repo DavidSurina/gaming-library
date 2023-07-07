@@ -8,8 +8,12 @@ import {
 } from "react-bootstrap-icons";
 import IconWrapper from "./IconWrapper";
 
-function PlatformIconRow(props: { platforms: Platforms[]; name: string }) {
-  const { platforms, name } = props;
+type PropTypes = {
+  platforms: Platforms[];
+};
+
+function PlatformIconRow(props: PropTypes) {
+  const { platforms } = props;
   const platformList = ["pc", "playstation", "xbox", "nintendo-switch"];
   const size = 25;
   let icons = platformList.map((p) => {

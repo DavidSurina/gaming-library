@@ -47,7 +47,7 @@ function GameTile(props: PropTypes) {
           <div className="d-flex flex-row justify-content-between py-1">
             <Card.Subtitle>Platforms:</Card.Subtitle>
             <Card.Text as="div">
-              <PlatformIconRow name={name} platforms={platforms} />
+              <PlatformIconRow platforms={platforms} />
             </Card.Text>
           </div>
         </Card.Body>
