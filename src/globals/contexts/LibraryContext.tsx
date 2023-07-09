@@ -12,7 +12,15 @@ type LibContextPropType = {
   children: JSX.Element;
 };
 
-export type CurrentQueryType = [string, string];
+export type CurrentQueryType = {
+  queryKey: string;
+  params: string;
+};
+
+const initialQuery = {
+  queryKey: "Best Games",
+  params: rawgParams["Best Games"],
+};
 
 export type LibContextType = {
   initialUrl: string;
@@ -26,7 +34,7 @@ const defaultContextValue: LibContextType = {
   initialUrl: ``,
   subUrl: rawgSubUrls.game,
   setSubUrl: () => {},
-  currentQuery: ["Best Games", rawgParams["Best Games"]],
+  currentQuery: initialQuery,
   setCurrentQuery: () => {},
 };
 
@@ -36,12 +44,10 @@ function LibContextProvider(props: LibContextPropType) {
   const { children } = props;
 
   const [subUrl, setSubUrl] = useState(rawgSubUrls.game);
-  const [currentQuery, setCurrentQuery] = useState<CurrentQueryType>([
-    "Best Games",
-    rawgParams["Best Games"],
-  ]);
+  const [currentQuery, setCurrentQuery] =
+    useState<CurrentQueryType>(initialQuery);
 
-  const initialUrl = `${subUrl}?${currentQuery[1]}`;
+  const initialUrl = `${subUrl}?${currentQuery.params}`;
   const context = (): LibContextType => {
     return {
       currentQuery,
