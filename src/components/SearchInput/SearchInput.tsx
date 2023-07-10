@@ -9,7 +9,10 @@ function SearchInput() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCurrentQuery([`gameSearch=${input}`, `search=${input}`]);
+    setCurrentQuery({
+      queryKey: `gameSearch=${input}`,
+      params: `search=${input}`,
+    });
   };
 
   return (

@@ -9,6 +9,7 @@ import { genres, platform, publishers } from "../../globals/rawgParams";
 import { UseSelectStateChange } from "downshift";
 import { Button, Form } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";
+import { currentQueryConvert } from "../../globals/functions/helpers";
 
 interface PropTypes {
   open: boolean;
@@ -18,7 +19,7 @@ function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
   const [filteringParams, setFilteringParams] = useState<
-    Record<string, [string, string][]>
+    Record<string, CurrentQueryType[]>
   >({
     genres: [],
     platform: [],
@@ -31,7 +32,10 @@ function FilterMenu(props: PropTypes) {
   ) => {
     const { selectedItem } = e;
     const arr = [...filteringParams[label]];
-    if (!arr.length || (selectedItem && arr[0][1] !== selectedItem[1])) {
+    if (
+      !arr.length ||
+      (selectedItem && arr[0].queryKey !== selectedItem.queryKey)
+    ) {
       arr[0] = selectedItem as CurrentQueryType;
       setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
     }
@@ -39,7 +43,10 @@ function FilterMenu(props: PropTypes) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCurrentQuery(["filter", formatParams(filteringParams)]);
+    setCurrentQuery({
+      queryKey: "filter",
+      params: formatParams(filteringParams),
+    });
   };
 
   // TODO change this to form
@@ -63,7 +70,7 @@ function FilterMenu(props: PropTypes) {
             <Select
               labelId="genres"
               selectedItem={filteringParams.genres[0]}
-              items={Object.entries(genres)}
+              items={currentQueryConvert(genres)}
               onSelectedItemChange={(e) => onSelectItem(e, "genres")}
             />
           </div>
@@ -74,7 +81,7 @@ function FilterMenu(props: PropTypes) {
             <Select
               labelId="platforms"
               selectedItem={filteringParams.platform[0]}
-              items={Object.entries(platform)}
+              items={currentQueryConvert(platform)}
               onSelectedItemChange={(e) => onSelectItem(e, "platform")}
             />
           </div>
@@ -85,7 +92,7 @@ function FilterMenu(props: PropTypes) {
             <Select
               labelId="publishers"
               selectedItem={filteringParams.publishers[0]}
-              items={Object.entries(publishers)}
+              items={currentQueryConvert(publishers)}
               onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
             />
           </div>

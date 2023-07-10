@@ -1,6 +1,5 @@
 import axios from "axios";
 import { CurrentQueryType } from "../contexts/LibraryContext";
-import { type } from "@testing-library/user-event/dist/type";
 
 export const baseRawgUrl = "https://api.rawg.io/api";
 
@@ -25,7 +24,7 @@ export function formatParams(
       }
       if (typeof paramsObj[param] === "object") {
         const par = (paramsObj[param] as CurrentQueryType[]).map(
-          (item) => item[1]
+          (item) => item.params
         );
         return `&${param}=${par.join(",")}`;
       } else {

@@ -13,11 +13,12 @@ import Select from "../../components/Select/Select";
 import SearchInput from "components/SearchInput/SearchInput";
 
 import { RawgApiService } from "globals/functions/api";
-import { Game, GamesResults } from "globals/types/rawgTypes";
+import { GamesResults } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/rawgParams";
 import "./style.scss";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Button } from "react-bootstrap";
+import { currentQueryConvert } from "../../globals/functions/helpers";
 
 function GameLibrary() {
   const id = useId();
@@ -70,9 +71,7 @@ function GameLibrary() {
 
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
-  const selectItems = Object.entries(rawgParams).map((i) => {
-    return { queryKey: i[0], params: i[1] };
-  });
+  const selectItems = currentQueryConvert(rawgParams);
 
   return (
     <section>
