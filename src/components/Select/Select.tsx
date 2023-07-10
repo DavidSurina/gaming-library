@@ -26,7 +26,7 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
         {...getToggleButtonProps()}
         style={{ width: selectWidth }}
       >
-        <span>{selectedItem ? selectedItem[0] : ""}</span>
+        <span>{selectedItem ? selectedItem.queryKey : ""}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
@@ -48,10 +48,10 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
                   "fw-bold": selectedItem === item,
                   "bg-secondary": highlightedIndex === index,
                 })}
-                key={`${item[0]}${index}`}
+                key={`${item.queryKey}${index}`}
                 {...getItemProps({ item, index })}
               >
-                <span>{item[0]}</span>
+                <span>{item.queryKey}</span>
               </li>
             );
           })}
