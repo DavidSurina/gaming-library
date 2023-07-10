@@ -27,7 +27,7 @@ function GameLibrary() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
-      queryKey: [currentQuery[0], initialUrl],
+      queryKey: [currentQuery.queryKey, initialUrl],
       queryFn: ({ pageParam = initialUrl }) => getRawgData(pageParam),
       getNextPageParam: (lastPage) => {
         return lastPage.next;
@@ -38,7 +38,7 @@ function GameLibrary() {
     setMenuOpen(false);
   };
 
-  const handleSelect = (e: UseSelectStateChange<[string, string]>) => {
+  const handleSelect = (e: UseSelectStateChange<CurrentQueryType>) => {
     const { selectedItem } = e;
     setCurrentQuery(selectedItem as CurrentQueryType);
   };
@@ -70,7 +70,9 @@ function GameLibrary() {
 
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
-  const selectItems = Object.entries(rawgParams);
+  const selectItems = Object.entries(rawgParams).map((i) => {
+    return { queryKey: i[0], params: i[1] };
+  });
 
   return (
     <section>
