@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GamesResults } from "globals/types/rawgTypes";
+import { CurrentQueryType } from "../contexts/LibraryContext";
 
 export const baseRawgUrl = "https://api.rawg.io/api";
 
@@ -14,13 +14,22 @@ const rawgClient = axios.create({
   },
 });
 
-export function formatParams(paramsObj: Record<string, string | string[]>) {
+export function formatParams(
+  paramsObj: Record<string, string | CurrentQueryType[]>
+) {
   return Object.keys(paramsObj)
     .map((param) => {
       if (paramsObj[param].length === 0) {
         return "";
       }
-      return `&${param}=${paramsObj[param]}`;
+      if (typeof paramsObj[param] === "object") {
+        const par = (paramsObj[param] as CurrentQueryType[]).map(
+          (item) => item.params
+        );
+        return `&${param}=${par.join(",")}`;
+      } else {
+        return `&${param}=${paramsObj[param]}`;
+      }
     })
     .join("");
 }
@@ -37,9 +46,7 @@ async function getRawgData<T>(
   const urlString = _params
     ? url + "?key=" + process.env.REACT_APP_GAMING_LIBRARY_API_KEY + params
     : `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
-  console.log(urlString);
   const response = await rawgClient.get<T>(urlString);
-  console.log(response);
   return response.data;
 }
 

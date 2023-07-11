@@ -12,7 +12,7 @@ function GameDetail() {
   const { getRawgData } = RawgApiService;
   const param = `${rawgSubUrls.game}/${id}`;
 
-  const { data, error, isInitialLoading } = useQuery<Game>({
+  const { data, isInitialLoading } = useQuery<Game>({
     queryKey: [`game-${id}`],
     queryFn: () => getRawgData<Game>(param, {}),
   });
@@ -33,6 +33,11 @@ function GameDetail() {
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
       </div>
+      <div>{`Publisher - ${data?.publishers[0].name}`}</div>
+      <div>{`Platforms - ${data?.platforms
+        .map((pl) => pl?.platform.name)
+        .join(", ")}`}</div>
+      <div>{`Genres - ${data?.genres.map((g) => g.name).join(", ")}`}</div>
     </section>
   );
 }

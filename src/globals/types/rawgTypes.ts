@@ -21,10 +21,15 @@ export type Genres = {
   slug: string;
 };
 
+export type Publishers = {
+  name: string;
+}; // TODO add type for this
+
 export type Game = {
   slug: string;
   name: string;
   platforms: Platforms[];
+  publishers: Publishers[];
   released: string;
   background_image: string;
   metacritic: number;

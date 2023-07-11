@@ -12,13 +12,13 @@ import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import Select from "../../components/Select/Select";
 import SearchInput from "components/SearchInput/SearchInput";
 
-import { RawgApiService, formatParams } from "globals/functions/api";
-import { Game, GamesResults } from "globals/types/rawgTypes";
+import { RawgApiService } from "globals/functions/api";
+import { GamesResults } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/rawgParams";
 import "./style.scss";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Button } from "react-bootstrap";
-import { getSelectData } from "../../globals/functions/helpers";
+import { currentQueryConvert } from "../../globals/functions/helpers";
 
 function GameLibrary() {
   const id = useId();
@@ -26,7 +26,6 @@ function GameLibrary() {
   const { getRawgData } = RawgApiService;
   const { currentQuery, setCurrentQuery, initialUrl } = useLibContext();
   const [menuOpen, setMenuOpen] = useState(false);
-
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
       queryKey: [currentQuery.queryKey, initialUrl],
@@ -41,11 +40,8 @@ function GameLibrary() {
   };
 
   const handleSelect = (e: UseSelectStateChange<CurrentQueryType>) => {
-    setCurrentQuery((prevState) => ({
-      ...prevState,
-      queryKey: e.selectedItem?.queryKey as string,
-      params: e.selectedItem?.params as string,
-    }));
+    const { selectedItem } = e;
+    setCurrentQuery(selectedItem as CurrentQueryType);
   };
 
   useEffect(() => {
@@ -75,13 +71,15 @@ function GameLibrary() {
 
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
+  const selectItems = currentQueryConvert(rawgParams);
+
   return (
     <section>
       <div className="filtering-wrapper">
         <Select
-          items={getSelectData(rawgParams)}
+          items={selectItems}
           onSelectedItemChange={(e) => handleSelect(e)}
-          initialSelectedItem={currentQuery}
+          defaultSelectedItem={selectItems[0]}
         />
         <SearchInput />
         <Button
@@ -93,8 +91,8 @@ function GameLibrary() {
       </div>
       {!isLoading && data?.pages && (
         <div className="tiles-wrapper">
-          {data.pages.map((group: GamesResults) => {
-            return group.results.map((game: Game) => {
+          {data.pages.map((group) => {
+            return group.results.map((game) => {
               return <GameTile game={game} key={`${id}${game.name}`} />;
             });
           })}

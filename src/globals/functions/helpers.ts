@@ -1,13 +1,9 @@
 import { CurrentQueryType } from "../contexts/LibraryContext";
-import { GameParams } from "../types/rawgTypes";
 
-export function getSelectData(
-  data: Record<string, string | Partial<GameParams>>
+export function currentQueryConvert(
+  obj: Record<string, string>
 ): CurrentQueryType[] {
-  return Object.entries(data).map(([key, value]) => {
-    return {
-      queryKey: key,
-      params: value as string,
-    };
+  return Object.entries(obj).map((entry) => {
+    return { queryKey: entry[0], params: entry[1] };
   });
 }

@@ -1,4 +1,5 @@
 import { GameParams } from "./types/rawgTypes";
+import { formatParams } from "./functions/api";
 
 const getCurrentMonth = function () {
   const month = new Date().getMonth() + 1;
@@ -101,21 +102,26 @@ export const platform = {
 };
 
 export const publishers = {
+  "CD PROJEKT RED": "cd-projekt-red",
+  "Sony Computer Entertainment": "sony-computer-entertainment",
+  "Activision Blizzard": "activision-blizzard",
   "Electronic Arts": "electronic-arts",
   "Square Enix": "square-enix",
+  "Bethesda Softworks": "bethesda-softworks",
   "Ubisoft Entertainment": "ubisoft-entertainment",
   "Microsoft Studios": "microsoft-studios",
+  Nintendo: "nintendo",
+  Valve: "valve",
   SEGA: "sega-2",
   "2K Games": "2k-games",
-  "Bethesda Softworks": "bethesda-softworks",
   "Feral Interactive": "feral-interactive",
-  Valve: "valve",
   Capcom: "capcom",
-  Nintendo: "nintendo",
+  Konami: "konami",
+  "Bandai Namco Entertainment": "bandai-namco-entertainment",
 };
 
 export const rawgParams = {
-  "Best Games": best_games,
-  "Latest Releases": latest_releases,
-  "Upcoming Games": upcoming_games,
+  "Best Games": formatParams(best_games),
+  "Latest Releases": formatParams(latest_releases),
+  "Upcoming Games": formatParams(upcoming_games),
 };

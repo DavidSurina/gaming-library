@@ -7,9 +7,9 @@ import {
 import Select from "../Select/Select";
 import { genres, platform, publishers } from "../../globals/rawgParams";
 import { UseSelectStateChange } from "downshift";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";
-import { getSelectData } from "../../globals/functions/helpers";
+import { currentQueryConvert } from "../../globals/functions/helpers";
 
 interface PropTypes {
   open: boolean;
@@ -19,7 +19,7 @@ function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
   const [filteringParams, setFilteringParams] = useState<
-    Record<string, string[]>
+    Record<string, CurrentQueryType[]>
   >({
     genres: [],
     platform: [],
@@ -31,12 +31,14 @@ function FilterMenu(props: PropTypes) {
     label: string
   ) => {
     const { selectedItem } = e;
-    const arr = [...filteringParams[`${label}`]];
-    if (!arr.includes(selectedItem?.params as string)) {
-      arr[0] = selectedItem?.params as string;
+    const arr = [...filteringParams[label]];
+    if (
+      !arr.length ||
+      (selectedItem && arr[0].queryKey !== selectedItem.queryKey)
+    ) {
+      arr[0] = selectedItem as CurrentQueryType;
+      setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
     }
-
-    setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -49,14 +51,14 @@ function FilterMenu(props: PropTypes) {
 
   // TODO change this to form
   return (
-    <form onSubmit={handleSubmit}>
-      <Offcanvas
-        show={open}
-        onHide={handleClose}
-        placement="end"
-        backdrop={true}
-        className="bg-primary"
-      >
+    <Offcanvas
+      show={open}
+      onHide={handleClose}
+      placement="end"
+      backdrop={true}
+      className="bg-primary"
+    >
+      <Form onSubmit={handleSubmit}>
         <Offcanvas.Header>
           <Offcanvas.Title>Filtering</Offcanvas.Title>
         </Offcanvas.Header>
@@ -67,7 +69,8 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="genres"
-              items={getSelectData(genres)}
+              selectedItem={filteringParams.genres[0]}
+              items={currentQueryConvert(genres)}
               onSelectedItemChange={(e) => onSelectItem(e, "genres")}
             />
           </div>
@@ -77,7 +80,8 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="platforms"
-              items={getSelectData(platform)}
+              selectedItem={filteringParams.platform[0]}
+              items={currentQueryConvert(platform)}
               onSelectedItemChange={(e) => onSelectItem(e, "platform")}
             />
           </div>
@@ -87,7 +91,8 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Select
               labelId="publishers"
-              items={getSelectData(publishers)}
+              selectedItem={filteringParams.publishers[0]}
+              items={currentQueryConvert(publishers)}
               onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
             />
           </div>
@@ -103,8 +108,8 @@ function FilterMenu(props: PropTypes) {
         <Button type="submit" className="p-3">
           Confirm
         </Button>
-      </Offcanvas>
-    </form>
+      </Form>
+    </Offcanvas>
   );
 }
 
