@@ -1,5 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { useSelect, UseSelectProps } from "downshift";
+import {
+  useSelect,
+  UseSelectProps,
+  UseSelectState,
+  UseSelectStateChangeOptions,
+} from "downshift";
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import clsx from "clsx";
@@ -7,18 +12,38 @@ import { FilteringParamsType } from "../FilterMenu/FilterMenu";
 
 const selectWidth = "330px"; // TODO move out globally or separate file
 
+function stateReducer(
+  state: UseSelectState<CurrentQueryType>,
+  actionAndChanges: UseSelectStateChangeOptions<CurrentQueryType>
+) {
+  const { changes, type } = actionAndChanges;
+  switch (type) {
+    case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
+    case useSelect.stateChangeTypes.ToggleButtonKeyDownSpaceButton:
+    case useSelect.stateChangeTypes.ItemClick:
+      return {
+        ...changes,
+        isOpen: true, // keep menu open after selection.
+        highlightedIndex: state.highlightedIndex,
+      };
+    default:
+      return changes;
+  }
+}
+
 interface ExtendedSelectProps extends UseSelectProps<CurrentQueryType> {
   selectedItems: FilteringParamsType;
   setSelectedItems: Dispatch<SetStateAction<FilteringParamsType>>;
 }
+
 function Multiselect(props: ExtendedSelectProps) {
   const {
     labelId,
-    selectedItems: wholeSelectedItems,
+    selectedItems: initialSelectedItems,
     setSelectedItems,
     ...rest
   } = props;
-  const selectedItems = wholeSelectedItems[labelId + ""];
+  const selectedItems = [...initialSelectedItems[labelId + ""]];
 
   const {
     isOpen,
@@ -26,29 +51,41 @@ function Multiselect(props: ExtendedSelectProps) {
     getMenuProps,
     highlightedIndex,
     getItemProps,
-    getLabelProps,
   } = useSelect({
     ...rest,
     labelId: labelId,
+    stateReducer: stateReducer,
     onSelectedItemChange: ({ selectedItem }) => {
       if (!selectedItem) {
         return;
       }
+      let newSelectedItems = [];
+      let index = null;
+      selectedItems.some((item, i) =>
+        item.queryKey === selectedItem.queryKey ? ((index = i), true) : false
+      );
 
-      const index = selectedItems.indexOf(selectedItem);
-
-      if (index > 0) {
-        setSelectedItems([
+      if (typeof index === "number" && index > 0) {
+        newSelectedItems = [
           ...selectedItems.slice(0, index),
           ...selectedItems.slice(index + 1),
-        ]);
+        ];
       } else if (index === 0) {
-        setSelectedItems([...selectedItems.slice(1)]);
+        newSelectedItems = [...selectedItems.slice(1)];
       } else {
-        setSelectedItems([...selectedItems, selectedItem]);
+        newSelectedItems = [...selectedItems, selectedItem];
       }
+
+      setSelectedItems({
+        ...initialSelectedItems,
+        [labelId as string]: newSelectedItems,
+      });
     },
   });
+
+  const selectItemText = selectedItems.length
+    ? `${selectedItems.length} elements selected`
+    : "Elements";
 
   return (
     <div
@@ -60,8 +97,7 @@ function Multiselect(props: ExtendedSelectProps) {
         {...getToggleButtonProps()}
         style={{ width: selectWidth }}
       >
-        {/* TODO Selected item count */}
-        <span>Selected item count</span>
+        <span>{selectItemText}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
@@ -80,19 +116,25 @@ function Multiselect(props: ExtendedSelectProps) {
               <li
                 style={isOpen && { zIndex: "auto" }}
                 className={clsx("py-2 px-3 shadow-sm flex-col", {
-                  "fw-bold": selectedItem === item,
                   "bg-secondary": highlightedIndex === index,
                 })}
                 key={`${item.queryKey}${index}`}
-                {...getItemProps({ item, index })}
+                {...getItemProps({
+                  item,
+                  index,
+                  "aria-selected": selectedItems.some(
+                    (i) => i.queryKey === item.queryKey
+                  ),
+                })}
               >
                 <input
                   type="checkbox"
-                  className="p-2 h-5 w-5"
+                  className="p-2"
                   checked={selectedItems.some(
                     (i) => i.queryKey === item.queryKey
                   )}
                   value={item.queryKey}
+                  onChange={() => null}
                 />
                 <span>{item.queryKey}</span>
               </li>
