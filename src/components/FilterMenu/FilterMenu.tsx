@@ -10,6 +10,10 @@ import { UseSelectStateChange } from "downshift";
 import { Button, Form } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";
 import { currentQueryConvert } from "../../globals/functions/helpers";
+import Multiselect from "../Multiselect/Multiselect";
+import FilterSlider from "../FilterSlider/FilterSlider";
+
+export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 
 interface PropTypes {
   open: boolean;
@@ -18,12 +22,11 @@ interface PropTypes {
 function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
-  const [filteringParams, setFilteringParams] = useState<
-    Record<string, CurrentQueryType[]>
-  >({
+  const [filteringParams, setFilteringParams] = useState<FilteringParamsType>({
     genres: [],
     platform: [],
     publishers: [],
+    metacritic: [],
   });
 
   const onSelectItem = (
@@ -49,7 +52,6 @@ function FilterMenu(props: PropTypes) {
     });
   };
 
-  // TODO change this to form
   return (
     <Offcanvas
       show={open}
@@ -67,22 +69,22 @@ function FilterMenu(props: PropTypes) {
             <label id="genres" className="pb-2">
               Genre:
             </label>
-            <Select
+            <Multiselect
               labelId="genres"
-              selectedItem={filteringParams.genres[0]}
+              selectedItems={filteringParams}
+              setSelectedItems={setFilteringParams}
               items={currentQueryConvert(genres)}
-              onSelectedItemChange={(e) => onSelectItem(e, "genres")}
             />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
             <label id="platforms" className="pb-2">
               Platforms:
             </label>
-            <Select
-              labelId="platforms"
-              selectedItem={filteringParams.platform[0]}
+            <Multiselect
+              labelId="platform"
+              selectedItems={filteringParams}
+              setSelectedItems={setFilteringParams}
               items={currentQueryConvert(platform)}
-              onSelectedItemChange={(e) => onSelectItem(e, "platform")}
             />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
@@ -99,6 +101,10 @@ function FilterMenu(props: PropTypes) {
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Critic rating:</div>
             {/*Select with multiple or input from user between 0-100*/}
+            <FilterSlider
+              state={filteringParams}
+              setState={setFilteringParams}
+            />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Released:</div>

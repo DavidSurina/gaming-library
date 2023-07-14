@@ -1,0 +1,19 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.slider {
+&-wrapper {
+  width: 100%;
+  position: relative;
+
+}
+  &-track {
+    background-color: orange;
+  }
+
+&-thumb {
+  border-radius: 50%;
+  background-color: green;
+}
+
+}
