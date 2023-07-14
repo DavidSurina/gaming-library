@@ -120,7 +120,7 @@ function Multiselect(props: ExtendedSelectProps) {
                 className={clsx("py-2 px-3 shadow-sm flex-col", {
                   "bg-secondary": highlightedIndex === index,
                 })}
-                key={`${item.queryKey}${index}`}
+                key={`${item.queryKey}`}
                 {...getItemProps({
                   item,
                   index,
