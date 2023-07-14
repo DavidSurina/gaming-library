@@ -83,9 +83,11 @@ function Multiselect(props: ExtendedSelectProps) {
     },
   });
 
-  const selectItemText = selectedItems.length
-    ? `${selectedItems.length} elements selected`
-    : "Elements";
+  let selectItemText = selectedItems.length
+    ? `${selectedItems.length} element${
+        selectedItems.length > 1 ? "s" : ""
+      } selected`
+    : "";
 
   return (
     <div
@@ -136,7 +138,7 @@ function Multiselect(props: ExtendedSelectProps) {
                   value={item.queryKey}
                   onChange={() => null}
                 />
-                <span>{item.queryKey}</span>
+                <span className="mx-2">{item.queryKey}</span>
               </li>
             );
           })}
