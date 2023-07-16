@@ -12,13 +12,13 @@ function FilterSlider(props: PropTypes) {
 
   return (
     <ReactSlider
-      value={[0, 100]}
       className="slider-wrapper"
       thumbClassName="slider-thumb"
       trackClassName="slider-track"
+      onChange={(value, index) => console.log(value, index)}
       min={0}
       max={100}
-      ariaLabel={["Lower thumb", "Upper thumb"]}
+      defaultValue={[0, 100]}
       ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
       renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
       pearling
