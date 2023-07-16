@@ -60,18 +60,14 @@ function Multiselect(props: ExtendedSelectProps) {
         return;
       }
       let newSelectedItems = [];
-      let index = null;
-      selectedItems.some((item, i) =>
-        item.queryKey === selectedItem.queryKey ? ((index = i), true) : false
+      const isCurrentlySelected = selectedItems.some(
+        (item, i) => item.queryKey === selectedItem.queryKey
       );
 
-      if (typeof index === "number" && index > 0) {
-        newSelectedItems = [
-          ...selectedItems.slice(0, index),
-          ...selectedItems.slice(index + 1),
-        ];
-      } else if (index === 0) {
-        newSelectedItems = [...selectedItems.slice(1)];
+      if (isCurrentlySelected) {
+        newSelectedItems = selectedItems.filter(
+          (item) => item.queryKey !== selectedItem.queryKey
+        );
       } else {
         newSelectedItems = [...selectedItems, selectedItem];
       }
