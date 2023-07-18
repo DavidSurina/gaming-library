@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap-icons";
 import IconWrapper from "./IconWrapper";
 import { iconSize, platformList } from "./constants";
+import "./style.scss";
 
 type PropTypes = {
   platforms: Platforms[];
@@ -20,6 +21,10 @@ type AttributeType = {
 
 function PlatformIconRow(props: PropTypes) {
   const { platforms } = props;
+
+  if (!platforms.length) {
+    return <div />;
+  }
 
   let icons = platformList.map((p) => {
     const findPlatform = platforms.find((pl) => pl.platform.slug.includes(p));
@@ -68,15 +73,17 @@ function PlatformIconRow(props: PropTypes) {
     );
   });
 
-  if (icons.length) {
-    return (
-      <div className="d-flex flex-row flex-grow-1 justify-content-end">
-        {icons}
-      </div>
-    );
+  if (icons.length < platforms.length) {
+    const calc = platforms.length - icons.length;
+    const element = <p className="icon-text">{"+" + calc}</p>;
+    icons.push(<IconWrapper key={"other"} icon={element} />);
   }
 
-  return <div />;
+  return (
+    <div className="d-flex flex-row flex-grow-1 justify-content-end">
+      {icons}
+    </div>
+  );
 }
 
 export default PlatformIconRow;

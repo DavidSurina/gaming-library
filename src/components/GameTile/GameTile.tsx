@@ -44,8 +44,7 @@ function GameTile(props: PropTypes) {
             <Card.Subtitle>Critic rating:</Card.Subtitle>
             <Card.Text>{metacritic ? `${metacritic}/100` : "---"}</Card.Text>
           </div>
-          <div className="d-flex flex-row justify-content-between py-1">
-            <Card.Subtitle>Platforms:</Card.Subtitle>
+          <div className="d-flex flex-row justify-content-end py-1 mt-1">
             <Card.Text as="div">
               <PlatformIconRow platforms={platforms} />
             </Card.Text>

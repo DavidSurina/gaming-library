@@ -2,7 +2,11 @@ import React from "react";
 
 type PropTypes = {
   icon: JSX.Element;
-  bgColor: string;
+  bgColor?: string;
+};
+
+IconWrapper.defaultProps = {
+  bgColor: "#3e8df7",
 };
 function IconWrapper(props: PropTypes) {
   const { icon, bgColor } = props;
