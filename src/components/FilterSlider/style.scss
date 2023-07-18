@@ -1,35 +1,29 @@
 @use '/src/globals/styles/mixins' as m;
 @use '/src/globals/styles/constants' as c;
 
-.wrapper {
-  position: relative;
-  width: 100%;
-}
-
 .slider {
-&-wrapper {
-  width: 100%;
-  position: relative;
-}
+  &-wrapper {
+    width: 90%;
+    margin: 0 auto 1.5rem auto;
+    z-index: auto !important;
+  }
   &-track {
-    top: 12px;
+    top: 12.5px;
     height: 10px;
-    background-color: orange;
-    color: orange;
+    background-color: c.$background-dark_lightest;
     border-radius: 5px;
-    margin: auto 0;
-
-    // TODO add more styles to track - differentiate 3 separate tracks
-    // Change color - play with what looks good
+    z-index: auto !important;
   }
 
-&-thumb {
-  height: 35px;
-  line-height: 35px;
-  width: 35px;
-  text-align: center;
-  border-radius: 50%;
-  background-color: green;
-}
-
+  &-thumb {
+    height: 35px;
+    line-height: 33px;
+    width: 35px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid c.$font-color_primary;
+    color: c.$font-color_primary;
+    background-color: c.$background-dark_light;
+    z-index: auto !important;
+  }
 }

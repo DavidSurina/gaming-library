@@ -10,7 +10,6 @@ type PropTypes = {
 };
 function FilterSlider(props: PropTypes) {
   const { state, setState } = props;
-  console.log(state);
   function handleChange(value: number[]) {
     const param = [{ queryKey: "metacritic", params: value.join(",") }];
     setState({ ...state, metacritic: param });
@@ -21,7 +20,7 @@ function FilterSlider(props: PropTypes) {
       className="slider-wrapper"
       thumbClassName="slider-thumb"
       trackClassName="slider-track"
-      onChange={handleChange}
+      onAfterChange={handleChange}
       min={0}
       max={100}
       defaultValue={[0, 100]}
