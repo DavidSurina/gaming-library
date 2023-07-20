@@ -9,8 +9,7 @@ import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import clsx from "clsx";
 import { FilteringParamsType } from "../FilterMenu/FilterMenu";
-
-const selectWidth = "330px"; // TODO move out globally or separate file
+import { filterSelectWidth } from "../../globals/constants/constants";
 
 function stateReducer(
   state: UseSelectState<CurrentQueryType>,
@@ -93,7 +92,7 @@ function Multiselect(props: ExtendedSelectProps) {
       <div
         className="p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
         {...getToggleButtonProps()}
-        style={{ width: selectWidth }}
+        style={{ width: filterSelectWidth }}
       >
         <span>{selectItemText}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
@@ -105,7 +104,7 @@ function Multiselect(props: ExtendedSelectProps) {
             "hidden border-0": !isOpen,
           }
         )}
-        style={{ width: selectWidth, zIndex: "auto", maxHeight: "400px" }}
+        style={{ width: filterSelectWidth, zIndex: "auto", maxHeight: "400px" }}
         {...getMenuProps()}
       >
         {isOpen &&

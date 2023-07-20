@@ -3,7 +3,7 @@ import { useSelect, UseSelectProps } from "downshift";
 import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import clsx from "clsx";
-const selectWidth = "330px";
+import { filterSelectWidth } from "../../globals/constants/constants";
 
 function Select(props: UseSelectProps<CurrentQueryType>) {
   const { items } = props;
@@ -24,7 +24,7 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
       <div
         className="p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
         {...getToggleButtonProps()}
-        style={{ width: selectWidth }}
+        style={{ width: filterSelectWidth }}
       >
         <span>{selectedItem ? selectedItem.queryKey : ""}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
@@ -36,7 +36,7 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
             "hidden border-0": !isOpen,
           }
         )}
-        style={{ width: selectWidth, zIndex: "auto", maxHeight: "400px" }}
+        style={{ width: filterSelectWidth, zIndex: "auto", maxHeight: "400px" }}
         {...getMenuProps()}
       >
         {isOpen &&
