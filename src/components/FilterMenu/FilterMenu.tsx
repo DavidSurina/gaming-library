@@ -12,6 +12,7 @@ import { formatParams } from "../../globals/functions/api";
 import { currentQueryConvert } from "../../globals/functions/helpers";
 import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
+import YearsInput from "../YearsInput/YearsInput";
 
 export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 
@@ -27,8 +28,10 @@ function FilterMenu(props: PropTypes) {
     platform: [],
     publishers: [],
     metacritic: [],
+    dates: [],
   });
-
+  const thisYear = new Date().getFullYear();
+  console.log(thisYear);
   const onSelectItem = (
     e: UseSelectStateChange<CurrentQueryType>,
     label: string
@@ -107,8 +110,12 @@ function FilterMenu(props: PropTypes) {
             />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
-            <div className="pb-2">Released:</div>
+            <div className="pb-2">Release year between:</div>
             {/*Date range input*/}
+            <YearsInput
+              filteringParams={filteringParams}
+              setFilteringParams={setFilteringParams}
+            />
           </div>
         </Offcanvas.Body>
         <Button type="submit" className="p-3">

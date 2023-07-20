@@ -1,0 +1,30 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: auto;
+}
+
+.years-label {
+  width: 45%;
+  margin: 0.5rem auto;
+  z-index: auto;
+  input {
+    z-index: auto;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+.years-input::-webkit-outer-spin-button,
+.years-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.years-input[type=number] {
+  -moz-appearance: textfield;
+}
