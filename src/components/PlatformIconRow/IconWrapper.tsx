@@ -11,14 +11,14 @@ IconWrapper.defaultProps = {
 function IconWrapper(props: PropTypes) {
   const { icon, bgColor } = props;
   return (
-    <span
+    <li
       className="mx-1 p-1 rounded-circle"
       style={{
         backgroundColor: bgColor,
       }}
     >
       {icon}
-    </span>
+    </li>
   );
 }
 

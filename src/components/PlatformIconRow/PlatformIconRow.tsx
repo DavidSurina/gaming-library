@@ -75,14 +75,12 @@ function PlatformIconRow(props: PropTypes) {
 
   if (icons.length < platforms.length) {
     const calc = platforms.length - icons.length;
-    const element = <p className="icon-text">{"+" + calc}</p>;
+    const element = <span className="icon-text">{"+" + calc}</span>;
     icons.push(<IconWrapper key={"other"} icon={element} />);
   }
 
   return (
-    <div className="d-flex flex-row flex-grow-1 justify-content-end">
-      {icons}
-    </div>
+    <ul className="d-flex flex-row flex-grow-1 justify-content-end">{icons}</ul>
   );
 }
 
