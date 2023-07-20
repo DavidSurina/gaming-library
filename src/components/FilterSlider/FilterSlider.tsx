@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import ReactSlider from "react-slider";
 import { FilteringParamsType } from "../FilterMenu/FilterMenu";
 import "./style.scss";
-import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 
 type PropTypes = {
   state: FilteringParamsType;
