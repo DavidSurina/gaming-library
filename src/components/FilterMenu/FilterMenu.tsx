@@ -15,10 +15,10 @@ import FilterSlider from "../FilterSlider/FilterSlider";
 
 export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 
-interface PropTypes {
+type PropTypes = {
   open: boolean;
   handleClose: () => void;
-}
+};
 function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();

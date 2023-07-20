@@ -31,10 +31,10 @@ function stateReducer(
   }
 }
 
-interface ExtendedSelectProps extends UseSelectProps<CurrentQueryType> {
+type ExtendedSelectProps = UseSelectProps<CurrentQueryType> & {
   selectedItems: FilteringParamsType;
   setSelectedItems: Dispatch<SetStateAction<FilteringParamsType>>;
-}
+};
 
 function Multiselect(props: ExtendedSelectProps) {
   const {
