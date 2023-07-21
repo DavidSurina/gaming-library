@@ -51,7 +51,7 @@ function FilterMenu(props: PropTypes) {
     e.preventDefault();
     setCurrentQuery({
       queryKey: "filter",
-      params: formatParams(filteringParams),
+      params: formatParams(filteringParams) + "&search_precise=true",
     });
   };
 
