@@ -31,7 +31,6 @@ function FilterMenu(props: PropTypes) {
     dates: [],
   });
   const thisYear = new Date().getFullYear();
-  console.log(thisYear);
   const onSelectItem = (
     e: UseSelectStateChange<CurrentQueryType>,
     label: string
