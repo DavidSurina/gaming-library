@@ -17,7 +17,7 @@ const getCurrentDay = function () {
     return day;
   }
 };
-const currentYear = new Date().getFullYear();
+export const currentYear = new Date().getFullYear();
 const currentMonth = getCurrentMonth();
 const currentDay = getCurrentDay();
 const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;

@@ -1,0 +1,29 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.slider {
+  &-wrapper {
+    width: 90%;
+    margin: 0 auto 1.5rem auto;
+    z-index: auto !important;
+  }
+  &-track {
+    top: 12.5px;
+    height: 10px;
+    background-color: c.$background-dark_lightest;
+    border-radius: 5px;
+    z-index: auto !important;
+  }
+
+  &-thumb {
+    height: 35px;
+    line-height: 33px;
+    width: 35px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid c.$font-color_primary;
+    color: c.$font-color_primary;
+    background-color: c.$background-dark_light;
+    z-index: auto !important;
+  }
+}
