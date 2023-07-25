@@ -5,11 +5,12 @@ import {
   UseSelectState,
   UseSelectStateChangeOptions,
 } from "downshift";
-import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
-import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import clsx from "clsx";
-import { filterSelectWidth } from "../../globals/constants/constants";
+import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
+
+import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
+import "./style.scss";
 
 function stateReducer(
   state: UseSelectState<CurrentQueryType>,
@@ -76,33 +77,27 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
     : "";
 
   return (
-    <div
-      className="w-20 m-auto justify-content-center"
-      style={{ zIndex: "auto" }}
-    >
+    <div className="position-relative w-100 m-auto justify-content-center">
       <div
-        className="p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
+        className="w-100 p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
         {...getToggleButtonProps()}
-        style={{ width: filterSelectWidth }}
       >
         <span>{selectItemText}</span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
         className={clsx(
-          "position-absolute bg-body mt-1 shadow-sm overflow-auto p-0 border border-white",
+          "position-absolute w-100 bg-body mt-1 shadow-sm overflow-auto p-0 border border-white multiselect-list",
           {
             "hidden border-0": !isOpen,
           }
         )}
-        style={{ width: filterSelectWidth, zIndex: "auto", maxHeight: "400px" }}
         {...getMenuProps()}
       >
         {isOpen &&
           props.items.map((item, index) => {
             return (
               <li
-                style={isOpen && { zIndex: "auto" }}
                 className={clsx("py-2 px-3 shadow-sm flex-col", {
                   "bg-secondary": highlightedIndex === index,
                 })}
