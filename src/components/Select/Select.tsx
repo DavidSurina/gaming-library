@@ -7,6 +7,7 @@ import { filterSelectWidth } from "../../globals/constants/constants";
 
 function Select(props: UseSelectProps<CurrentQueryType>) {
   const { items } = props;
+
   const {
     isOpen,
     selectedItem,

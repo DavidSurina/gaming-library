@@ -19,6 +19,7 @@ import "./style.scss";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Button } from "react-bootstrap";
 import { currentQueryConvert } from "../../globals/functions/helpers";
+import FilterContextProvider from "../../globals/contexts/FilterContext";
 
 function GameLibrary() {
   const id = useId();
@@ -106,7 +107,9 @@ function GameLibrary() {
       )}
       {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
-      <FilterMenu open={menuOpen} handleClose={handleClose} />
+      <FilterContextProvider>
+        <FilterMenu open={menuOpen} handleClose={handleClose} />
+      </FilterContextProvider>
     </section>
   );
 }

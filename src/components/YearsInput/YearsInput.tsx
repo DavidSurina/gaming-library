@@ -1,19 +1,14 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { currentYear } from "../../globals/rawgParams";
 import "./style.scss";
-import { FilteringParamsType } from "../FilterMenu/FilterMenu";
+import { useFilterContext } from "../../globals/contexts/FilterContext";
 
 const initialFromVal = 1950;
 const initialToVal = currentYear;
 
-type PropTypes = {
-  filteringParams: FilteringParamsType;
-  setFilteringParams: Dispatch<SetStateAction<FilteringParamsType>>;
-};
-
-function YearsInput(props: PropTypes) {
-  const { filteringParams, setFilteringParams } = props;
+function YearsInput() {
+  const { filteringParams, setFilteringParams } = useFilterContext();
   const [from, setFrom] = useState(initialFromVal);
   const [to, setTo] = useState(initialToVal);
 

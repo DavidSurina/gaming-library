@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {
   CurrentQueryType,
@@ -13,8 +13,7 @@ import { currentQueryConvert } from "../../globals/functions/helpers";
 import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
 import YearsInput from "../YearsInput/YearsInput";
-
-export type FilteringParamsType = Record<string, CurrentQueryType[]>;
+import { useFilterContext } from "../../globals/contexts/FilterContext";
 
 type PropTypes = {
   open: boolean;
@@ -23,14 +22,7 @@ type PropTypes = {
 function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
-  const [filteringParams, setFilteringParams] = useState<FilteringParamsType>({
-    genres: [],
-    platform: [],
-    publishers: [],
-    metacritic: [],
-    dates: [],
-  });
-  const thisYear = new Date().getFullYear();
+  const { filteringParams, setFilteringParams } = useFilterContext();
   const onSelectItem = (
     e: UseSelectStateChange<CurrentQueryType>,
     label: string
@@ -71,12 +63,7 @@ function FilterMenu(props: PropTypes) {
             <label id="genres" className="pb-2">
               Genre:
             </label>
-            <Multiselect
-              labelId="genres"
-              selectedItems={filteringParams}
-              setSelectedItems={setFilteringParams}
-              items={currentQueryConvert(genres)}
-            />
+            <Multiselect labelId="genres" items={currentQueryConvert(genres)} />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
             <label id="platforms" className="pb-2">
@@ -84,8 +71,6 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Multiselect
               labelId="platform"
-              selectedItems={filteringParams}
-              setSelectedItems={setFilteringParams}
               items={currentQueryConvert(platform)}
             />
           </div>
@@ -103,18 +88,12 @@ function FilterMenu(props: PropTypes) {
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Critic rating:</div>
             {/*Select with multiple or input from user between 0-100*/}
-            <FilterSlider
-              state={filteringParams}
-              setState={setFilteringParams}
-            />
+            <FilterSlider />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Release year between:</div>
             {/*Date range input*/}
-            <YearsInput
-              filteringParams={filteringParams}
-              setFilteringParams={setFilteringParams}
-            />
+            <YearsInput />
           </div>
         </Offcanvas.Body>
         <Button type="submit" className="p-3">

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import {
   useSelect,
   UseSelectProps,
@@ -8,8 +8,8 @@ import {
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import clsx from "clsx";
-import { FilteringParamsType } from "../FilterMenu/FilterMenu";
 import { filterSelectWidth } from "../../globals/constants/constants";
+import { useFilterContext } from "../../globals/contexts/FilterContext";
 
 function stateReducer(
   state: UseSelectState<CurrentQueryType>,
@@ -30,19 +30,10 @@ function stateReducer(
   }
 }
 
-type ExtendedSelectProps = UseSelectProps<CurrentQueryType> & {
-  selectedItems: FilteringParamsType;
-  setSelectedItems: Dispatch<SetStateAction<FilteringParamsType>>;
-};
-
-function Multiselect(props: ExtendedSelectProps) {
-  const {
-    labelId,
-    selectedItems: initialSelectedItems,
-    setSelectedItems,
-    ...rest
-  } = props;
-  const selectedItems = [...initialSelectedItems[labelId + ""]];
+function Multiselect(props: UseSelectProps<CurrentQueryType>) {
+  const { labelId, ...rest } = props;
+  const { filteringParams, setFilteringParams } = useFilterContext();
+  const selectedItems = [...filteringParams[labelId + ""]];
 
   const {
     isOpen,
@@ -71,8 +62,8 @@ function Multiselect(props: ExtendedSelectProps) {
         newSelectedItems = [...selectedItems, selectedItem];
       }
 
-      setSelectedItems({
-        ...initialSelectedItems,
+      setFilteringParams({
+        ...filteringParams,
         [labelId as string]: newSelectedItems,
       });
     },
