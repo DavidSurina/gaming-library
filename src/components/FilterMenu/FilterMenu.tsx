@@ -14,6 +14,7 @@ import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
 import YearsInput from "../YearsInput/YearsInput";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
+import "./style.scss";
 
 type PropTypes = {
   open: boolean;
@@ -54,7 +55,7 @@ function FilterMenu(props: PropTypes) {
       backdrop={true}
       className="bg-primary"
     >
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="filter-form">
         <Offcanvas.Header>
           <Offcanvas.Title>Filtering</Offcanvas.Title>
         </Offcanvas.Header>
@@ -96,9 +97,18 @@ function FilterMenu(props: PropTypes) {
             <YearsInput />
           </div>
         </Offcanvas.Body>
-        <Button type="submit" className="p-3">
-          Confirm
-        </Button>
+        <div className="offcanvas_button-wrapper">
+          <Button type="submit" variant="secondary" className="p-3 flex-grow-1">
+            Confirm
+          </Button>
+          <Button
+            type="button"
+            variant="outline-secondary"
+            className="p-3 flex-grow-2"
+          >
+            Reset filters
+          </Button>
+        </div>
       </Form>
     </Offcanvas>
   );
