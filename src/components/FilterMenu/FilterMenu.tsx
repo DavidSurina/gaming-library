@@ -14,12 +14,14 @@ import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
 import YearsInput from "../YearsInput/YearsInput";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
+import FilterChip from "../FilerChip/FilterChip";
 import "./style.scss";
 
 type PropTypes = {
   open: boolean;
   handleClose: () => void;
 };
+
 function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
@@ -56,8 +58,14 @@ function FilterMenu(props: PropTypes) {
       className="bg-primary"
     >
       <Form onSubmit={handleSubmit} className="filter-form">
-        <Offcanvas.Header>
+        <Offcanvas.Header className="d-flex flex-column align-items-start">
           <Offcanvas.Title>Filtering</Offcanvas.Title>
+          <Offcanvas.Header className="w-100">
+            <FilterChip
+              value={"Marvel Capcom"}
+              onClose={() => console.log("bum")}
+            />
+          </Offcanvas.Header>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="d-flex flex-column justify-content-around py-3">
@@ -98,13 +106,17 @@ function FilterMenu(props: PropTypes) {
           </div>
         </Offcanvas.Body>
         <div className="offcanvas_button-wrapper">
-          <Button type="submit" variant="secondary" className="p-3 flex-grow-1">
+          <Button
+            type="submit"
+            variant="secondary"
+            className="p-2 ms-1 flex-grow-1"
+          >
             Confirm
           </Button>
           <Button
             type="button"
             variant="outline-secondary"
-            className="p-3 flex-grow-2"
+            className="p-2 flex-grow-2 me-1"
           >
             Reset filters
           </Button>

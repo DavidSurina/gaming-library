@@ -12,7 +12,6 @@ export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 type FilterContextPropType = {
   children: JSX.Element;
 };
-
 type FilterContextType = {
   filteringParams: FilteringParamsType;
   setFilteringParams: Dispatch<SetStateAction<FilteringParamsType>>;
