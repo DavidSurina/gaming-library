@@ -9,9 +9,18 @@ import { CurrentQueryType } from "./LibraryContext";
 
 export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 
+export const initialFilteringParams: FilteringParamsType = {
+  genres: [],
+  platform: [],
+  publishers: [],
+  metacritic: [],
+  dates: [],
+};
+
 type FilterContextPropType = {
   children: JSX.Element;
 };
+
 type FilterContextType = {
   filteringParams: FilteringParamsType;
   setFilteringParams: Dispatch<SetStateAction<FilteringParamsType>>;
@@ -25,13 +34,9 @@ export const FilterContext = createContext(defaultContextValue);
 
 function FilterContextProvider(props: FilterContextPropType) {
   const { children } = props;
-  const [filteringParams, setFilteringParams] = useState<FilteringParamsType>({
-    genres: [],
-    platform: [],
-    publishers: [],
-    metacritic: [],
-    dates: [],
-  });
+  const [filteringParams, setFilteringParams] = useState<FilteringParamsType>(
+    initialFilteringParams
+  );
 
   const context = (): FilterContextType => {
     return {

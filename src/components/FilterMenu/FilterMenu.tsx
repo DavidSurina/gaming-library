@@ -13,8 +13,11 @@ import { currentQueryConvert } from "../../globals/functions/helpers";
 import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
 import YearsInput from "../YearsInput/YearsInput";
-import { useFilterContext } from "../../globals/contexts/FilterContext";
-import FilterChip from "../FilerChip/FilterChip";
+import {
+  initialFilteringParams,
+  useFilterContext,
+} from "../../globals/contexts/FilterContext";
+import FilterChipBox from "../FilterChipBox/FitlerChipBox";
 import "./style.scss";
 
 type PropTypes = {
@@ -41,6 +44,10 @@ function FilterMenu(props: PropTypes) {
     }
   };
 
+  const handleReset = () => {
+    setFilteringParams(initialFilteringParams);
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCurrentQuery({
@@ -61,10 +68,7 @@ function FilterMenu(props: PropTypes) {
         <Offcanvas.Header className="d-flex flex-column align-items-start">
           <Offcanvas.Title>Filtering</Offcanvas.Title>
           <Offcanvas.Header className="w-100">
-            <FilterChip
-              value={"Marvel Capcom"}
-              onClose={() => console.log("bum")}
-            />
+            <FilterChipBox />
           </Offcanvas.Header>
         </Offcanvas.Header>
         <Offcanvas.Body>
@@ -117,6 +121,7 @@ function FilterMenu(props: PropTypes) {
             type="button"
             variant="outline-secondary"
             className="p-2 flex-grow-2 me-1"
+            onClick={handleReset}
           >
             Reset filters
           </Button>
