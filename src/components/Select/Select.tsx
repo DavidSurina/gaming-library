@@ -4,12 +4,12 @@ import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import clsx from "clsx";
 import "./style.scss";
+
 function Select(props: UseSelectProps<CurrentQueryType>) {
-  const { items } = props;
+  const { items, selectedItem } = props;
 
   const {
     isOpen,
-    selectedItem,
     getToggleButtonProps,
     getMenuProps,
     highlightedIndex,
@@ -22,7 +22,11 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
         className="w-100 p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
         {...getToggleButtonProps()}
       >
-        <span>{selectedItem ? selectedItem.queryKey : ""}</span>
+        <span>
+          {selectedItem?.queryKey && selectedItem?.queryKey.length > 0
+            ? selectedItem.queryKey
+            : " "}
+        </span>
         <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
       </div>
       <ul
