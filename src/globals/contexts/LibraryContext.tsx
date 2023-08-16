@@ -38,7 +38,7 @@ const defaultContextValue: LibContextType = {
   setCurrentQuery: () => {},
 };
 
-export const LibContext = createContext(defaultContextValue);
+const LibContext = createContext(defaultContextValue);
 
 function LibContextProvider(props: LibContextPropType) {
   const { children } = props;

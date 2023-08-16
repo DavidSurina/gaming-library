@@ -30,7 +30,8 @@ const defaultContextValue: FilterContextType = {
   filteringParams: {},
   setFilteringParams: () => null,
 };
-export const FilterContext = createContext(defaultContextValue);
+
+const FilterContext = createContext(defaultContextValue);
 
 function FilterContextProvider(props: FilterContextPropType) {
   const { children } = props;
