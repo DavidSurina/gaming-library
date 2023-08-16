@@ -23,7 +23,7 @@ function PlatformIconRow(props: PropTypes) {
   const { platforms } = props;
 
   if (!platforms.length) {
-    return <div />;
+    return null;
   }
 
   let icons = platformList.map((p) => {
