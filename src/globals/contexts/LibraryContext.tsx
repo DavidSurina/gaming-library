@@ -6,7 +6,7 @@ import React, {
   SetStateAction,
 } from "react";
 import { rawgSubUrls } from "globals/functions/api";
-import { rawgParams } from "globals/rawgParams";
+import { rawgParams } from "globals/types/rawgParams";
 
 type LibContextPropType = {
   children: JSX.Element;

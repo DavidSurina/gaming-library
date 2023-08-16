@@ -5,7 +5,7 @@ import {
   useLibContext,
 } from "../../globals/contexts/LibraryContext";
 import Select from "../Select/Select";
-import { genres, platform, publishers } from "../../globals/rawgParams";
+import { genres, platform, publishers } from "../../globals/types/rawgParams";
 import { UseSelectStateChange } from "downshift";
 import { Button, Form } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";

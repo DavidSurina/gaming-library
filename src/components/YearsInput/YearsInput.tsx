@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
-import { currentYear } from "../../globals/rawgParams";
+import { currentYear } from "../../globals/types/rawgParams";
 import "./style.scss";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
 import { YearsInputRefType } from "../FilterMenu/FilterMenu";

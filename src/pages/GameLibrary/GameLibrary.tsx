@@ -14,7 +14,7 @@ import SearchInput from "components/SearchInput/SearchInput";
 
 import { RawgApiService } from "globals/functions/api";
 import { GamesResults } from "globals/types/rawgTypes";
-import { rawgParams } from "globals/rawgParams";
+import { rawgParams } from "globals/types/rawgParams";
 import "./style.scss";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Button } from "react-bootstrap";
