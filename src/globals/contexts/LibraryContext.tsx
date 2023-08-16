@@ -17,17 +17,17 @@ export type CurrentQueryType = {
   params: string;
 };
 
-const initialQuery = {
-  queryKey: "Best Games",
-  params: rawgParams["Best Games"],
-};
-
 export type LibContextType = {
   initialUrl: string;
   subUrl: string;
   setSubUrl: Dispatch<SetStateAction<string>>;
   currentQuery: CurrentQueryType;
   setCurrentQuery: Dispatch<SetStateAction<CurrentQueryType>>;
+};
+
+const initialQuery = {
+  queryKey: "Best Games",
+  params: rawgParams["Best Games"],
 };
 
 const defaultContextValue: LibContextType = {
