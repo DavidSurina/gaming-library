@@ -5,7 +5,7 @@ import {
   useLibContext,
 } from "globals/contexts/LibraryContext";
 import { UseSelectStateChange } from "downshift";
-import { Filter } from "react-bootstrap-icons";
+import { Filter as FilterIcon } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 
 import GameTile from "components/GameTile/GameTile";
@@ -89,7 +89,7 @@ function GameLibrary() {
           className="filtering-button"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <Filter size="25" />
+          <FilterIcon size="25" />
         </Button>
       </div>
       {!isLoading && data?.pages && (

@@ -6,7 +6,10 @@ import {
   UseSelectStateChangeOptions,
 } from "downshift";
 import clsx from "clsx";
-import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
+import {
+  ChevronDown as ChevronDownIcon,
+  ChevronUp as ChevronUpIcon,
+} from "react-bootstrap-icons";
 
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
@@ -83,7 +86,9 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
         {...getToggleButtonProps()}
       >
         <span>{selectItemText}</span>
-        <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
+        <span className="px-2">
+          {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        </span>
       </div>
       <ul
         className={clsx(

@@ -1,10 +1,10 @@
 import React from "react";
 import { Platforms } from "../../globals/types/rawgTypes";
 import {
-  PcDisplay,
-  NintendoSwitch,
-  Playstation,
-  Xbox,
+  PcDisplay as PcDisplayIcon,
+  NintendoSwitch as NintendoSwitchIcon,
+  Playstation as PlaystationIcon,
+  Xbox as XboxIcon,
 } from "react-bootstrap-icons";
 import IconWrapper from "./IconWrapper";
 import { iconSize, platformList } from "./constants";
@@ -42,22 +42,22 @@ function PlatformIconRow(props: PropTypes) {
       switch (p) {
         case "pc":
           attributes.icon = (
-            <PcDisplay className="mx-1" size={iconSize} color="white" />
+            <PcDisplayIcon className="mx-1" size={iconSize} color="white" />
           );
           attributes.bgColor = "black";
           break;
         case "playstation":
           attributes.icon = (
-            <Playstation className="mx-1" size={iconSize} color="white" />
+            <PlaystationIcon className="mx-1" size={iconSize} color="white" />
           );
           attributes.bgColor = "blue";
           break;
         case "xbox":
-          attributes.icon = <Xbox size={iconSize} color="green" />;
+          attributes.icon = <XboxIcon size={iconSize} color="green" />;
           attributes.bgColor = "white";
           break;
         case "nintendo-switch":
-          attributes.icon = <NintendoSwitch size={iconSize} color="red" />;
+          attributes.icon = <NintendoSwitchIcon size={iconSize} color="red" />;
           attributes.bgColor = "white";
           break;
         default:

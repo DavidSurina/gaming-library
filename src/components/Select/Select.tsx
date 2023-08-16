@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelect, UseSelectProps } from "downshift";
-import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
+import {
+  ChevronUp as ChevronUpIcon,
+  ChevronDown as ChevronDownIcon,
+} from "react-bootstrap-icons";
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import clsx from "clsx";
 import "./style.scss";
@@ -27,7 +30,9 @@ function Select(props: UseSelectProps<CurrentQueryType>) {
             ? selectedItem.queryKey
             : " "}
         </span>
-        <span className="px-2">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
+        <span className="px-2">
+          {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        </span>
       </div>
       <ul
         className={clsx(
