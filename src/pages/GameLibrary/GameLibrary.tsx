@@ -6,27 +6,29 @@ import {
 } from "globals/contexts/LibraryContext";
 import { UseSelectStateChange } from "downshift";
 import { Filter } from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
 
 import GameTile from "components/GameTile/GameTile";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import Select from "../../components/Select/Select";
 import SearchInput from "components/SearchInput/SearchInput";
+import FilterMenu from "../../components/FilterMenu/FilterMenu";
+import FilterContextProvider from "../../globals/contexts/FilterContext";
 
 import { RawgApiService } from "globals/functions/api";
 import { GamesResults } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/types/rawgParams";
-import "./style.scss";
-import FilterMenu from "../../components/FilterMenu/FilterMenu";
-import { Button } from "react-bootstrap";
 import { currentQueryConvert } from "../../globals/functions/helpers";
-import FilterContextProvider from "../../globals/contexts/FilterContext";
+import "./style.scss";
 
 function GameLibrary() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { currentQuery, setCurrentQuery, initialUrl } = useLibContext();
+
   const id = useId();
   const gameRef = useRef<HTMLDivElement>(null);
+
   const { getRawgData } = RawgApiService;
-  const { currentQuery, setCurrentQuery, initialUrl } = useLibContext();
-  const [menuOpen, setMenuOpen] = useState(false);
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
     useInfiniteQuery<GamesResults>({
       queryKey: [currentQuery.queryKey, initialUrl],
