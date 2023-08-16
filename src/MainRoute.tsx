@@ -1,6 +1,6 @@
 import React from "react";
 import GameDetail from "components/GameDetail/GameDetail";
-import NotFound from "components/NotFound/NotFound";
+import NotFound from "pages/NotFound/NotFound";
 import GameLibrary from "pages/GameLibrary/GameLibrary";
 import Home from "pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
