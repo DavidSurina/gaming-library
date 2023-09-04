@@ -83,10 +83,8 @@ function FilterMenu(props: PropTypes) {
     >
       <Form onSubmit={handleSubmit} className="filter-form">
         <Offcanvas.Header className="d-flex flex-column align-items-start">
-          <Offcanvas.Title>Filtering</Offcanvas.Title>
-          <Offcanvas.Header className="w-100">
-            <FilterChipBox />
-          </Offcanvas.Header>
+          <Offcanvas.Title className="py-3">Filtering</Offcanvas.Title>
+          <FilterChipBox />
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="d-flex flex-column justify-content-around py-3">

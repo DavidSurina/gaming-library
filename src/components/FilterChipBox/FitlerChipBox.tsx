@@ -26,7 +26,7 @@ function FilterChipBox() {
     ));
   });
 
-  return <div className="chip-wrapper">{render.flat(1)}</div>;
+  return <div className="chip-wrapper p-2 rounded-1">{render.flat(1)}</div>;
 }
 
 export default FilterChipBox;
