@@ -37,7 +37,7 @@ function GameTile(props: PropTypes) {
         </Card.Header>
         <Card.Body>
           <div className="d-flex justify-content-between align-items-center py-1">
-            <Card.Subtitle>Released:</Card.Subtitle>
+            <Card.Subtitle>Release:</Card.Subtitle>
             <Card.Text>{new Date(released).toLocaleDateString()}</Card.Text>
           </div>
           <div className="d-flex justify-content-between align-items-center py-1">
