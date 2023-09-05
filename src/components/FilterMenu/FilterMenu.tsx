@@ -1,11 +1,11 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, MutableRefObject, useRef } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {
   CurrentQueryType,
   useLibContext,
 } from "../../globals/contexts/LibraryContext";
 import Select from "../Select/Select";
-import { genres, platform, publishers } from "../../globals/rawgParams";
+import { genres, platform, publishers } from "../../globals/types/rawgParams";
 import { UseSelectStateChange } from "downshift";
 import { Button, Form } from "react-bootstrap";
 import { formatParams } from "../../globals/functions/api";
@@ -13,24 +13,33 @@ import { currentQueryConvert } from "../../globals/functions/helpers";
 import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
 import YearsInput from "../YearsInput/YearsInput";
+import {
+  initialFilteringParams,
+  useFilterContext,
+} from "../../globals/contexts/FilterContext";
+import FilterChipBox from "../FilterChipBox/FitlerChipBox";
+import "./style.scss";
 
-export type FilteringParamsType = Record<string, CurrentQueryType[]>;
+export type YearsInputRefType = MutableRefObject<{
+  from: null | number;
+  to: null | number;
+}>;
 
 type PropTypes = {
   open: boolean;
   handleClose: () => void;
 };
+
 function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
-  const [filteringParams, setFilteringParams] = useState<FilteringParamsType>({
-    genres: [],
-    platform: [],
-    publishers: [],
-    metacritic: [],
-    dates: [],
+  const { filteringParams, setFilteringParams } = useFilterContext();
+
+  const yearsRef: YearsInputRefType = useRef({
+    from: null,
+    to: null,
   });
-  const thisYear = new Date().getFullYear();
+
   const onSelectItem = (
     e: UseSelectStateChange<CurrentQueryType>,
     label: string
@@ -44,6 +53,16 @@ function FilterMenu(props: PropTypes) {
       arr[0] = selectedItem as CurrentQueryType;
       setFilteringParams((prevState) => ({ ...prevState, [`${label}`]: arr }));
     }
+  };
+
+  // console.log(filteringParams.publishers[0]);
+
+  const handleReset = () => {
+    yearsRef.current = {
+      from: null,
+      to: null,
+    };
+    setFilteringParams(initialFilteringParams);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -62,21 +81,17 @@ function FilterMenu(props: PropTypes) {
       backdrop={true}
       className="bg-primary"
     >
-      <Form onSubmit={handleSubmit}>
-        <Offcanvas.Header>
-          <Offcanvas.Title>Filtering</Offcanvas.Title>
+      <Form onSubmit={handleSubmit} className="filter-form">
+        <Offcanvas.Header className="d-flex flex-column align-items-start">
+          <Offcanvas.Title className="py-3">Filtering</Offcanvas.Title>
+          <FilterChipBox />
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="d-flex flex-column justify-content-around py-3">
             <label id="genres" className="pb-2">
               Genre:
             </label>
-            <Multiselect
-              labelId="genres"
-              selectedItems={filteringParams}
-              setSelectedItems={setFilteringParams}
-              items={currentQueryConvert(genres)}
-            />
+            <Multiselect labelId="genres" items={currentQueryConvert(genres)} />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
             <label id="platforms" className="pb-2">
@@ -84,8 +99,6 @@ function FilterMenu(props: PropTypes) {
             </label>
             <Multiselect
               labelId="platform"
-              selectedItems={filteringParams}
-              setSelectedItems={setFilteringParams}
               items={currentQueryConvert(platform)}
             />
           </div>
@@ -103,23 +116,31 @@ function FilterMenu(props: PropTypes) {
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Critic rating:</div>
             {/*Select with multiple or input from user between 0-100*/}
-            <FilterSlider
-              state={filteringParams}
-              setState={setFilteringParams}
-            />
+            <FilterSlider />
           </div>
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Release year between:</div>
             {/*Date range input*/}
-            <YearsInput
-              filteringParams={filteringParams}
-              setFilteringParams={setFilteringParams}
-            />
+            <YearsInput yearsRef={yearsRef} />
           </div>
         </Offcanvas.Body>
-        <Button type="submit" className="p-3">
-          Confirm
-        </Button>
+        <div className="offcanvas_button-wrapper">
+          <Button
+            type="submit"
+            variant="secondary"
+            className="p-2 ms-1 flex-grow-1"
+          >
+            Confirm
+          </Button>
+          <Button
+            type="button"
+            variant="outline-secondary"
+            className="p-2 flex-grow-2 me-1"
+            onClick={handleReset}
+          >
+            Reset filters
+          </Button>
+        </div>
       </Form>
     </Offcanvas>
   );

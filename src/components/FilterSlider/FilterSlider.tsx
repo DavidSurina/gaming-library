@@ -1,17 +1,13 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import ReactSlider from "react-slider";
-import { FilteringParamsType } from "../FilterMenu/FilterMenu";
+import { useFilterContext } from "../../globals/contexts/FilterContext";
 import "./style.scss";
 
-type PropTypes = {
-  state: FilteringParamsType;
-  setState: Dispatch<SetStateAction<FilteringParamsType>>;
-};
-function FilterSlider(props: PropTypes) {
-  const { state, setState } = props;
+function FilterSlider() {
+  const { filteringParams, setFilteringParams } = useFilterContext();
   function handleChange(value: number[]) {
     const param = [{ queryKey: "metacritic", params: value.join(",") }];
-    setState({ ...state, metacritic: param });
+    setFilteringParams({ ...filteringParams, metacritic: param });
   }
 
   return (

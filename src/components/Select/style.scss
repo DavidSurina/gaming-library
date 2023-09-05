@@ -1,0 +1,9 @@
+.select {
+  &-wrapper {
+    max-width: 380px;
+  }
+  &-list {
+    max-height: 400px;
+    z-index: 1;
+  }
+}

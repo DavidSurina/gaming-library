@@ -1,5 +1,5 @@
-import { GameParams } from "./types/rawgTypes";
-import { formatParams } from "./functions/api";
+import { GameParams } from "./rawgTypes";
+import { formatParams } from "../functions/api";
 
 const getCurrentMonth = function () {
   const month = new Date().getMonth() + 1;

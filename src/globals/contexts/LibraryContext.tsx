@@ -6,7 +6,7 @@ import React, {
   SetStateAction,
 } from "react";
 import { rawgSubUrls } from "globals/functions/api";
-import { rawgParams } from "globals/rawgParams";
+import { rawgParams } from "globals/types/rawgParams";
 
 type LibContextPropType = {
   children: JSX.Element;
@@ -17,17 +17,17 @@ export type CurrentQueryType = {
   params: string;
 };
 
-const initialQuery = {
-  queryKey: "Best Games",
-  params: rawgParams["Best Games"],
-};
-
 export type LibContextType = {
   initialUrl: string;
   subUrl: string;
   setSubUrl: Dispatch<SetStateAction<string>>;
   currentQuery: CurrentQueryType;
   setCurrentQuery: Dispatch<SetStateAction<CurrentQueryType>>;
+};
+
+const initialQuery = {
+  queryKey: "Best Games",
+  params: rawgParams["Best Games"],
 };
 
 const defaultContextValue: LibContextType = {
@@ -38,7 +38,7 @@ const defaultContextValue: LibContextType = {
   setCurrentQuery: () => {},
 };
 
-export const LibContext = createContext(defaultContextValue);
+const LibContext = createContext(defaultContextValue);
 
 function LibContextProvider(props: LibContextPropType) {
   const { children } = props;

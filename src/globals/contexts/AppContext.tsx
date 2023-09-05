@@ -12,7 +12,7 @@ const defaultContextValue: AppContextType = {
   value: "",
 };
 
-export const AppContext = createContext(defaultContextValue);
+const AppContext = createContext(defaultContextValue);
 
 function AppContextProvider(props: AppContextPropsType) {
   const { children } = props;
