@@ -7,10 +7,7 @@ import React, {
 } from "react";
 import { rawgSubUrls } from "globals/functions/api";
 import { rawgParams } from "globals/types/rawgParams";
-
-type LibContextPropType = {
-  children: JSX.Element;
-};
+import { Outlet } from "react-router-dom";
 
 export type CurrentQueryType = {
   queryKey: string;
@@ -40,9 +37,7 @@ const defaultContextValue: LibContextType = {
 
 const LibContext = createContext(defaultContextValue);
 
-function LibContextProvider(props: LibContextPropType) {
-  const { children } = props;
-
+function LibContextProvider() {
   const [subUrl, setSubUrl] = useState(rawgSubUrls.game);
   const [currentQuery, setCurrentQuery] =
     useState<CurrentQueryType>(initialQuery);
@@ -58,7 +53,9 @@ function LibContextProvider(props: LibContextPropType) {
     };
   };
   return (
-    <LibContext.Provider value={context()}>{children}</LibContext.Provider>
+    <LibContext.Provider value={context()}>
+      <Outlet />
+    </LibContext.Provider>
   );
 }
 

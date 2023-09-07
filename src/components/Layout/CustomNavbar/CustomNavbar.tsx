@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
-import { HOME_ROUTE, LIBRARY_ROUTE } from "MainRoute";
+import { GAMES_ROUTE, HOME_ROUTE, LIBRARY_ROUTE } from "MainRoute";
 import "./style.scss";
 
 function CustomNavbar() {
@@ -16,7 +16,7 @@ function CustomNavbar() {
           <Nav.Link as={NavLink} to={HOME_ROUTE}>
             Home
           </Nav.Link>
-          <Nav.Link as={NavLink} to={LIBRARY_ROUTE}>
+          <Nav.Link as={NavLink} to={`${LIBRARY_ROUTE}/${GAMES_ROUTE}`}>
             Library
           </Nav.Link>
         </Nav>
