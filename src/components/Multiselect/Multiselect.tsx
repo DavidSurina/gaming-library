@@ -80,7 +80,7 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
     : "";
 
   return (
-    <div className="position-relative w-100 m-auto justify-content-center">
+    <div className="position-relative w-100 m-auto justify-content-center multiselect">
       <div
         className="w-100 p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
         {...getToggleButtonProps()}
