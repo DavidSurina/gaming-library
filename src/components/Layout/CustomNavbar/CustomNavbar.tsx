@@ -16,7 +16,7 @@ function CustomNavbar() {
           <Nav.Link as={NavLink} to={HOME_ROUTE}>
             Home
           </Nav.Link>
-          <Nav.Link as={NavLink} to={LIBRARY_ROUTE}>
+          <Nav.Link as={NavLink} to={`${LIBRARY_ROUTE}`}>
             Library
           </Nav.Link>
         </Nav>

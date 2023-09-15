@@ -1,4 +1,4 @@
-import React, { FormEvent, MutableRefObject, useRef } from "react";
+import React, { FormEvent } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import {
   CurrentQueryType,
@@ -20,11 +20,6 @@ import {
 import FilterChipBox from "../FilterChipBox/FitlerChipBox";
 import "./style.scss";
 
-export type YearsInputRefType = MutableRefObject<{
-  from: null | number;
-  to: null | number;
-}>;
-
 type PropTypes = {
   open: boolean;
   handleClose: () => void;
@@ -34,11 +29,6 @@ function FilterMenu(props: PropTypes) {
   const { open, handleClose } = props;
   const { setCurrentQuery } = useLibContext();
   const { filteringParams, setFilteringParams } = useFilterContext();
-
-  const yearsRef: YearsInputRefType = useRef({
-    from: null,
-    to: null,
-  });
 
   const onSelectItem = (
     e: UseSelectStateChange<CurrentQueryType>,
@@ -58,10 +48,6 @@ function FilterMenu(props: PropTypes) {
   // console.log(filteringParams.publishers[0]);
 
   const handleReset = () => {
-    yearsRef.current = {
-      from: null,
-      to: null,
-    };
     setFilteringParams(initialFilteringParams);
   };
 
@@ -121,7 +107,7 @@ function FilterMenu(props: PropTypes) {
           <div className="d-flex flex-column justify-content-around py-3">
             <div className="pb-2">Release year between:</div>
             {/*Date range input*/}
-            <YearsInput yearsRef={yearsRef} />
+            <YearsInput />
           </div>
         </Offcanvas.Body>
         <div className="offcanvas_button-wrapper">

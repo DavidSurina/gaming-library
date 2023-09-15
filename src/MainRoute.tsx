@@ -8,22 +8,16 @@ import LibContextProvider from "globals/contexts/LibraryContext";
 
 export const HOME_ROUTE = "/";
 export const LIBRARY_ROUTE = "/lib";
-export const DETAIL_ROUTE = "/detail";
 
 function MainRoute() {
   return (
     <>
       <Routes>
         <Route path={HOME_ROUTE} element={<Home />} />
-        <Route
-          path={LIBRARY_ROUTE}
-          element={
-            <LibContextProvider>
-              <GameLibrary />
-            </LibContextProvider>
-          }
-        />
-        <Route path={`${DETAIL_ROUTE}/:id`} element={<GameDetail />} />
+        <Route path={`${LIBRARY_ROUTE}/*`} element={<LibContextProvider />}>
+          <Route index element={<GameLibrary />} />
+          <Route path={`:id`} element={<GameDetail />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

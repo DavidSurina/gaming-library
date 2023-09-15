@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Image, Card } from "react-bootstrap";
 
-import { DETAIL_ROUTE } from "MainRoute";
 import { Game } from "globals/types/rawgTypes";
 import "./style.scss";
 import PlatformIconRow from "../PlatformIconRow/PlatformIconRow";
 import clsx from "clsx";
+import { LIBRARY_ROUTE } from "../../MainRoute";
 
 type PropTypes = {
   game: Game;
@@ -19,7 +19,7 @@ function GameTile(props: PropTypes) {
   let formattedName = name.split(":");
 
   return (
-    <Link to={`${DETAIL_ROUTE}/${slug}`}>
+    <Link to={`${LIBRARY_ROUTE}/${slug}`}>
       <Card>
         <div className="img-container">
           <Image src={background_image} alt="game-img" />

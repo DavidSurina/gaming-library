@@ -22,7 +22,7 @@ type AttributeType = {
 function PlatformIconRow(props: PropTypes) {
   const { platforms } = props;
 
-  if (!platforms.length) {
+  if (!platforms) {
     return null;
   }
 
