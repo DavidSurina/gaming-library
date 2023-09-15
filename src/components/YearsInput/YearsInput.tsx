@@ -1,60 +1,71 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { currentYear } from "../../globals/types/rawgParams";
 import "./style.scss";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
-import { YearsInputRefType } from "../FilterMenu/FilterMenu";
 
-const initialFromVal = 1950;
+const initialFromVal = 1985;
 const initialToVal = currentYear;
 
-type PropTypes = {
-  yearsRef: YearsInputRefType;
-};
-function YearsInput(props: PropTypes) {
-  const { yearsRef } = props;
+function formatAndValidateYearsInput(
+  from: number,
+  to: number,
+  field: "from" | "to"
+) {
+  const fromObj = {
+    queryKey: "filter-dates-from",
+    params: `${from}`,
+  };
+
+  const toObj = {
+    queryKey: "filter-dates-to",
+    params: `${to}`,
+  };
+
+  if (
+    from < initialFromVal ||
+    from > initialToVal ||
+    to > initialToVal ||
+    to < initialFromVal ||
+    from > to
+  ) {
+    if (from >= initialFromVal && from > to && from <= initialToVal) {
+      if (field === "from") {
+        toObj.params = `${from}`;
+      } else {
+        fromObj.params = `${to}`;
+      }
+    }
+    if (from < initialFromVal) {
+      fromObj.params = `${initialFromVal}`;
+    } else if (from > initialToVal) {
+      fromObj.params = `${initialToVal}`;
+    }
+    if (to < initialFromVal) {
+      toObj.params = `${initialFromVal}`;
+    } else if (to > initialToVal) {
+      toObj.params = `${initialToVal}`;
+    }
+  }
+
+  return [fromObj, toObj];
+}
+
+function YearsInput() {
   const { filteringParams, setFilteringParams } = useFilterContext();
 
-  const [from, setFrom] = useState(initialFromVal);
-  const [to, setTo] = useState(initialToVal);
+  const handleChange = (val: number, field: "from" | "to") => {
+    const fromVal =
+      field === "from" ? val : parseInt(filteringParams.dates[0].params);
+    const toVal =
+      field === "to" ? val : parseInt(filteringParams.dates[1].params);
+    const newDatesObj = formatAndValidateYearsInput(fromVal, toVal, field);
 
-  useEffect(() => {
-    if (
-      (yearsRef?.current && yearsRef.current.to !== initialToVal) ||
-      (yearsRef?.current?.from && yearsRef.current.from !== initialFromVal)
-    ) {
-      setFrom(yearsRef?.current?.from as number);
-      setTo(yearsRef?.current?.to as number);
-    }
-  }, []);
-
-  useEffect(() => {
-    const isFromValid =
-      from >= initialFromVal && from < initialToVal && from < to;
-    const isToValid = to <= initialToVal && to > from && to > initialFromVal;
-    const fromVal = isFromValid ? from : initialFromVal;
-    const toVal = isToValid ? to : initialToVal;
-    const paramString = `${fromVal},${toVal}`;
-
-    if (from !== initialFromVal || to !== initialToVal) {
-      yearsRef.current = {
-        from: from,
-        to: to,
-      };
-    }
-
-    const datesObj = [
-      {
-        queryKey: "filter-dates",
-        params: paramString,
-      },
-    ];
-
-    setFilteringParams({
-      ...filteringParams,
-      dates: datesObj,
-    });
-  }, [from, to]);
+    setFilteringParams((prev) => ({
+      ...prev,
+      dates: newDatesObj,
+    }));
+  };
 
   return (
     <div className="wrapper" style={{ zIndex: "auto" }}>
@@ -68,8 +79,8 @@ function YearsInput(props: PropTypes) {
           className="years-input"
           type="number"
           placeholder="years input"
-          value={from}
-          onInput={(e) => setFrom(+e.currentTarget.value)}
+          value={parseInt(filteringParams.dates[0].params)}
+          onInput={(e) => handleChange(parseInt(e.currentTarget.value), "from")}
         />
       </FloatingLabel>
       <FloatingLabel className="years-label" controlId="toYearInput" label="To">
@@ -78,8 +89,8 @@ function YearsInput(props: PropTypes) {
           className="years-input"
           type="number"
           placeholder="years input"
-          value={to}
-          onInput={(e) => setTo(+e.currentTarget.value)}
+          value={parseInt(filteringParams.dates[1].params)}
+          onInput={(e) => handleChange(parseInt(e.currentTarget.value), "to")}
         />
       </FloatingLabel>
     </div>

@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { CurrentQueryType } from "./LibraryContext";
+import { currentYear } from "../types/rawgParams";
 
 export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 
@@ -22,8 +23,14 @@ export const initialFilteringParams: FilteringParamsType = {
   genres: [],
   platform: [],
   publishers: [],
-  metacritic: [],
-  dates: [],
+  metacritic: [
+    { params: "0", queryKey: "metacritic-min" },
+    { params: "100", queryKey: "metacritic-max" },
+  ],
+  dates: [
+    { params: "1985", queryKey: "filter-dates-from" },
+    { params: `${currentYear}`, queryKey: "filter-dates-to" },
+  ],
 };
 
 const defaultContextValue: FilterContextType = {
