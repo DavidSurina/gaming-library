@@ -53,7 +53,7 @@ function GameLibrary() {
         entries.forEach((entry) => {
           if (!hasNextPage) return;
           if (entry.isIntersecting) {
-            console.log("gets fetched");
+            // console.log("gets fetched");
             fetchNextPage();
           }
         });
@@ -70,7 +70,7 @@ function GameLibrary() {
     return () => {
       observer.disconnect();
     };
-  }, [gameRef.current, isLoading, hasNextPage]);
+  }, [isLoading, hasNextPage]);
 
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 

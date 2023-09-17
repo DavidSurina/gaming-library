@@ -33,7 +33,6 @@ function FilterChipBox() {
       );
     });
   });
-  console.log(render);
   return <div className="chip-wrapper p-2 rounded-1">{render.flat(1)}</div>;
 }
 
