@@ -26,11 +26,7 @@ function SearchInput() {
             onInput={(e) => setInput(e.currentTarget.value)}
           />
         </FloatingLabel>
-        <Button
-          type="submit"
-          variant="outline-secondary"
-          disabled={input.length === 0}
-        >
+        <Button type="submit" variant="secondary" disabled={input.length === 0}>
           Search
         </Button>
       </InputGroup>
