@@ -75,7 +75,7 @@ function GameLibrary() {
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
   const selectItems = currentQueryConvert(rawgParams);
-
+  console.log(data);
   return (
     <section>
       <div className="filtering-wrapper">
@@ -83,6 +83,9 @@ function GameLibrary() {
           items={selectItems}
           onSelectedItemChange={(e) => handleSelect(e)}
           defaultSelectedItem={selectItems[0]}
+          selectedItem={selectItems.find(
+            (i) => i.queryKey === currentQuery.queryKey
+          )}
         />
         <SearchInput />
         <Button
@@ -93,19 +96,21 @@ function GameLibrary() {
         </Button>
       </div>
       {!isLoading && data?.pages && (
-        <div className="tiles-wrapper">
-          {data.pages.map((group) => {
-            return group.results.map((game) => {
-              return <GameTile game={game} key={`${id}${game.name}`} />;
-            });
-          })}
-          {data?.pages[0].count === 0 && (
-            <div style={{ textAlign: "center" }}>No Results</div>
+        <>
+          <div className="tiles-wrapper">
+            {data.pages.map((group) => {
+              return group.results.map((game) => {
+                return <GameTile game={game} key={`${id}${game.name}`} />;
+              });
+            })}
+            {data?.pages[0].count === 0 && (
+              <div className="no-more">No Results</div>
+            )}
+          </div>
+          {!hasNextPage && !isFetching && data?.pages?.[0]?.count > 0 && (
+            <div className="no-more">No more entries</div>
           )}
-          {!hasNextPage && !isFetching && data?.pages[0]?.count > 0 && (
-            <div style={{ textAlign: "center" }}>No more entries</div>
-          )}
-        </div>
+        </>
       )}
       {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
