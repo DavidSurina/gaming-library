@@ -75,7 +75,7 @@ function GameLibrary() {
   if (error) return <div>{`Request Failed - ${error}`}</div>;
 
   const selectItems = currentQueryConvert(rawgParams);
-  console.log(data);
+
   return (
     <section>
       <div className="filtering-wrapper">
