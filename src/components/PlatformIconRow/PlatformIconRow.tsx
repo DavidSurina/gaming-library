@@ -26,7 +26,7 @@ function PlatformIconRow(props: PropTypes) {
     return null;
   }
 
-  let icons = platformList.map((p) => {
+  const icons = platformList.map((p) => {
     const findPlatform = platforms.find((pl) => pl.platform.slug.includes(p));
 
     const attributes: AttributeType = {

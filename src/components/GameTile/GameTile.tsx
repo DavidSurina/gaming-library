@@ -16,7 +16,7 @@ function GameTile(props: PropTypes) {
   const {
     game: { name, background_image, platforms, released, metacritic, slug },
   } = props;
-  let formattedName = name.split(":");
+  const formattedName = name.split(":");
 
   return (
     <Link to={`${LIBRARY_ROUTE}/${slug}`}>

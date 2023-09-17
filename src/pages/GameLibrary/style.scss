@@ -9,7 +9,7 @@
     width: 100%;
     min-height: 80vh;
     gap: 25px;
-  z-index: 400;
+    z-index: 400;
 
     &:hover > a > .card:hover {
         transform: scale(1.03);
@@ -26,7 +26,11 @@
         height: 100%;
       }
     }
+}
 
+.no-more {
+  text-align: center;
+  width: 100%;
 }
 
 .filtering {

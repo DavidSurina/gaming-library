@@ -55,7 +55,7 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
       }
       let newSelectedItems = [];
       const isCurrentlySelected = selectedItems.some(
-        (item, i) => item.queryKey === selectedItem.queryKey
+        (item) => item.queryKey === selectedItem.queryKey
       );
 
       if (isCurrentlySelected) {
@@ -73,7 +73,7 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
     },
   });
 
-  let selectItemText = selectedItems.length
+  const selectItemText = selectedItems.length
     ? `${selectedItems.length} element${
         selectedItems.length > 1 ? "s" : ""
       } selected`

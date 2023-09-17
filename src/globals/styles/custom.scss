@@ -1,9 +1,10 @@
 @use '/src/globals/styles/constants' as c;
 @import './base';
 
-$primary:  c.$background-dark_darkest;
+$primary: c.$background-dark_darkest;
 $secondary: c.$background-dark_lightest;
 $dark: c.$background-dark_dark;
+$btn-disabled-opacity: 50%;
 $text-primary: c.$font-color_primary;
 $text-secondary: c.$font-color_secondary;
 $bg-primary: c.$background-dark_darkest;
