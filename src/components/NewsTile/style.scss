@@ -1,0 +1,12 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: c.$background-dark_light;
+  border-radius: c.$border-radius;
+  
+}
