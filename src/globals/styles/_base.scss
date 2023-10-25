@@ -15,7 +15,8 @@ body {
 };
 
 main {
-    min-height: calc(max(100vh - (c.$footer-min-height + c.$nav-height)));
+    //min-height: calc(max(100vh - (c.$footer-min-height + c.$nav-height)));
+    min-height: 80vh;
     padding: min(200px, 2%); // TODO add units that Michal mentioned instead of percentages
 }
 
