@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import NewsTile from "../../components/NewsTile/NewsTile";
 import axios from "axios";
+import './style.scss';
 
 export type ParsedFeedType = {
     link: string;
@@ -26,8 +27,6 @@ function Home() {
                 "Content-Type": 'text/plain',
             }
         }).then((res) => {
-            // const {contents} = res.data;
-            // console.log(jsonData);
             const feed = new window.DOMParser().parseFromString(res.data, "text/xml");
             const items = feed.querySelectorAll("item");
 
@@ -51,9 +50,13 @@ function Home() {
     }, []);
 
     return (
-        <Container fluid="true" className="vh-100">
+        <Container fluid="true" className="news-container">
             {loading && <LoadingSpinner/>}
-            {feed && feed.map((item) => <NewsTile key={`${item.title}tile`} data={item}/>)}
+            <section className="left-col"></section>
+            <section className="middle-col">
+                {feed && feed.map((item) => <NewsTile key={`${item.title}tile`} data={item}/>)}
+            </section>
+            <section className="right-col"></section>
         </Container>
     );
 }
