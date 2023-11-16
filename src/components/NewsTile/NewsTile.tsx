@@ -11,11 +11,12 @@ type PropTypes = {
 function NewsTile(props: PropTypes) {
     const {data} = props;
     const {link, title, author} = data;
+    const cleanedTitle = title.replace("<![CDATA[", "").replace("]]>", "");
 
     return (
         <Card className="news-tile">
-            <h2>{title}</h2>
-            <h4>{author}</h4>
+            <h3>{cleanedTitle}</h3>
+            <h5>{author}</h5>
             <div>{}</div>
             <Link to={link} target="_blank">Go to</Link>
         </Card>
