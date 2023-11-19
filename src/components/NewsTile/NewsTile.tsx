@@ -1,5 +1,5 @@
 import React from "react";
-import {Card} from "react-bootstrap";
+import {Card, Image} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {ParsedFeedType} from "../../pages/Home/Home";
 import './style.scss';
@@ -10,16 +10,26 @@ type PropTypes = {
 
 function NewsTile(props: PropTypes) {
     const {data} = props;
-    const {link, title, author} = data;
-    const cleanedTitle = title.replace("<![CDATA[", "").replace("]]>", "");
+    const {link, title, author, img, pubDate} = data;
+    const cleanedTitle = title?.replace("<![CDATA[", "").replace("]]>", "");
+    const locale = window.navigator.language;
+    const dateConvert = typeof pubDate === "string" ? Intl.DateTimeFormat(locale, {
+        dateStyle: 'medium',
+        timeStyle: undefined
+    }).format(new Date(pubDate)) : '-';
 
     return (
-        <Card className="news-tile">
-            <h3>{cleanedTitle}</h3>
-            <h5>{author}</h5>
-            <div>{}</div>
-            <Link to={link} target="_blank">Go to</Link>
-        </Card>
+        <Link to={link || '/home'} target="_blank">
+            <Card className="news-tile">
+                <div className="news-img_container">
+                    <Image src={img || ''} className="news-img"/>
+                </div>
+                <div className="news-date">{dateConvert}</div>
+                <h3 className="news-title">{cleanedTitle}</h3>
+                <h5 className="news-author">{author}</h5>
+                <div>{}</div>
+            </Card>
+        </Link>
     );
 }
 
