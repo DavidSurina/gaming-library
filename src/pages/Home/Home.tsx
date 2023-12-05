@@ -1,42 +1,55 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import Container from "react-bootstrap/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import NewsTile from "../../components/NewsTile/NewsTile";
 import './style.scss';
 import useRssFeed from "../../globals/hooks/useRssFeed";
-
-export type ParsedFeedType = {
-    link: string | undefined;
-    title: string | undefined;
-    author: string | undefined;
-    pubDate: string | undefined;
-    description: string | undefined;
-    img: string | null | undefined;
-}
+import NewsTile from "../../components/NewsTile/NewsTile";
 
 function Home() {
-    const {getRss, loading} = useRssFeed();
-    const [feed, setFeed] = useState<ParsedFeedType[]>([]);
-
-    //TODO maybe create a hook out of all this - to get feed/get next page of it/ just to hold most of the logic
-    //TODO maybe do it same way as the game library - tanstack infinite query - caching will be easier
+    const {data, isLoading, fetchNextPage, hasNextPage} = useRssFeed();
+    const colEndRef = useRef(null);
 
     useEffect(() => {
-        getRss().then(res => {
-            if (res) {
-                setFeed(res);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!hasNextPage) return;
+                    if (entry.isIntersecting) {
+                        // console.log("gets fetched");
+                        fetchNextPage();
+                    }
+                });
+            },
+            {
+                rootMargin: "0px 0px 400px 0px",
             }
-        })
-    }, []);
+        );
+
+        if (colEndRef.current && hasNextPage) {
+            observer.observe(colEndRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [isLoading, hasNextPage]);
 
     return (
         <Container fluid="true" className="news-container">
             <section className="left-col"></section>
+
             <section className="middle-col">
-                {feed && feed.map((item) => <NewsTile key={`${item.title}tile`} data={item}/>)}
+                {data?.pages &&
+                    data.pages.map(pages => {
+                        return pages.feedItems.map((item) => {
+                            return <NewsTile key={`${item.title}tile`} data={item}/>
+                        })
+                    })}
+                {data && <span ref={colEndRef}/>}
             </section>
+
             <section className="right-col"></section>
-            {loading && <LoadingSpinner/>}
+            {isLoading && <LoadingSpinner/>}
         </Container>
     );
 }

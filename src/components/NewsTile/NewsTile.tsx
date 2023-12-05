@@ -1,7 +1,7 @@
 import React from "react";
 import {Card, Image} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {ParsedFeedType} from "../../pages/Home/Home";
+import {ParsedFeedType} from "../../globals/functions/feedApi";
 import './style.scss';
 
 type PropTypes = {

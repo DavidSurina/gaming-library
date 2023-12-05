@@ -19,6 +19,16 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  &:hover > a > .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+
+  &:hover > a > .card:not(:hover) {
+    opacity: 0.5;
+  }
 }
 
 .right-col {

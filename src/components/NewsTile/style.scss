@@ -13,7 +13,6 @@
   &-img_container {
     width: 100%;
     position: relative;
-    //max-height: 220px;
     min-height: 320px;
     overflow: hidden;
     border-radius: c.$border-radius;
@@ -23,11 +22,6 @@
     background-position: center;
     z-index: 0;
     transition: all 1s ease-in-out;
-
-    &:hover::before {
-      background: rgba(15, 18, 32, 0.8);
-    }
-
 
     &::before {
       z-index: 10;
