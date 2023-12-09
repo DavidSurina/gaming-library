@@ -12,13 +12,13 @@ type FeedStateType = {
 
 const useRssFeed = () => {
 
-    const {data, isLoading, hasNextPage, fetchNextPage} = useInfiniteQuery<FeedStateType>({
+    const {data, isLoading, hasNextPage, fetchNextPage, isFetching} = useInfiniteQuery<FeedStateType>({
         queryKey: ['rssFeed', initialUrl],
         queryFn: ({pageParam = initialUrl}) => getRssFeed(pageParam),
         getNextPageParam: (nextPage) => nextPage.nextUrl,
     });
-    
-    return {data, isLoading, fetchNextPage, hasNextPage};
+
+    return {data, isLoading, fetchNextPage, isFetching, hasNextPage};
 }
 
 export default useRssFeed;

@@ -25,8 +25,10 @@ function NewsTile(props: PropTypes) {
                     <Image src={img || ''} className="news-img"/>
                 </div>
                 <div className="news-date">{dateConvert}</div>
-                <h3 className="news-title">{cleanedTitle}</h3>
-                <h5 className="news-author">{author}</h5>
+                <section className="news-desc_container">
+                    <h3>{cleanedTitle}</h3>
+                    <h5 className="news-author">{author}</h5>
+                </section>
                 <div>{}</div>
             </Card>
         </Link>

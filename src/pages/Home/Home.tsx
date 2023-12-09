@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from "react";
 import Container from "react-bootstrap/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import './style.scss';
 import useRssFeed from "../../globals/hooks/useRssFeed";
 import NewsTile from "../../components/NewsTile/NewsTile";
+import './style.scss';
 
 function Home() {
-    const {data, isLoading, fetchNextPage, hasNextPage} = useRssFeed();
+    const {data, isLoading, fetchNextPage, isFetching, hasNextPage} = useRssFeed();
     const colEndRef = useRef(null);
 
     useEffect(() => {
@@ -46,10 +46,10 @@ function Home() {
                         })
                     })}
                 {data && <span ref={colEndRef}/>}
+                {isLoading || isFetching && <LoadingSpinner/>}
             </section>
 
             <section className="right-col"></section>
-            {isLoading && <LoadingSpinner/>}
         </Container>
     );
 }
