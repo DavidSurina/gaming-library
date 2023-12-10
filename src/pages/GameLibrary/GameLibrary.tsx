@@ -75,7 +75,7 @@ function GameLibrary() {
     const selectItems = currentQueryConvert(rawgParams);
 
     return (
-        <section>
+        <section className="section-wrapper">
             <div className="filtering-wrapper">
                 <Select
                     items={selectItems}
@@ -114,7 +114,7 @@ function GameLibrary() {
 
             {data && <span ref={gameRef}/>}
             {isFetching && <LoadingSpinner/>}
-            
+
             <FilterContextProvider>
                 <FilterMenu open={menuOpen} handleClose={handleClose}/>
             </FilterContextProvider>

@@ -24,6 +24,11 @@
     transform: scale(1.03);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
+
+    & > .news-img_container::before {
+      transition: all 0.2s ease-out;
+      background: transparent;
+    }
   }
 
   &:hover > a > .card:not(:hover) {

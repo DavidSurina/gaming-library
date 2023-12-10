@@ -22,7 +22,7 @@ function GameDetail() {
     }
 
     return (
-        <section style={{width: "100%"}}>
+        <section style={{width: "100%", minHeight: "90vh"}}>
             <Button type="button" onClick={() => navigate(-1)} style={{}}>
                 Back
             </Button>
