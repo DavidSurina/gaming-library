@@ -13,7 +13,7 @@
   &-img_container {
     width: 100%;
     position: relative;
-    min-height: 320px;
+    min-height: 380px;
     overflow: hidden;
     border-radius: c.$border-radius;
     background-image: url('../../../public/img/rawg-img-placeholder.png');
@@ -21,7 +21,7 @@
     background-repeat: no-repeat;
     background-position: center;
     z-index: 0;
-    
+
     &::before {
       z-index: 10;
       content: "";
