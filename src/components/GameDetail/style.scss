@@ -22,15 +22,21 @@
     @include m.global-page-padding;
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
     min-height: 40vh;
     padding-block: 2rem;
     background: linear-gradient(rgba(15, 18, 32, 0.2), rgba(15, 18, 32, 0.6));
   }
 
+  &_main-heading {
+    padding-block: 2rem;
+  }
+
   &_carousel {
-    width: 100%;
+    width: 65%;
   }
 
   &_carousel-img {
@@ -45,20 +51,18 @@
     }
   }
 
-  &_top-left {
-    width: 65%;
+  &_top-content {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
   }
 
-  &_top-right {
+  &_top-description {
     width: 20%;
   }
 
   &_back-btn {
-
   }
 
   // --Bottom section--

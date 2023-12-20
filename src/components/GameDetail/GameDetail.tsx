@@ -38,11 +38,11 @@ function GameDetail() {
                  }}>
 
             <div className="game-detail_top-section">
-                <div className="game-detail_top-left">
-                    <Button type="button" variant='link' className="game-detail_back-btn" onClick={() => navigate(-1)}>
-                        Back
-                    </Button>
-                    <h1>{data?.name}</h1>
+                <Button type="button" variant='link' className="game-detail_back-btn" onClick={() => navigate(-1)}>
+                    Back
+                </Button>
+                <h1 className="game-detail_main-heading">{data?.name}</h1>
+                <div className="game-detail_top-content">
                     {screenshotsData &&
                         <Carousel className="game-detail_carousel">
                             {screenshotsData.results.map((item) => {
@@ -54,15 +54,17 @@ function GameDetail() {
                             })}
                         </Carousel>
                     }
-                </div>
-                <div className="game-detail_top-right">
-                    <span></span>
-
+                    <ul className="game-detail_top-description">
+                        <li className="game-detail_description-row">
+                            <span>Publisher:</span>
+                            <span></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
             <div className="game-detail_bottom-section">
-                <Tabs defaultActiveKey="">
+                <Tabs defaultActiveKey="details">
                     <Tab eventKey="details" title='Details'>
                         <section>
                             <div>Hi tab 1</div>
