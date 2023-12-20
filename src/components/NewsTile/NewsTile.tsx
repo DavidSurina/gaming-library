@@ -10,8 +10,9 @@ type PropTypes = {
 
 function NewsTile(props: PropTypes) {
     const {data} = props;
-    const {link, title, author, img, pubDate} = data;
+    const {description, link, title, author, img, pubDate} = data;
     const cleanedTitle = title?.replace("<![CDATA[", "").replace("]]>", "");
+    const cleanedDesc = description?.replace("<![CDATA[", "").replace("]]>", "");
     const locale = window.navigator.language;
     const dateConvert = typeof pubDate === "string" ? Intl.DateTimeFormat(locale, {
         dateStyle: 'medium',
@@ -24,10 +25,10 @@ function NewsTile(props: PropTypes) {
                 <div className="news-img_container">
                     <Image src={img || ''} className="news-img"/>
                 </div>
-                <div className="news-date">{dateConvert}</div>
+                <h5 className="news-date-author">{author} - {dateConvert}</h5>
                 <section className="news-desc_container">
-                    <h3>{cleanedTitle}</h3>
-                    <h5 className="news-author">{author}</h5>
+                    <h3 className="news-desc_item">{cleanedTitle}</h3>
+                    <span className="news-desc_item">{cleanedDesc}</span>
                 </section>
                 <div>{}</div>
             </Card>
