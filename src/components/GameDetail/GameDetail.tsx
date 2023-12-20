@@ -3,41 +3,84 @@ import {useParams, useNavigate} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 import {RawgApiService, rawgSubUrls} from "../../globals/functions/rawgApi";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import {Button} from "react-bootstrap";
-import {Game} from "../../globals/types/rawgTypes";
+import {Button, Carousel, Image, Tab, Tabs} from "react-bootstrap";
+import {Game, GameScreenshotResults} from "../../globals/types/rawgTypes";
+import './style.scss';
 
 function GameDetail() {
     const {id} = useParams();
     const navigate = useNavigate();
     const {getRawgData} = RawgApiService;
-    const param = `${rawgSubUrls.game}/${id}`;
+    const gameParam = `${rawgSubUrls.game}/${id}`;
+    const screenShotParam = `${rawgSubUrls.game}/${id}/screenshots`;
 
     const {data, isInitialLoading} = useQuery<Game>({
         queryKey: [`game-${id}`],
-        queryFn: () => getRawgData<Game>(param, {}),
+        queryFn: () => getRawgData<Game>(gameParam, {}),
     });
 
-    if (isInitialLoading) {
+    const {data: screenshotsData, isInitialLoading: screenshotsInitialLoading} = useQuery({
+        queryKey: [``],
+        queryFn: () => getRawgData<GameScreenshotResults>(screenShotParam, {}),
+    })
+
+    if (isInitialLoading || screenshotsInitialLoading) {
         return <LoadingSpinner/>;
     }
 
+
     return (
-        <section style={{width: "100%", minHeight: "90vh"}}>
-            <Button type="button" onClick={() => navigate(-1)} style={{}}>
-                Back
-            </Button>
-            <div style={{width: "100%", overflow: "hidden", maxHeight: "60vh"}}>
-                <img
-                    alt="game-img"
-                    src={data?.background_image}
-                    style={{width: "100%", height: "100%", objectFit: "cover"}}
-                />
+        <section className="game-detail_wrapper"
+                 style={{
+                     backgroundImage: `url(${data?.background_image})`,
+                     backgroundPosition: 'center',
+                     backgroundSize: 'cover'
+                 }}>
+
+            <div className="game-detail_top-section">
+                <div className="game-detail_top-left">
+                    <Button type="button" variant='link' className="game-detail_back-btn" onClick={() => navigate(-1)}>
+                        Back
+                    </Button>
+                    <h1>{data?.name}</h1>
+                    {screenshotsData &&
+                        <Carousel className="game-detail_carousel">
+                            {screenshotsData.results.map((item) => {
+                                return <Carousel.Item key={`${item.id}Slide`}>
+                                    <div className="game-detail_carousel-img-container">
+                                        <Image className="game-detail_carousel-img" src={item.image}/>
+                                    </div>
+                                </Carousel.Item>
+                            })}
+                        </Carousel>
+                    }
+                </div>
+                <div className="game-detail_top-right">
+                    <span></span>
+
+                </div>
             </div>
-            <div>{`Publisher - ${data?.publishers[0].name}`}</div>
-            <div>{`Platforms - ${data?.platforms
-                .map((pl) => pl?.platform.name)
-                .join(", ")}`}</div>
-            <div>{`Genres - ${data?.genres.map((g) => g.name).join(", ")}`}</div>
+
+            <div className="game-detail_bottom-section">
+                <Tabs defaultActiveKey="">
+                    <Tab eventKey="details" title='Details'>
+                        <section>
+                            <div>Hi tab 1</div>
+
+                        </section>
+                    </Tab>
+                    <Tab eventKey='reviews' title='Reviews'>
+                        <section>
+                            Hi tab 2
+                        </section>
+                    </Tab>
+                    <Tab eventKey='more' title='More'>
+                        <section>
+                            Hi tab 3
+                        </section>
+                    </Tab>
+                </Tabs>
+            </div>
         </section>
     );
 }
