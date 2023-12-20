@@ -32,11 +32,15 @@
   }
 
   &_main-heading {
-    padding-block: 2rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(22, 27, 46, 0.7);
+    border-radius: 20px 0;
   }
 
   &_carousel {
     width: 65%;
+    border-radius: c.$border-radius;
   }
 
   &_carousel-img {
@@ -44,10 +48,12 @@
     overflow: hidden;
     min-height: 40vh;
     max-height: 50vh;
+    border-radius: c.$border-radius;
 
     & img {
       height: 100%;
       object-fit: cover;
+      border-radius: c.$border-radius;
     }
   }
 
