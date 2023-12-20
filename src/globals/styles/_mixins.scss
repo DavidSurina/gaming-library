@@ -1,11 +1,15 @@
 @use './constants' as c;
 
 @mixin flex-row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 @mixin flex-col {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin global-page-padding {
+  padding: min(200px, 2%);
 }

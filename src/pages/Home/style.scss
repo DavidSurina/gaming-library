@@ -2,7 +2,8 @@
 @use '/src/globals/styles/constants' as c;
 
 .news-container {
-  min-height: 100vh;
+  @include m.global-page-padding;
+  min-height: 100%;
   width: 100%;
   display: grid;
   grid-template-columns: 12% 1fr 12%;

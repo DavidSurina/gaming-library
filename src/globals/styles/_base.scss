@@ -4,30 +4,32 @@
 *::before,
 *::after,
 html {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-};
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+;
 
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-};
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+;
 
 main {
-    //min-height: calc(max(100vh - (c.$footer-min-height + c.$nav-height)));
-    min-height: 80vh;
-    padding: min(200px, 2%); // TODO add units that Michal mentioned instead of percentages
+  min-height: 85vh;
 }
 
 button, link {
-    cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }

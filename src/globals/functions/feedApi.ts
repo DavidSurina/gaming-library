@@ -31,10 +31,6 @@ export async function getRssFeed(url: string) {
             description: el.querySelector("description")?.innerHTML,
             img: el.querySelector("content")?.getAttribute('url'),
         }));
-        // console.log(res)
-        // console.log(feed)
-        // console.log(items)
-        // console.log(feedItems)
 
         return {feedItems, nextUrl};
     })
