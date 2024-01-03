@@ -23,25 +23,9 @@ function ImageCarousel(props: PropTypes) {
         setImageIndex(index);
     }, []);
 
-    // const increaseSelectedIndex = useCallback(() => {
-    //     console.log('clicked')
-    //     console.log(imageIndex, images.results.length)
-    //     if (imageIndex < images.results.length) {
-    //         setImageIndex(prevState => ++prevState);
-    //     }
-    // }, [imageIndex, images.results]);
-    //
-    // const decreaseSelectedIndex = useCallback(() => {
-    //     if (imageIndex > 1) {
-    //         console.log('clicked')
-    //         setImageIndex(prevState => prevState - 1);
-    //     }
-    // }, [imageIndex]);
-
     const scroll = (offset: number) => {
         if (scrollWrapperRef.current) {
-            console.log(offset, scrollWrapperRef.current?.scrollLeft)
-            scrollWrapperRef.current.scrollLeft = scrollWrapperRef.current?.scrollLeft + offset;
+            scrollWrapperRef.current.scrollLeft += offset;
         }
     }
 
@@ -55,9 +39,9 @@ function ImageCarousel(props: PropTypes) {
     }, []);
 
     return <>
-        <div className="carousel" ref={scrollWrapperRef}>
-            <Button onClick={() => scroll(-50)} className="carousel_btn-left"><ChevronLeftIcon/></Button>
-            <div className="carousel_wrapper">
+        <div className="carousel">
+            <Button onClick={() => scroll(-400)} className="carousel_btn-left"><ChevronLeftIcon/></Button>
+            <div className="carousel_wrapper" ref={scrollWrapperRef}>
                 {
                     images.results.map((result, index) => (
                         <div key={result.id} className="carousel_img-wrapper"
@@ -67,7 +51,7 @@ function ImageCarousel(props: PropTypes) {
                     ))
                 }
             </div>
-            <Button onClick={() => scroll(-50)} className="carousel_btn-right"><ChevronRightIcon/></Button>
+            <Button onClick={() => scroll(400)} className="carousel_btn-right"><ChevronRightIcon/></Button>
         </div>
         <Modal show={galleryOpen} onHide={resetGallery} fullscreen>
             <Modal.Header closeButton/>
