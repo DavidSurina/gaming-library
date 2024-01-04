@@ -13,3 +13,8 @@
 @mixin global-page-padding {
   padding: min(200px, 2%);
 }
+
+@mixin global-max-width {
+  max-width: 1800px;
+  margin: auto;
+}
