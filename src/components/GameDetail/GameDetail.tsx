@@ -5,6 +5,7 @@ import {RawgApiService, rawgSubUrls} from "../../globals/functions/rawgApi";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import {Button, Carousel, Image, Tab, Tabs} from "react-bootstrap";
 import {Game, GameScreenshotResults} from "../../globals/types/rawgTypes";
+import {Game, GameScreenshotResultsType} from "../../globals/types/rawgTypes";
 import './style.scss';
 
 function GameDetail() {

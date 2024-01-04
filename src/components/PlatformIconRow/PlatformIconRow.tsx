@@ -1,5 +1,5 @@
 import React from "react";
-import { Platforms } from "../../globals/types/rawgTypes";
+import {PlatformsType} from "../../globals/types/rawgTypes";
 import {
   PcDisplay as PcDisplayIcon,
   NintendoSwitch as NintendoSwitchIcon,

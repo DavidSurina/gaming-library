@@ -16,7 +16,7 @@ import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import FilterContextProvider from "../../globals/contexts/FilterContext";
 
 import {RawgApiService} from "globals/functions/rawgApi";
-import {GamesResults} from "globals/types/rawgTypes";
+import {GamesResultsType} from "globals/types/rawgTypes";
 import {rawgParams} from "globals/types/rawgParams";
 import {currentQueryConvert} from "../../globals/functions/helpers";
 import "./style.scss";
@@ -30,7 +30,7 @@ function GameLibrary() {
 
     const {getRawgData} = RawgApiService;
     const {data, isLoading, error, fetchNextPage, isFetching, hasNextPage} =
-        useInfiniteQuery<GamesResults>({
+        useInfiniteQuery<GamesResultsType>({
             queryKey: [currentQuery.queryKey, initialUrl],
             queryFn: ({pageParam = initialUrl}) => getRawgData(pageParam),
             getNextPageParam: (lastPage) => lastPage.next,
