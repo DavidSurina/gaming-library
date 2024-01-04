@@ -4,6 +4,7 @@
 .section-wrapper {
   @include m.global-page-padding;
   min-height: 100%;
+  width: 100%;
 }
 
 .tiles-wrapper {
