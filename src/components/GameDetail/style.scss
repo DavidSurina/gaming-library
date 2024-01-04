@@ -3,6 +3,7 @@
 
 .game-detail {
   &_wrapper {
+    @include m.global-max-width;
     width: 100%;
     min-height: 90vh;
     position: relative;

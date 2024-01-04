@@ -3,6 +3,7 @@
 
 .news-container {
   @include m.global-page-padding;
+  @include m.global-max-width;
   min-height: 100%;
   width: 100%;
   display: grid;
