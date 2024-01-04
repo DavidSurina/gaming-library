@@ -14,6 +14,12 @@
     overflow-y: hidden;
     overflow-x: auto;
     scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &_btn-left {
@@ -67,6 +73,7 @@
   &_img-wrapper {
     min-width: 350px;
     height: 100%;
+    cursor: pointer;
   }
 
   &_img {
@@ -77,6 +84,20 @@
 }
 
 .modal {
+  &-body {
+    @include m.global-max-width;
+    justify-content: center;
+  }
+
+  &-header {
+    border-bottom: none;
+    padding-bottom: 0;
+
+    & .button {
+      color: c.$font-color_primary;
+    }
+  }
+
   &-content {
     background: c.$background-dark_light;
   }
@@ -85,6 +106,7 @@
     &-wrapper {
       width: 100%;
       height: fit-content;
+      margin-bottom: 1rem;
       border-radius: c.$border-radius;
     }
 

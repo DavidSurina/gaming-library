@@ -17,6 +17,7 @@ function ImageCarousel(props: PropTypes) {
     const [imageIndex, setImageIndex] = useState<number>(0);
 
     const scrollWrapperRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
+    const galleryScrollRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
     const openGalleryHandle = useCallback((index: number) => {
         setGalleryOpen(true);
@@ -26,6 +27,9 @@ function ImageCarousel(props: PropTypes) {
     const scroll = (offset: number) => {
         if (scrollWrapperRef.current) {
             scrollWrapperRef.current.scrollLeft += offset;
+        }
+        if (galleryScrollRef.current) {
+            galleryScrollRef.current.scrollLeft += offset;
         }
     }
 
@@ -40,7 +44,7 @@ function ImageCarousel(props: PropTypes) {
 
     return <>
         <div className="carousel">
-            <Button onClick={() => scroll(-400)} className="carousel_btn-left"><ChevronLeftIcon/></Button>
+            <Button onClick={() => scroll(-500)} className="carousel_btn-left"><ChevronLeftIcon/></Button>
             <div className="carousel_wrapper" ref={scrollWrapperRef}>
                 {
                     images.results.map((result, index) => (
@@ -51,12 +55,13 @@ function ImageCarousel(props: PropTypes) {
                     ))
                 }
             </div>
-            <Button onClick={() => scroll(400)} className="carousel_btn-right"><ChevronRightIcon/></Button>
+            <Button onClick={() => scroll(500)} className="carousel_btn-right"><ChevronRightIcon/></Button>
         </div>
         <Modal show={galleryOpen} onHide={resetGallery} fullscreen>
-            <Modal.Header closeButton/>
+            <Modal.Header closeButton closeVariant="white"/>
             <Modal.Body>
-                <Carousel fade activeIndex={imageIndex} onSelect={handleImageIndex} className="modal_gallery-wrapper">
+                <Carousel fade activeIndex={imageIndex} onSelect={handleImageIndex} controls={false}
+                          className="modal_gallery-wrapper">
                     {
                         images.results.map((item) => {
                             return <Carousel.Item key={`carouselItem${item.id}`}>
@@ -67,6 +72,20 @@ function ImageCarousel(props: PropTypes) {
                         })
                     }
                 </Carousel>
+                <div className="carousel">
+                    <Button onClick={() => scroll(-500)} className="carousel_btn-left"><ChevronLeftIcon/></Button>
+                    <div className="carousel_wrapper" ref={galleryScrollRef}>
+                        {
+                            images.results.map((result, index) => (
+                                <div key={result.id} className="carousel_img-wrapper"
+                                     onClick={() => openGalleryHandle(index)}>
+                                    <Image src={result.image} className="carousel_img"/>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <Button onClick={() => scroll(500)} className="carousel_btn-right"><ChevronRightIcon/></Button>
+                </div>
             </Modal.Body>
         </Modal>
     </>
