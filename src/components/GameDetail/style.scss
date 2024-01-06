@@ -28,57 +28,99 @@
     align-items: flex-start;
     width: 100%;
     min-height: 40vh;
-    padding-block: 2rem;
     background: linear-gradient(rgba(15, 18, 32, 0.2), rgba(15, 18, 32, 0.6));
+  }
+
+  &_top-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin: auto;
+  }
+
+  &_back-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: rgba(22, 27, 46, 0.7);
+    margin-bottom: 0.5rem;
+    border: none;
+    color: c.$font-color_secondary;
+    transition: 0.2s all;
+
+    & span {
+      margin-block: auto;
+    }
+
+    & svg {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background: rgba(22, 27, 46, 0.8);
+      color: c.$font-color_primary;
+    }
   }
 
   &_main-heading {
     padding: 1rem;
-    margin-bottom: 1rem;
     background: rgba(22, 27, 46, 0.7);
     border-radius: 20px 0;
-  }
-
-  &_carousel {
-    width: 65%;
-    border-radius: c.$border-radius;
-  }
-
-  &_carousel-img {
-    width: 100%;
-    overflow: hidden;
-    min-height: 40vh;
-    max-height: 50vh;
-    border-radius: c.$border-radius;
-
-    & img {
-      height: 100%;
-      object-fit: cover;
-      border-radius: c.$border-radius;
-    }
-  }
-
-  &_top-content {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  &_top-description {
-    width: 20%;
-  }
-
-  &_back-btn {
+    margin-bottom: 1.5rem;
   }
 
   // --Bottom section--
 
   &_bottom-section {
     @include m.global-page-padding;
+    padding-top: 0;
     position: relative;
     min-height: 60vh;
     background: linear-gradient(rgba(15, 18, 32, 0.6), c.$background-dark_darkest);
+  }
+
+  &_tabs-wrapper {
+    padding: 1rem 1rem 0 1rem;
+    justify-content: center;
+    background: rgba(22, 27, 46, 0.7);
+    border-radius: c.$border-radius;
+
+    & .nav-link {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    & .active {
+      border-bottom: 2px solid c.$background-dark_lightest;
+      color: c.$background-dark_lightest;
+
+      &:hover {
+        color: c.$background-dark_lightest;
+      }
+    }
+  }
+
+  &_tab-wrapper {
+    height: 100%;
+    padding: 2rem;
+    background: rgba(22, 27, 46, 0.7);
+  }
+
+  &_top-description {
+    width: 20%;
+  }
+
+  &_tab-subheading {
+    font-size: large;
+    font-weight: 500;
+  }
+
+  &_tab-text {
+    font-size: medium;
+    font-weight: 300;
   }
 
 }
