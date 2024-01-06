@@ -8,6 +8,7 @@
 .modal {
   &-body {
     @include m.global-max-width;
+    width: 100%;
     justify-content: center;
     overflow-x: auto;
   }
