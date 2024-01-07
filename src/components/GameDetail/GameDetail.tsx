@@ -8,6 +8,7 @@ import { ArrowLeft } from "react-bootstrap-icons";
 import { Game, GameScreenshotResultsType } from "../../globals/types/rawgTypes";
 import "./style.scss";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
+import DetailsTab from "./DetailsTab";
 
 function GameDetail() {
   const { id } = useParams();
@@ -63,10 +64,9 @@ function GameDetail() {
             title="Details"
             className="game-detail_tab-wrapper"
           >
-            <section>
-              <span>{`" ${data?.description_raw} "`}</span>
-            </section>
+            <DetailsTab data={data} />
           </Tab>
+
           <Tab
             eventKey="reviews"
             title="Reviews"
