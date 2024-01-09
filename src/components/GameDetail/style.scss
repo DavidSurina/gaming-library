@@ -74,7 +74,6 @@
   // --Bottom section--
 
   &_bottom-section {
-    @include m.global-page-padding;
     padding-top: 0;
     position: relative;
     min-height: 60vh;
@@ -82,6 +81,7 @@
   }
 
   &_tabs-wrapper {
+    @include m.global-page-padding;
     padding: 1rem 1rem 0 1rem;
     justify-content: center;
     background: rgba(22, 27, 46, 0.7);
@@ -90,11 +90,14 @@
     & .nav-link {
       background: transparent;
       border: none;
-      border-bottom: 2px solid transparent;
+      border-bottom: 3px solid transparent;
+      font-weight: 500;
+      padding-inline: 0.5rem;
+      margin-inline: 0.5rem;
     }
 
     & .active {
-      border-bottom: 2px solid c.$background-dark_lightest;
+      border-bottom: 3px solid c.$background-dark_lightest;
       color: c.$background-dark_lightest;
 
       &:hover {
@@ -107,13 +110,46 @@
     height: 100%;
     padding: 2rem;
     background: rgba(22, 27, 46, 0.7);
+
+    & > section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+    }
   }
 
-  &_top-description {
-    width: 20%;
+  &_tab-column {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_tab-row {
+    min-width: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &_tab-cell {
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   &_tab-subheading {
+    width: 100%;
     font-size: large;
     font-weight: 500;
   }
@@ -123,4 +159,71 @@
     font-weight: 300;
   }
 
+  &_review-summary {
+    width: 43%;
+    margin-right: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1.5rem;
+    background: c.$background-dark_darker;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+
+  &_rating-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: small;
+
+    & > span:nth-child(1) {
+      width: 25%;
+    }
+
+    & > span:nth-child(2) {
+      width: 60%;
+    }
+
+    & > span:nth-child(3) {
+      width: 13%;
+      text-align: right;
+    }
+  }
+
+  &_gauge {
+    width: 280px;
+    height: 20px;
+    padding: 1%;
+    background: c.$background-dark_light;
+    border-radius: 20px;
+
+    & > span {
+      height: 12px;
+      display: flex;
+      background: c.$background-dark_lightest;
+      border-radius: 20px;
+    }
+  }
+
+  &_main-rating {
+    font-size: xxx-large;
+    font-weight: 600;
+
+    & > span {
+      font-weight: 400;
+      font-size: x-large;
+    }
+  }
+
+  &_reviews {
+    width: 50%;
+    margin-left: auto;
+  }
 }

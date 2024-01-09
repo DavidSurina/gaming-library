@@ -9,6 +9,7 @@ import { Game, GameScreenshotResultsType } from "../../globals/types/rawgTypes";
 import "./style.scss";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import DetailsTab from "./DetailsTab";
+import ReviewsTab from "./ReviewsTab";
 
 function GameDetail() {
   const { id } = useParams();
@@ -52,16 +53,22 @@ function GameDetail() {
             <ArrowLeft size={25} />
             <span>Back</span>
           </Button>
+
           <h1 className="game-detail_main-heading">{data?.name}</h1>
+
           {screenshotsData && <ImageCarousel images={screenshotsData} />}
         </div>
       </div>
 
       <div className="game-detail_bottom-section">
-        <Tabs defaultActiveKey="details" className="game-detail_tabs-wrapper">
+        <Tabs
+          defaultActiveKey="details"
+          variant="underline"
+          className="game-detail_tabs-wrapper"
+        >
           <Tab
             eventKey="details"
-            title="Details"
+            title="DETAILS"
             className="game-detail_tab-wrapper"
           >
             <DetailsTab data={data} />
@@ -69,12 +76,13 @@ function GameDetail() {
 
           <Tab
             eventKey="reviews"
-            title="Reviews"
+            title="REVIEWS"
             className="game-detail_tab-wrapper"
           >
-            <section>Hi tab 2</section>
+            <ReviewsTab data={data} />
           </Tab>
-          <Tab eventKey="more" title="More" className="game-detail_tab-wrapper">
+
+          <Tab eventKey="more" title="MORE" className="game-detail_tab-wrapper">
             <section>Hi tab 3</section>
           </Tab>
         </Tabs>
