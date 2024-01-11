@@ -63,6 +63,7 @@ export type Game = {
   rating: number;
   ratings: RatingsType[];
   ratings_count: number;
+  rating_top: number;
 };
 
 export type GamesResultsType = {

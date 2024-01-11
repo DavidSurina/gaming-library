@@ -9,7 +9,6 @@ import { Game, GameScreenshotResultsType } from "../../globals/types/rawgTypes";
 import "./style.scss";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import DetailsTab from "./DetailsTab";
-import ReviewsTab from "./ReviewsTab";
 
 function GameDetail() {
   const { id } = useParams();
@@ -72,14 +71,6 @@ function GameDetail() {
             className="game-detail_tab-wrapper"
           >
             <DetailsTab data={data} />
-          </Tab>
-
-          <Tab
-            eventKey="reviews"
-            title="REVIEWS"
-            className="game-detail_tab-wrapper"
-          >
-            <ReviewsTab data={data} />
           </Tab>
 
           <Tab eventKey="more" title="MORE" className="game-detail_tab-wrapper">
