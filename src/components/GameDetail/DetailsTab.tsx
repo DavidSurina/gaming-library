@@ -1,5 +1,6 @@
 import React from "react";
 import { Game } from "../../globals/types/rawgTypes";
+import { Badge } from "react-bootstrap";
 
 type PropTypes = {
   data: Game | undefined;
@@ -10,7 +11,7 @@ function DetailsTab(props: PropTypes) {
   const rating = data?.rating || 0;
   const ratingTop = data?.rating_top || 0;
   const ratingsCount = data?.ratings_count || 0;
-  const ratings = data?.ratings;
+  const ratings = data?.ratings || [];
   const locale = window.navigator.language;
   const dateConvert =
     typeof data?.released === "string"
@@ -19,11 +20,12 @@ function DetailsTab(props: PropTypes) {
           timeStyle: undefined,
         }).format(new Date(data?.released))
       : "-";
+  const metacritic = data?.metacritic ? `${data.metacritic}%` : "-";
 
   return (
     <section>
       <div className="game-detail_tab-row">
-        <div className="game-detail_review-summary">
+        <div className="game-detail_rating-summary">
           <div>
             <span className="game-detail_main-rating">
               {rating} <span>of</span> {ratingTop}
@@ -48,29 +50,48 @@ function DetailsTab(props: PropTypes) {
             )}
           </div>
         </div>
-        <div className="game-detail_tab-column">
-          <span className="game-detail_tab-subheading">Developed by</span>
-          <span className="game-detail_tab-text">
-            {data?.developers[0].name}
-          </span>
-        </div>
-        <div className="game-detail_tab-column">
-          <span className="game-detail_tab-subheading">Published by</span>
-          <span className="game-detail_tab-text">
-            {data?.publishers[0].name}
-          </span>
-        </div>
-        <div className="game-detail_tab-column">
-          <span className="game-detail_tab-subheading">Release date</span>
-          <span className="game-detail_tab-text">{dateConvert}</span>
-        </div>
-      </div>
-
-      <div className="game-detail_tab-cell">
-        <div className="game-detail_tab-column">
-          <div className="game-detail_tab-cell">
+        <div className="game-detail_details-summary">
+          <div className="game-detail_tab-column">
+            <span className="game-detail_tab-subheading">
+              Metacritic rating
+            </span>
+            <span className="game-detail_tab-text">{metacritic}</span>
+          </div>
+          <div className="game-detail_tab-column">
+            <span className="game-detail_tab-subheading">Release date</span>
+            <span className="game-detail_tab-text">{dateConvert}</span>
+          </div>
+          <div className="game-detail_tab-column">
+            <span className="game-detail_tab-subheading">Developed by</span>
+            <span className="game-detail_tab-text">
+              {data?.developers[0].name}
+            </span>
+          </div>
+          <div className="game-detail_tab-column">
+            <span className="game-detail_tab-subheading">Published by</span>
+            <span className="game-detail_tab-text">
+              {data?.publishers[0].name}
+            </span>
+          </div>
+          <div className="game-detail_tab-row">
+            <span className="game-detail_tab-subheading">Genres</span>
+            <div className="game-detail_badge_wrapper">
+              {data?.genres.map((p) => (
+                <Badge bg="secondary" key={`${p.name}Badge`}>
+                  {p.name}
+                </Badge>
+              )) || <div />}
+            </div>
+          </div>
+          <div className="game-detail_tab-row">
             <span className="game-detail_tab-subheading">Playable on</span>
-            <></>
+            <div className="game-detail_badge_wrapper">
+              {data?.platforms.map((p) => (
+                <Badge bg="secondary" key={`${p.platform.name}Badge`}>
+                  {p.platform.name}
+                </Badge>
+              )) || <div />}
+            </div>
           </div>
         </div>
       </div>
