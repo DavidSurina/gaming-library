@@ -95,7 +95,16 @@ function DetailsTab(props: PropTypes) {
           </div>
         </div>
       </div>
-
+      <div className="game-detail_tab-row">
+        <span className="game-detail_tab-subheading">Tags</span>
+        <div className="game-detail_badge_wrapper">
+          {data?.tags?.map((t) => (
+            <Badge bg="secondary" key={`${t.name}Badge`}>
+              {t.name}
+            </Badge>
+          )) || <div />}
+        </div>
+      </div>
       <div className="game-detail_tab-cell">
         <span className="game-detail_tab-subheading">Description</span>
         <span className="game-detail_tab-text fst-italic">{`" ${data?.description_raw} "`}</span>
