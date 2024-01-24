@@ -7,6 +7,7 @@ type PropTypes = {
 
 function MoreTab(props: PropTypes) {
   const { data } = props;
+
   return <section>More Tab</section>;
 }
 

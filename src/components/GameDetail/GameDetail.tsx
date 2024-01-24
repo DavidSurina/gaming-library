@@ -9,6 +9,7 @@ import { Game, GameScreenshotResultsType } from "../../globals/types/rawgTypes";
 import "./style.scss";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import DetailsTab from "./DetailsTab";
+import MoreTab from "./MoreTab";
 
 function GameDetail() {
   const { id } = useParams();
@@ -74,7 +75,7 @@ function GameDetail() {
           </Tab>
 
           <Tab eventKey="more" title="MORE" className="game-detail_tab-wrapper">
-            <section>Hi tab 3</section>
+            <MoreTab data={data} />
           </Tab>
         </Tabs>
       </div>
