@@ -1,43 +1,84 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { RawgApiService, rawgSubUrls } from "../../globals/functions/api";
+import { RawgApiService, rawgSubUrls } from "../../globals/functions/rawgApi";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import { Button } from "react-bootstrap";
-import { Game } from "../../globals/types/rawgTypes";
+import { Button, Tab, Tabs } from "react-bootstrap";
+import { ArrowLeft } from "react-bootstrap-icons";
+import { Game, GameScreenshotResultsType } from "../../globals/types/rawgTypes";
+import "./style.scss";
+import ImageCarousel from "../ImageCarousel/ImageCarousel";
+import DetailsTab from "./DetailsTab";
+import MoreTab from "./MoreTab";
 
 function GameDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getRawgData } = RawgApiService;
-  const param = `${rawgSubUrls.game}/${id}`;
+  const gameParam = `${rawgSubUrls.game}/${id}`;
+  const screenShotParam = `${rawgSubUrls.game}/${id}/screenshots`;
 
   const { data, isInitialLoading } = useQuery<Game>({
     queryKey: [`game-${id}`],
-    queryFn: () => getRawgData<Game>(param, {}),
+    queryFn: () => getRawgData<Game>(gameParam, {}),
   });
 
-  if (isInitialLoading) {
+  const { data: screenshotsData, isInitialLoading: screenshotsInitialLoading } =
+    useQuery({
+      queryKey: [``],
+      queryFn: () =>
+        getRawgData<GameScreenshotResultsType>(screenShotParam, {}),
+    });
+
+  if (isInitialLoading || screenshotsInitialLoading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <section style={{ width: "100%" }}>
-      <Button type="button" onClick={() => navigate(-1)} style={{}}>
-        Back
-      </Button>
-      <div style={{ width: "100%", overflow: "hidden", maxHeight: "60vh" }}>
-        <img
-          alt="game-img"
-          src={data?.background_image}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+    <section
+      className="game-detail_wrapper"
+      style={{
+        backgroundImage: `url(${data?.background_image})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="game-detail_top-section">
+        <div className="game-detail_top-content">
+          <Button
+            type="button"
+            className="game-detail_back-btn"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowLeft size={25} />
+            <span>Back</span>
+          </Button>
+
+          <h1 className="game-detail_main-heading">{data?.name}</h1>
+
+          {screenshotsData && <ImageCarousel images={screenshotsData} />}
+        </div>
       </div>
-      <div>{`Publisher - ${data?.publishers[0].name}`}</div>
-      <div>{`Platforms - ${data?.platforms
-        .map((pl) => pl?.platform.name)
-        .join(", ")}`}</div>
-      <div>{`Genres - ${data?.genres.map((g) => g.name).join(", ")}`}</div>
+
+      <div className="game-detail_bottom-section">
+        <Tabs
+          defaultActiveKey="details"
+          variant="underline"
+          className="game-detail_tabs-wrapper"
+        >
+          <Tab
+            eventKey="details"
+            title="DETAILS"
+            className="game-detail_tab-wrapper"
+          >
+            <DetailsTab data={data} />
+          </Tab>
+
+          <Tab eventKey="more" title="MORE" className="game-detail_tab-wrapper">
+            <MoreTab data={data} />
+          </Tab>
+        </Tabs>
+      </div>
     </section>
   );
 }

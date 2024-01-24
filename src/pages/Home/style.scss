@@ -1,0 +1,43 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.news-container {
+  @include m.global-page-padding;
+  @include m.global-max-width;
+  min-height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 12% 1fr 12%;
+  grid-template-rows: auto;
+  grid-template-areas: "left middle right";
+}
+
+.left-col {
+  grid-area: left;
+}
+
+.middle-col {
+  grid-area: middle;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &:hover > a > .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+
+    & > .news-img_container::before {
+      transition: all 0.2s ease-out;
+      background: transparent;
+    }
+  }
+
+  &:hover > a > .card:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+.right-col {
+  grid-area: right;
+}

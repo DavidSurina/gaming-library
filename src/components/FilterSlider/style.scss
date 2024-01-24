@@ -7,11 +7,12 @@
     margin: 0 auto 1.5rem auto;
     z-index: auto !important;
   }
+
   &-track {
     top: 12.5px;
     height: 10px;
     background-color: c.$background-dark_lightest;
-    border-radius: 5px;
+    border-radius: c.$border-radius;
     z-index: auto !important;
   }
 

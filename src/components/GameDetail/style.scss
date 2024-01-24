@@ -1,0 +1,247 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.game-detail {
+  &_wrapper {
+    @include m.global-max-width;
+    width: 100%;
+    min-height: 90vh;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(20px) grayscale(10%);
+    }
+  }
+
+  // --Top section--
+
+  &_top-section {
+    @include m.global-page-padding;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 40vh;
+    background: linear-gradient(rgba(15, 18, 32, 0.2), rgba(15, 18, 32, 0.6));
+  }
+
+  &_top-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin: auto;
+  }
+
+  &_back-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: rgba(22, 27, 46, 0.7);
+    margin-bottom: 0.5rem;
+    border: none;
+    color: c.$font-color_secondary;
+    transition: 0.2s all;
+
+    & span {
+      margin-block: auto;
+    }
+
+    & svg {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background: rgba(22, 27, 46, 0.8);
+      color: c.$font-color_primary;
+    }
+  }
+
+  &_main-heading {
+    padding: 1rem;
+    background: rgba(22, 27, 46, 0.7);
+    border-radius: 20px 0;
+    margin-bottom: 1.5rem;
+  }
+
+  // --Bottom section--
+
+  &_bottom-section {
+    padding-top: 0;
+    position: relative;
+    min-height: 60vh;
+    background: linear-gradient(rgba(15, 18, 32, 0.6), c.$background-dark_darkest);
+  }
+
+  &_tabs-wrapper {
+    @include m.global-page-padding;
+    padding: 1rem 1rem 0 1rem;
+    justify-content: center;
+    background: rgba(22, 27, 46, 0.7);
+    border-radius: c.$border-radius;
+
+    & .nav-link {
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      font-weight: 500;
+      padding-inline: 0.5rem;
+      margin-inline: 0.5rem;
+    }
+
+    & .active {
+      border-bottom: 3px solid c.$background-dark_lightest;
+      color: c.$background-dark_lightest;
+
+      &:hover {
+        color: c.$background-dark_lightest;
+      }
+    }
+  }
+
+  &_tab-wrapper {
+    height: 100%;
+    padding: 2rem;
+    background: rgba(22, 27, 46, 0.7);
+
+    & > section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+    }
+  }
+
+  &_tab-column {
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 250px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_tab-row {
+    min-width: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &_tab-cell {
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &_tab-subheading {
+    width: 100%;
+    font-size: large;
+    font-weight: 500;
+  }
+
+  &_tab-text {
+    font-size: medium;
+    font-weight: 300;
+  }
+
+  &_details-summary {
+    width: 53%;
+    min-width: 500px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  &_rating-summary {
+    width: 45%;
+    min-width: 460px;
+    margin-right: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1.5rem;
+    background: c.$background-dark_darker;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
+
+  &_rating-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: small;
+
+    & > span:nth-child(1) {
+      width: 25%;
+    }
+
+    & > span:nth-child(2) {
+      width: 60%;
+    }
+
+    & > span:nth-child(3) {
+      width: 13%;
+      text-align: right;
+    }
+  }
+
+  &_gauge {
+    width: 280px;
+    height: 20px;
+    padding: 1%;
+    background: c.$background-dark_light;
+    border-radius: 20px;
+
+    & > span {
+      height: 12px;
+      display: flex;
+      background: c.$background-dark_lightest;
+      border-radius: 20px;
+    }
+  }
+
+  &_main-rating {
+    font-size: xxx-large;
+    font-weight: 600;
+
+    & > span {
+      font-weight: 400;
+      font-size: x-large;
+    }
+  }
+
+  &_badge_wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}

@@ -15,8 +15,8 @@ import SearchInput from "components/SearchInput/SearchInput";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import FilterContextProvider from "../../globals/contexts/FilterContext";
 
-import { RawgApiService } from "globals/functions/api";
-import { GamesResults } from "globals/types/rawgTypes";
+import { RawgApiService } from "globals/functions/rawgApi";
+import { GamesResultsType } from "globals/types/rawgTypes";
 import { rawgParams } from "globals/types/rawgParams";
 import { currentQueryConvert } from "../../globals/functions/helpers";
 import "./style.scss";
@@ -30,12 +30,10 @@ function GameLibrary() {
 
   const { getRawgData } = RawgApiService;
   const { data, isLoading, error, fetchNextPage, isFetching, hasNextPage } =
-    useInfiniteQuery<GamesResults>({
+    useInfiniteQuery<GamesResultsType>({
       queryKey: [currentQuery.queryKey, initialUrl],
       queryFn: ({ pageParam = initialUrl }) => getRawgData(pageParam),
-      getNextPageParam: (lastPage) => {
-        return lastPage.next;
-      },
+      getNextPageParam: (lastPage) => lastPage.next,
     });
 
   const handleClose = () => {
@@ -60,7 +58,7 @@ function GameLibrary() {
       },
       {
         rootMargin: "0px 0px 400px 0px",
-      }
+      },
     );
 
     if (gameRef.current && hasNextPage) {
@@ -77,14 +75,14 @@ function GameLibrary() {
   const selectItems = currentQueryConvert(rawgParams);
 
   return (
-    <section>
+    <section className="section-wrapper">
       <div className="filtering-wrapper">
         <Select
           items={selectItems}
           onSelectedItemChange={(e) => handleSelect(e)}
           defaultSelectedItem={selectItems[0]}
           selectedItem={selectItems.find(
-            (i) => i.queryKey === currentQuery.queryKey
+            (i) => i.queryKey === currentQuery.queryKey,
           )}
         />
         <SearchInput />
@@ -95,6 +93,7 @@ function GameLibrary() {
           <FilterIcon size="25" />
         </Button>
       </div>
+
       {!isLoading && data?.pages && (
         <>
           <div className="tiles-wrapper">
@@ -112,8 +111,10 @@ function GameLibrary() {
           )}
         </>
       )}
+
       {data && <span ref={gameRef} />}
       {isFetching && <LoadingSpinner />}
+
       <FilterContextProvider>
         <FilterMenu open={menuOpen} handleClose={handleClose} />
       </FilterContextProvider>
