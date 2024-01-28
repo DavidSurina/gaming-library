@@ -3,13 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { RawgApiService, rawgSubUrls } from "../../globals/functions/rawgApi";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import { Button, Tab, Tabs } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { ArrowLeft } from "react-bootstrap-icons";
 import { Game, GameScreenshotResultsType } from "../../globals/types/rawgTypes";
-import "./style.scss";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
-import DetailsTab from "./DetailsTab";
-import MoreTab from "./MoreTab";
+import DetailsSection from "./DetailsSection";
+import "./style.scss";
 
 function GameDetail() {
   const { id } = useParams();
@@ -17,7 +16,6 @@ function GameDetail() {
   const { getRawgData } = RawgApiService;
   const gameParam = `${rawgSubUrls.game}/${id}`;
   const screenShotParam = `${rawgSubUrls.game}/${id}/screenshots`;
-
   const { data, isInitialLoading } = useQuery<Game>({
     queryKey: [`game-${id}`],
     queryFn: () => getRawgData<Game>(gameParam, {}),
@@ -35,7 +33,7 @@ function GameDetail() {
   }
 
   return (
-    <section
+    <div
       className="game-detail_wrapper"
       style={{
         backgroundImage: `url(${data?.background_image})`,
@@ -43,7 +41,7 @@ function GameDetail() {
         backgroundSize: "cover",
       }}
     >
-      <div className="game-detail_top-section">
+      <section className="game-detail_top-section">
         <div className="game-detail_top-content">
           <Button
             type="button"
@@ -54,32 +52,21 @@ function GameDetail() {
             <span>Back</span>
           </Button>
 
-          <h1 className="game-detail_main-heading">{data?.name}</h1>
+          <div className="game-detail_main-heading">
+            <h1>{data?.name}</h1>
+            <div>
+              <h5>
+                {data?.publishers[0].name} &#183;{" "}
+                {data?.genres.map((p) => p.name.toLowerCase()).join(" / ")}
+              </h5>
+            </div>
+          </div>
 
           {screenshotsData && <ImageCarousel images={screenshotsData} />}
         </div>
-      </div>
-
-      <div className="game-detail_bottom-section">
-        <Tabs
-          defaultActiveKey="details"
-          variant="underline"
-          className="game-detail_tabs-wrapper"
-        >
-          <Tab
-            eventKey="details"
-            title="DETAILS"
-            className="game-detail_tab-wrapper"
-          >
-            <DetailsTab data={data} />
-          </Tab>
-
-          <Tab eventKey="more" title="MORE" className="game-detail_tab-wrapper">
-            <MoreTab data={data} />
-          </Tab>
-        </Tabs>
-      </div>
-    </section>
+      </section>
+      <DetailsSection data={data} />
+    </div>
   );
 }
 

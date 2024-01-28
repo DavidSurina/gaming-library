@@ -64,6 +64,8 @@ export type Game = {
   ratings: RatingsType[];
   ratings_count: number;
   rating_top: number;
+  reddit_url: string;
+  website: string;
 };
 
 export type GamesResultsType = {
