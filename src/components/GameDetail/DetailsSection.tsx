@@ -77,7 +77,7 @@ function DetailsSection(props: PropTypes) {
           <div className="game-detail_grid-column">
             <span className="game-detail_grid-subheading">Age rating</span>
             <span className="game-detail_grid-text">
-              {data?.esrb_rating.name ?? "-"}
+              {data?.esrb_rating ? data?.esrb_rating.name : "-"}
             </span>
           </div>
           <div className="game-detail_grid-column">
