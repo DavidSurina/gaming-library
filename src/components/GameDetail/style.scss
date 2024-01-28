@@ -43,7 +43,7 @@
     flex-direction: row;
     justify-content: center;
     background: c.$background-dark_darker;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     border: none;
     color: c.$font-color_secondary;
     transition: 0.2s all;
@@ -65,7 +65,7 @@
     padding: 1rem;
     background: c.$background-dark_darkest;
     border-radius: 20px 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 
     & h5 {
       color: c.$font-color_secondary !important;
