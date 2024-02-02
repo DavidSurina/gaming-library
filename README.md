@@ -13,6 +13,8 @@ The GamingLibrary project is a React-based web application that serves as a plat
 - Features
 
 Gaming Library: Utilizes the RAWG API to fetch and display information about a diverse range of games.
+
+
 News Feed: Integrates gaming articles and news from IGN through the use of RSS feeds.
 
 ## Available Scripts
