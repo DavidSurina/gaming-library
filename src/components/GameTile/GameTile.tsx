@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Image, Card } from "react-bootstrap";
+import { Image, Card, Stack } from "react-bootstrap";
 
 import { Game } from "globals/types/rawgTypes";
 import "./style.scss";
 import PlatformIconRow from "../PlatformIconRow/PlatformIconRow";
-import clsx from "clsx";
 import { LIBRARY_ROUTE } from "../../MainRoute";
+import MetaCriticBadge from "../MetaCriticBadge/MetaCriticBadge";
 
 type PropTypes = {
   game: Game;
@@ -14,9 +14,8 @@ type PropTypes = {
 
 function GameTile(props: PropTypes) {
   const {
-    game: { name, background_image, platforms, released, metacritic, slug },
+    game: { name, background_image, platforms, slug, metacritic },
   } = props;
-  const formattedName = name.split(":");
 
   return (
     <Link to={`${LIBRARY_ROUTE}/${slug}`}>
@@ -25,31 +24,12 @@ function GameTile(props: PropTypes) {
           <Image src={background_image} alt="game-img" />
         </div>
         <Card.Header>
-          <Card.Title
-            className={clsx({ "card-title-padding": !formattedName[1] })}
-          >
-            {formattedName[0]}
-            {formattedName.length === 2 && ":"}
-          </Card.Title>
-          {formattedName[1] && (
-            <Card.Subtitle className="my-1">{formattedName[1]}</Card.Subtitle>
-          )}
+          <div className="card-header_title-wrapper">
+            <Card.Title>{name}</Card.Title>
+            <MetaCriticBadge metaCriticRating={metacritic} />
+          </div>
+          <PlatformIconRow platforms={platforms} />
         </Card.Header>
-        <Card.Body>
-          <div className="d-flex justify-content-between align-items-center py-1">
-            <Card.Subtitle>Release:</Card.Subtitle>
-            <Card.Text>{new Date(released).toLocaleDateString()}</Card.Text>
-          </div>
-          <div className="d-flex justify-content-between align-items-center py-1">
-            <Card.Subtitle>Critic rating:</Card.Subtitle>
-            <Card.Text>{metacritic ? `${metacritic}/100` : "---"}</Card.Text>
-          </div>
-          <div className="d-flex flex-row justify-content-end py-1 mt-1">
-            <Card.Text as="div">
-              <PlatformIconRow platforms={platforms} />
-            </Card.Text>
-          </div>
-        </Card.Body>
       </Card>
     </Link>
   );
