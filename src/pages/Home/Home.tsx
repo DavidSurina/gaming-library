@@ -36,8 +36,8 @@ function Home() {
   }, [isLoading, hasNextPage]);
 
   return (
-    <>
-      <Container fluid="true" className="news-container">
+    <Container fluid="true" className="home-container">
+      <section className="news-container">
         {data?.pages &&
           data.pages.map((pages) => {
             return pages.feedItems.map((item) => {
@@ -46,8 +46,8 @@ function Home() {
           })}
         {isLoading || (isFetching && <LoadingSpinner />)}
         {data && <span ref={colEndRef} />}
-      </Container>
-    </>
+      </section>
+    </Container>
   );
 }
 

@@ -1,10 +1,14 @@
 @use '/src/globals/styles/mixins' as m;
 @use '/src/globals/styles/constants' as c;
 
-.news-container {
+.home-container {
   @include m.global-page-padding;
   @include m.global-max-width;
   min-height: 100%;
+  width: 100%;
+}
+
+.news-container {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minMax(600px, 1fr));
