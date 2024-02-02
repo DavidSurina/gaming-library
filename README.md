@@ -1,10 +1,10 @@
-#GamingLibrary Project
+# GamingLibrary Project
 
-##Overview
+## Overview
 
 The GamingLibrary project is a React-based web application that serves as a platform for users to explore and discover information about various games. Leveraging TypeScript for robust typing, Bootstrap for responsive design, and SCSS for styling. The gaming library is populated using the RAWG API (https://rawg.io/apidocs), and the latest gaming news is fetched from the IGN (ign.com) RSS feed.
 
-##Technologies Used
+## Technologies Used
 
 - React
 - TypeScript
