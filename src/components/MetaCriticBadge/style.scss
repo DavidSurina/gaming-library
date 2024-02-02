@@ -1,0 +1,10 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.metacritic-badge_wrapper {
+  padding: 5px;
+  border-radius: 5px;
+  color: c.$font-color_primary;
+  background-color: c.$background-dark_lightest;
+  font-size: large;
+}
