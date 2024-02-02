@@ -1,9 +1,18 @@
 @use '/src/globals/styles/mixins' as m;
 @use '/src/globals/styles/constants' as c;
 
-.icon-text {
-  line-height: 25px;
-  padding: 0 5px;
-  color: c.$font-color_primary;
-  font-size: 0.9rem;
+.icon-row {
+  &_wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+  }
+
+  &_extra-text {
+    line-height: 25px;
+    padding: 0 5px;
+    color: c.$font-color_primary;
+    font-size: 0.9rem;
+  }
 }
