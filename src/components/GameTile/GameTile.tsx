@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Image, Card, Stack } from "react-bootstrap";
-
-import { Game } from "globals/types/rawgTypes";
-import "./style.scss";
+import { Image, Card } from "react-bootstrap";
 import PlatformIconRow from "../PlatformIconRow/PlatformIconRow";
 import { LIBRARY_ROUTE } from "../../MainRoute";
 import MetaCriticBadge from "../MetaCriticBadge/MetaCriticBadge";
+import { Game } from "globals/types/rawgTypes";
+import "./style.scss";
 
 type PropTypes = {
   game: Game;
