@@ -10,7 +10,6 @@ The GamingLibrary project is a React-based web application that serves as a plat
 - TypeScript
 - Bootstrap
 - SCSS
-- Features
 
 Gaming Library: Utilizes the RAWG API to fetch and display information about a diverse range of games.
 
