@@ -16,7 +16,6 @@ function Home() {
         entries.forEach((entry) => {
           if (!hasNextPage) return;
           if (entry.isIntersecting) {
-            // console.log("gets fetched");
             fetchNextPage();
           }
         });

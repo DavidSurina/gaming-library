@@ -18,7 +18,7 @@ type PropTypes = {
 
 function PlatformIconRow(props: PropTypes) {
   const { platforms } = props;
-  console.log(platforms);
+
   if (!platforms) {
     return null;
   }
@@ -30,31 +30,30 @@ function PlatformIconRow(props: PropTypes) {
     }
     let icon: JSX.Element;
 
-    if (findPlatform) {
-      switch (p) {
-        case "pc":
-          icon = <WindowsIcon size={iconSize - 2} color="white" />;
-          break;
-        case "macos":
-          icon = <AppleIcon size={iconSize} color="white" />;
-          break;
-        case "android":
-          icon = <AndroidIcon size={iconSize} color="white" />;
-          break;
-        case "playstation":
-          icon = <PlaystationIcon size={iconSize} color="white" />;
-          break;
-        case "xbox":
-          icon = <XboxIcon size={iconSize} color="white" />;
-          break;
-        case "nintendo-switch":
-          icon = <NintendoSwitchIcon size={iconSize} color="white" />;
-          break;
-        default:
-          icon = <div />;
-          break;
-      }
+    switch (p) {
+      case "pc":
+        icon = <WindowsIcon size={iconSize - 2} color="white" />;
+        break;
+      case "macos":
+        icon = <AppleIcon size={iconSize} color="white" />;
+        break;
+      case "android":
+        icon = <AndroidIcon size={iconSize} color="white" />;
+        break;
+      case "playstation":
+        icon = <PlaystationIcon size={iconSize} color="white" />;
+        break;
+      case "xbox":
+        icon = <XboxIcon size={iconSize} color="white" />;
+        break;
+      case "nintendo-switch":
+        icon = <NintendoSwitchIcon size={iconSize} color="white" />;
+        break;
+      default:
+        icon = <div />;
+        break;
     }
+
     return <IconWrapper key={p} icon={icon} />;
   });
 
