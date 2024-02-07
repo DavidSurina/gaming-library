@@ -4,6 +4,7 @@
 
 .card {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-around;
   background-color: c.$background-dark_light;
@@ -12,27 +13,28 @@
   transition: all .2s ease-in-out;
 
   &-header {
-    padding: 1rem 1rem 0.5rem 1rem;
-    border: none;
+    position: absolute;
+    width: 95%;
+    margin: 0 2.5%;
+    padding: 17px 25px;
+    bottom: 1rem;
+    background: rgba(15, 18, 32, 0.9);
+    border-radius: 20px 0;
+
+    &_title-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   &-title {
     margin: 0;
-
-    &-padding {
-      padding-bottom: 28px;
-    }
-  }
-
-  &-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100px;
-    padding: 0 1.3rem;
+    color: c.$font-color_primary;
   }
 
   &-text {
-    color: c.$font-color_secondary;
     font-size: small;
   }
 }
@@ -41,8 +43,8 @@
 .img-container {
   width: 100%;
   position: relative;
-  max-height: 220px;
-  min-height: 220px;
+  max-height: 320px;
+  min-height: 320px;
   overflow: hidden;
   border-radius: c.$border-radius c.$border-radius 0 0;
   background-image: url('../../../public/img/rawg-img-placeholder.png');

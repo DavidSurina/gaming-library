@@ -9,8 +9,7 @@
 
 .tiles-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-auto-rows: 410px;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   margin: 2rem auto;
   width: 100%;
   min-height: 95vh;
