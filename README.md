@@ -11,8 +11,10 @@ The GamingLibrary project is a React-based web application that serves as a plat
 - Bootstrap
 - SCSS
 
+
 Gaming Library: Utilizes the RAWG API to fetch and display information about a diverse range of games.
 
+Deployed on [Netlify](https://coruscating-jelly-4a1296.netlify.app); 
 
 News Feed: Integrates gaming articles and news from IGN through the use of RSS feeds.
 
