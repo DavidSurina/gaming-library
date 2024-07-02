@@ -2,9 +2,12 @@
 @use '/src/globals/styles/constants' as c;
 
 .navbar {
-  padding: 0;
-  background-color: c.$background-dark_light;
+  padding: 0 min(200px, 2%);;
   position: sticky;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: c.$background-dark_light;
 }
 
 .navbar-brand {
