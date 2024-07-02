@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { Controller as ControllerIcon } from "react-bootstrap-icons";
 
 import { HOME_ROUTE, LIBRARY_ROUTE } from "MainRoute";
 import "./style.scss";
@@ -10,6 +11,7 @@ function CustomNavbar() {
     <Navbar sticky="top">
       <Container>
         <Navbar.Brand as={NavLink} to={HOME_ROUTE}>
+          <ControllerIcon size={40} />
           <span>G</span>
           <span>ame</span>
           <span>L</span>
