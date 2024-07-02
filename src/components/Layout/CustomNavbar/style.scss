@@ -3,6 +3,8 @@
 
 .navbar {
   padding: 0;
+  background-color: c.$background-dark_light;
+  position: sticky;
 }
 
 .navbar-brand {
@@ -25,16 +27,39 @@
 
 .navbar-nav {
   .nav-link.active {
-    color: c.$background-dark_lightest;
-    border-bottom: 3px solid c.$background-dark_lightest;
+    color: c.$font-color_primary;
+    opacity: 1;
+
+    &::before {
+      width: 100%;
+    }
   }
 }
 
 .nav-link {
-  font-size: large;
-  color: c.$font-color_secondary;
+  position: relative;
+  color: c.$font-color_primary;
+  font-size: x-large;
+  opacity: 0.5;
+  transition: all 0.3s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -2px;
+    width: 0;
+    height: 4px;
+    background-color: c.$font-color_primary;
+    transition: all .5s;
+  }
 
   &:hover {
     color: c.$font-color_primary;
+    opacity: 1;
+  }
+
+  &:focus {
+    opacity: 1;
   }
 }
