@@ -1,0 +1,22 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.input-group {
+  position: relative;
+  width: 95%;
+  margin-left: 5%;
+
+  & > .form-control {
+    padding-left: 35px;
+    border-radius: c.$border-radius;
+  }
+
+  & > span {
+    position: absolute;
+    left: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+  }
+}
