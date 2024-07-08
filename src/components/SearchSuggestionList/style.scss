@@ -1,0 +1,13 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
+.suggestion_wrapper {
+  visibility: hidden;
+  width: 100%;
+  padding: 1em;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: c.$background-dark_dark;
+  z-index: 10000000;
+}
