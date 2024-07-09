@@ -2,39 +2,46 @@
 @use '/src/globals/styles/constants' as c;
 
 .navbar {
-  padding: 0 min(200px, 2%);;
-  position: sticky;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  padding: 0;
   background-color: c.$background-dark_light;
-}
 
-.navbar-brand {
-  color: c.$font-color_primary;
-  font-size: x-large;
-
-  &:hover {
-    color: c.$font-color_primary;
+  & > .container {
+    @include m.global-max-width;
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
   }
 
-  &.active {
-    color: c.$font-color_primary;
+  &-nav {
+    .nav-link {
+      align-self: center;
+
+      &.active {
+        color: c.$font-color_primary;
+        opacity: 1;
+
+        &::before {
+          width: 100%;
+        }
+      }
+    }
   }
 
-  :nth-child(2n) {
-    color: c.$background-dark_lightest;
-    font-weight: 600;
-  }
-}
-
-.navbar-nav {
-  .nav-link.active {
+  &-brand {
+    align-self: flex-start;
     color: c.$font-color_primary;
-    opacity: 1;
+    font-size: x-large;
 
-    &::before {
-      width: 100%;
+    &:hover {
+      color: c.$font-color_primary;
+    }
+
+    &.active {
+      color: c.$font-color_primary;
+    }
+
+    :nth-child(2n) {
+      color: c.$background-dark_lightest;
+      font-weight: 600;
     }
   }
 }
@@ -42,15 +49,15 @@
 .nav-link {
   position: relative;
   color: c.$font-color_primary;
-  font-size: x-large;
+  font-size: large;
   opacity: 0.5;
   transition: all 0.3s;
 
   &::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: -2px;
+    bottom: -2px;
+    left: -1px;
     width: 0;
     height: 4px;
     background-color: c.$font-color_primary;
