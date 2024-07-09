@@ -7,12 +7,12 @@
     flex-direction: row;
     padding: 0;
     margin: 0.5rem 0 0 0;
+    color: c.$font-color_secondary;
   }
 
   &_extra-text {
     line-height: 25px;
     padding: 0 5px;
-    color: c.$font-color_primary;
-    font-size: 0.9rem;
+    font-size: large;
   }
 }
