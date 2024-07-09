@@ -5,6 +5,12 @@
   position: relative;
   width: 95%;
   margin-left: 5%;
+  transition: opacity 0.2s;
+
+  &:focus-within .suggestion_wrapper {
+    visibility: visible;
+    opacity: 1;
+  }
 
   & > .form-control {
     padding-left: 35px;
