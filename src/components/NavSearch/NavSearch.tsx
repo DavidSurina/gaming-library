@@ -1,30 +1,66 @@
-import React, { useState, forwardRef, ForwardedRef } from "react";
-import "./style.scss";
+import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 import { InputGroup, Form } from "react-bootstrap";
 import { Search as SearchIcon } from "react-bootstrap-icons";
+import { useMutation } from "@tanstack/react-query";
 
-const NavSearch = forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
+import SearchSuggestionList from "../SearchSuggestionList/SearchSuggestionList";
+import { GamesResultsType } from "globals/types/rawgTypes";
+import { RawgApiService, rawgSubUrls } from "../../globals/functions/rawgApi";
+
+import "./style.scss";
+
+function NavSearch() {
+  //TODO if you change the route - empty the search
   const [input, setInput] = useState("");
+  const searchRef = useRef(null);
+
+  const searchParam = `${rawgSubUrls.game}?search=${input}&page_size=4`;
+
+  const { getRawgData } = RawgApiService;
+  const gameSearchMutation = useMutation<GamesResultsType>({
+    mutationKey: [`gameSearch=${input}`],
+    mutationFn: () => getRawgData(searchParam),
+  });
+
+  useEffect(() => {
+    const debounceFn = setTimeout(() => {
+      if (input.length > 0) {
+        gameSearchMutation.mutate();
+      }
+    }, 500);
+
+    return () => clearTimeout(debounceFn);
+  }, [input]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // TODO handle input whitespace
+    setInput(event.target.value);
+  };
 
   const handleSubmit = () => {
-    if (input.length === 0) return;
     // TODO redirect and
+    console.log("fired");
   };
 
   return (
-    <InputGroup ref={ref}>
+    <InputGroup>
       <Form.Control
+        ref={searchRef}
         type="input"
-        className="form-control"
         onSubmit={handleSubmit}
         value={input}
-        onChange={(event) => setInput(event.target.value)}
+        onChange={handleChange}
       />
       <span>
         <SearchIcon size="15" />
       </span>
+
+      <SearchSuggestionList
+        data={input.length > 0 ? gameSearchMutation.data : undefined}
+        loading={gameSearchMutation.isLoading}
+      />
     </InputGroup>
   );
-});
+}
 
 export default NavSearch;
