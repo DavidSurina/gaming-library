@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 import { InputGroup, Form } from "react-bootstrap";
-import { Search as SearchIcon } from "react-bootstrap-icons";
+import { Search as SearchIcon, X as CloseIcon } from "react-bootstrap-icons";
 import { useMutation } from "@tanstack/react-query";
 
 import SearchSuggestionList from "../SearchSuggestionList/SearchSuggestionList";
@@ -42,6 +42,8 @@ function NavSearch() {
     console.log("fired");
   };
 
+  const clearInput = () => setInput("");
+
   return (
     <InputGroup>
       <Form.Control
@@ -51,9 +53,14 @@ function NavSearch() {
         value={input}
         onChange={handleChange}
       />
-      <span>
+      <span className="search-icon_wrapper">
         <SearchIcon size="15" />
       </span>
+      {input.length > 0 && (
+        <span className="close-icon_wrapper" onClick={clearInput}>
+          <CloseIcon size="25" />
+        </span>
+      )}
 
       <SearchSuggestionList
         data={input.length > 0 ? gameSearchMutation.data : undefined}
