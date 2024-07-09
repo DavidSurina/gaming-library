@@ -1,10 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Badge, Button, ListGroup, ListGroupItem } from "react-bootstrap";
-import { ChevronRight } from "react-bootstrap-icons";
+import {
+  Badge,
+  Button,
+  ListGroup,
+  ListGroupItem,
+  Image,
+} from "react-bootstrap";
+import { ChevronRight as ChevronRightIcon } from "react-bootstrap-icons";
+
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { GamesResultsType } from "../../globals/types/rawgTypes";
 import { LIBRARY_ROUTE } from "../../MainRoute";
+
 import "./style.scss";
 
 type PropTypes = {
@@ -46,7 +54,7 @@ function SearchSuggestionList(props: PropTypes) {
             key={`${game.name}Suggestion`}
           >
             <div className="img_wrapper">
-              <img alt={`${game.name} logo`} src={game.background_image} />
+              <Image alt={`${game.name}_logo`} src={game.background_image} />
             </div>
             <div className="text_wrapper">
               <span>{game.name}</span>
@@ -64,7 +72,7 @@ function SearchSuggestionList(props: PropTypes) {
         <span>Results: {data.count || "-"}</span>
         {data.count && data.count > 4 ? (
           <Button>
-            More <ChevronRight />
+            More <ChevronRightIcon />
           </Button>
         ) : (
           <div />
