@@ -3,11 +3,59 @@
 
 .suggestion_wrapper {
   visibility: hidden;
+  opacity: 0;
   width: 100%;
-  padding: 1em;
+  padding: 1em 0;
   position: absolute;
-  top: 50px;
+  top: 45px;
   left: 0;
-  background-color: c.$background-dark_dark;
+  background-color: c.$background-dark_darker;
   z-index: 10000000;
+}
+
+.list-group-item {
+  max-height: 80px;
+  display: flex;
+  flex-direction: row;
+  background-color: c.$background-dark_darker;
+  color: c.$font-color_primary;
+  font-weight: 600;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: c.$background-dark_light;
+  }
+}
+
+.img_wrapper {
+  width: 15%;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+
+  & > img {
+    height: 100%;
+  }
+}
+
+.text_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 2%;
+}
+
+.badge_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.result-text_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1em 0 1em;
 }
