@@ -63,6 +63,8 @@ function NavSearch() {
       )}
 
       <SearchSuggestionList
+        input={input}
+        clearInput={clearInput}
         data={input.length > 0 ? gameSearchMutation.data : undefined}
         loading={gameSearchMutation.isLoading}
       />

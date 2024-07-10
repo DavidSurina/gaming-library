@@ -12,16 +12,17 @@ import { ChevronRight as ChevronRightIcon } from "react-bootstrap-icons";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { GamesResultsType } from "../../globals/types/rawgTypes";
 import { LIBRARY_ROUTE } from "../../MainRoute";
-
 import "./style.scss";
 
 type PropTypes = {
+  input: string;
+  clearInput: () => void;
   data: GamesResultsType | undefined;
   loading: boolean;
 };
 
 function SearchSuggestionList(props: PropTypes) {
-  const { data, loading } = props;
+  const { input, clearInput, data, loading } = props;
   const navigate = useNavigate();
 
   if (loading)
@@ -43,7 +44,16 @@ function SearchSuggestionList(props: PropTypes) {
     navigate(`${LIBRARY_ROUTE}/${slug}`);
   };
 
-  // TODO add other image if one from data unavailable
+  const handleMoreCLick = () => {
+    navigate(`${LIBRARY_ROUTE}`, {
+      state: {
+        queryKey: `gameSearch=${input}`,
+        params: `search=${input}`,
+      },
+    });
+    clearInput();
+  };
+
   return (
     <ListGroup className="suggestion_wrapper">
       {data.results &&
@@ -71,7 +81,7 @@ function SearchSuggestionList(props: PropTypes) {
       <div className="result-text_row">
         <span>Results: {data.count || "-"}</span>
         {data.count && data.count > 4 ? (
-          <Button>
+          <Button onClick={handleMoreCLick}>
             More <ChevronRightIcon />
           </Button>
         ) : (
