@@ -32,22 +32,22 @@ function PlatformIconRow(props: PropTypes) {
 
     switch (p) {
       case "pc":
-        icon = <WindowsIcon size={iconSize - 2} color="white" />;
+        icon = <WindowsIcon size={iconSize - 2} />;
         break;
       case "macos":
-        icon = <AppleIcon size={iconSize} color="white" />;
+        icon = <AppleIcon size={iconSize} />;
         break;
       case "android":
-        icon = <AndroidIcon size={iconSize} color="white" />;
+        icon = <AndroidIcon size={iconSize} />;
         break;
       case "playstation":
-        icon = <PlaystationIcon size={iconSize} color="white" />;
+        icon = <PlaystationIcon size={iconSize} />;
         break;
       case "xbox":
-        icon = <XboxIcon size={iconSize} color="white" />;
+        icon = <XboxIcon size={iconSize} />;
         break;
       case "nintendo-switch":
-        icon = <NintendoSwitchIcon size={iconSize} color="white" />;
+        icon = <NintendoSwitchIcon size={iconSize} />;
         break;
       default:
         icon = <div />;
@@ -56,6 +56,8 @@ function PlatformIconRow(props: PropTypes) {
 
     return <IconWrapper key={p} icon={icon} />;
   });
+
+  if (icons.length === 0) return null;
 
   if (icons.length < platforms.length) {
     const calc = platforms.length - icons.length;

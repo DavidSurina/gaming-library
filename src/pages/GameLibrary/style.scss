@@ -10,6 +10,7 @@
 .tiles-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-auto-rows: minmax(0, 320px);
   margin: 2rem auto;
   width: 100%;
   min-height: 95vh;
@@ -49,7 +50,7 @@
     flex-direction: row;
     gap: 10px;
     padding: 1rem;
-    background-color: c.$background-dark_light;
+    background-color: c.$grey-bg_main;
     width: 100%;
     z-index: 250;
   }

@@ -16,6 +16,7 @@ function GameDetail() {
   const { getRawgData } = RawgApiService;
   const gameParam = `${rawgSubUrls.game}/${id}`;
   const screenShotParam = `${rawgSubUrls.game}/${id}/screenshots`;
+
   const { data, isInitialLoading } = useQuery<Game>({
     queryKey: [`game-${id}`],
     queryFn: () => getRawgData<Game>(gameParam, {}),
@@ -23,7 +24,7 @@ function GameDetail() {
 
   const { data: screenshotsData, isInitialLoading: screenshotsInitialLoading } =
     useQuery({
-      queryKey: [``],
+      queryKey: [`${id}screenshots`],
       queryFn: () =>
         getRawgData<GameScreenshotResultsType>(screenShotParam, {}),
     });

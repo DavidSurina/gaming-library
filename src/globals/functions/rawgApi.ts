@@ -1,49 +1,57 @@
 import axios from "axios";
-import {CurrentQueryType} from "../contexts/LibraryContext";
+
+import { CurrentQueryType } from "../contexts/LibraryContext";
 
 export const baseRawgUrl = "https://api.rawg.io/api";
-
 export const rawgSubUrls = {
-    game: "/games",
+  game: "/games",
 };
 
 const rawgClient = axios.create({
-    baseURL: "https://api.rawg.io/api",
-    headers: {
-        "Content-type": "application/json",
-    },
+  baseURL: baseRawgUrl,
+  headers: {
+    "Content-type": "application/json",
+  },
 });
 
-export function formatParams(paramsObj: Record<string, string | CurrentQueryType[]>) {
-    return Object.keys(paramsObj)
-        .map((param) => {
-            if (paramsObj[param].length === 0) {
-                return "";
-            }
-            if (typeof paramsObj[param] === "object") {
-                const par = (paramsObj[param] as CurrentQueryType[]).map(
-                    (item) => item.params
-                );
-                return `&${param}=${par.join(",")}`;
-            } else {
-                return `&${param}=${paramsObj[param]}`;
-            }
-        })
-        .join("");
+export function formatParams(
+  paramsObj: Record<string, string | CurrentQueryType[]>,
+) {
+  return Object.keys(paramsObj)
+    .map((param) => {
+      if (paramsObj[param].length === 0) {
+        return "";
+      }
+      if (typeof paramsObj[param] === "object") {
+        const par = (paramsObj[param] as CurrentQueryType[]).map(
+          (item) => item.params,
+        );
+        return `&${param}=${par.join(",")}`;
+      } else {
+        return `&${param}=${paramsObj[param]}`;
+      }
+    })
+    .join("");
 }
 
-async function getRawgData<T>(url: string, _params?: Record<string, string>): Promise<T> {
-    let params = "";
-    if (_params) {
-        params = formatParams(_params);
-    }
+async function getRawgData<T>(
+  url: string,
+  params?: Record<string, string>,
+): Promise<T> {
+  let formattedUrlString = "";
 
-    const urlString = _params
-        ? url + "?key=" + process.env.REACT_APP_GAMING_LIBRARY_API_KEY + params
-        : `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
+  if (params) {
+    formattedUrlString =
+      url +
+      "?key=" +
+      process.env.REACT_APP_GAMING_LIBRARY_API_KEY +
+      formatParams(params);
+  } else {
+    formattedUrlString = `${url}&key=${process.env.REACT_APP_GAMING_LIBRARY_API_KEY}`;
+  }
 
-    const response = await rawgClient.get<T>(urlString);
-    return response.data;
+  const response = await rawgClient.get<T>(formattedUrlString);
+  return response.data;
 }
 
-export const RawgApiService = {getRawgData};
+export const RawgApiService = { getRawgData };
