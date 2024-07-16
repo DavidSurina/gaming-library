@@ -4,6 +4,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
 import { rawgSubUrls } from "globals/functions/rawgApi";
 import { rawgParams } from "globals/types/rawgParams";
@@ -40,9 +41,14 @@ const LibContext = createContext(defaultContextValue);
 function LibContextProvider() {
   const { state } = useLocation();
   const [subUrl, setSubUrl] = useState(rawgSubUrls.game);
-  const [currentQuery, setCurrentQuery] = useState<CurrentQueryType>(
-    state || initialQuery,
-  );
+  const [currentQuery, setCurrentQuery] =
+    useState<CurrentQueryType>(initialQuery);
+
+  useEffect(() => {
+    if (state) {
+      setCurrentQuery(state);
+    }
+  }, [state]);
 
   const initialUrl = `${subUrl}?${currentQuery.params}`;
   const context = (): LibContextType => {
