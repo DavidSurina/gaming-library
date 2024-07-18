@@ -68,7 +68,6 @@ function FilterMenu(props: PropTypes) {
       <Form onSubmit={handleSubmit} className="filter-form">
         <Offcanvas.Header className="d-flex flex-column align-items-start">
           <Offcanvas.Title className="py-3">Filtering</Offcanvas.Title>
-          <FilterChipBox />
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="d-flex flex-column justify-content-around py-3">
@@ -107,6 +106,7 @@ function FilterMenu(props: PropTypes) {
             {/*Date range input*/}
             <YearsInput />
           </div>
+          <FilterChipBox />
         </Offcanvas.Body>
         <div className="offcanvas_button-wrapper">
           <Button
