@@ -1,12 +1,18 @@
+@use '/src/globals/styles/mixins' as m;
+@use '/src/globals/styles/constants' as c;
+
 .filter-form {
   height: 100%;
   position: relative;
 }
 
 .offcanvas {
+  background-color: c.$background-dark_darker;
+
   &-body {
     height: 80%;
   }
+
   &_button-wrapper {
     width: 100%;
     position: absolute;
