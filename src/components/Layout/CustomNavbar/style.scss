@@ -19,9 +19,17 @@
         color: c.$font-color_primary;
         opacity: 1;
 
+        &:focus {
+          color: c.$font-color_primary;
+        }
+
         &::before {
           width: 100%;
         }
+      }
+
+      &:focus {
+        color: c.$font-color_secondary;
       }
     }
   }
@@ -32,6 +40,10 @@
     font-size: x-large;
 
     &:hover {
+      color: c.$font-color_primary;
+    }
+
+    &:focus {
       color: c.$font-color_primary;
     }
 
