@@ -58,13 +58,7 @@ function FilterMenu(props: PropTypes) {
   };
 
   return (
-    <Offcanvas
-      show={open}
-      onHide={handleClose}
-      placement="end"
-      backdrop={true}
-      className="bg-primary"
-    >
+    <Offcanvas show={open} onHide={handleClose} placement="end" backdrop={true}>
       <Form onSubmit={handleSubmit} className="filter-form">
         <Offcanvas.Header className="d-flex flex-column align-items-start">
           <Offcanvas.Title className="py-3">Filtering</Offcanvas.Title>
