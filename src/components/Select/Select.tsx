@@ -1,56 +1,42 @@
 import React from "react";
 import { useSelect, UseSelectProps } from "downshift";
-import {
-  ChevronUp as ChevronUpIcon,
-  ChevronDown as ChevronDownIcon,
-} from "react-bootstrap-icons";
-import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
+import { ChevronDown as ChevronDownIcon } from "react-bootstrap-icons";
 import clsx from "clsx";
+
+import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import "./style.scss";
 
 function Select(props: UseSelectProps<CurrentQueryType>) {
   const { items, selectedItem } = props;
 
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getMenuProps,
-    highlightedIndex,
-    getItemProps,
-  } = useSelect({ ...props });
+  const { isOpen, getToggleButtonProps, getMenuProps, getItemProps } =
+    useSelect({ ...props });
 
   return (
-    <div className="position-relative w-100 m-auto justify-content-center select-wrapper">
-      <div
-        className="w-100 p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
-        {...getToggleButtonProps()}
-      >
+    <div className="select-wrapper rounded-1">
+      <div className="select" {...getToggleButtonProps()}>
         <span>
           {selectedItem?.queryKey && selectedItem?.queryKey.length > 0
             ? selectedItem.queryKey
             : " "}
         </span>
         <span className="px-2">
-          {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          <ChevronDownIcon
+            className={clsx("select-icon", { "select-icon_rotate": isOpen })}
+          />
         </span>
       </div>
       <ul
-        className={clsx(
-          "w-100 position-absolute bg-body mt-1 shadow-sm overflow-auto p-0 border border-white select-list",
-          {
-            "hidden border-0": !isOpen,
-          }
-        )}
+        className={clsx("select-list", {
+          "select-list_hidden": !isOpen,
+        })}
         {...getMenuProps()}
       >
         {isOpen &&
           items.map((item, index) => {
             return (
               <li
-                className={clsx("py-2 px-3 shadow-sm flex-col", {
-                  "fw-bold": selectedItem === item,
-                  "bg-secondary": highlightedIndex === index,
-                })}
+                className={selectedItem === item ? "fw-bold" : ""}
                 key={`${item.queryKey}${index}`}
                 {...getItemProps({ item, index })}
               >
