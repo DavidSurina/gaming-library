@@ -4,7 +4,7 @@
 .section-wrapper {
   @include m.global-page-padding;
   @include m.global-max-width;
-  min-height: 100%;
+  min-height: 95vh;
   width: 100%;
 }
 
