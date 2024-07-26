@@ -10,7 +10,17 @@
   background-color: c.$background-dark_darker;
 
   &-body {
-    height: 80%;
+    min-height: 80%;
+    padding-top: 0;
+    overflow: auto;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 8px;
+    }
   }
 
   &_button-wrapper {
