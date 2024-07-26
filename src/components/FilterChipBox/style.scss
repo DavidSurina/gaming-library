@@ -2,8 +2,8 @@
 @use '/src/globals/styles/constants' as c;
 
 .chip-wrapper {
-  height: 100px;
-  max-height: 100px;
+  min-height: 105px;
+  max-height: 250px;
   width: 100%;
   line-height: 40px;
   display: flex;
@@ -11,7 +11,6 @@
   flex-wrap: wrap;
   overflow-y: auto;
   gap: 0.5rem;
-  background-color: c.$background-dark_light;
-  border: 1px solid c.$font-color_primary;
+  background-color: c.$background-dark_dark;
   cursor: default;
 }
