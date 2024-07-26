@@ -98,6 +98,7 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
                 })}
               >
                 <input
+                  className="form-check-input"
                   type="checkbox"
                   checked={selectedItems.some(
                     (i) => i.queryKey === item.queryKey,
