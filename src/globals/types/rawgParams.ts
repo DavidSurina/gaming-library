@@ -28,13 +28,11 @@ const best_games: Partial<GameParams> = {
   ordering: "-rating",
   metacritic: "90,100",
   dates: `1990,${currentDate}`,
-  exclude_additions: "true",
 };
 
 const latest_releases: Partial<GameParams> = {
   ordering: "-released",
-  metacritic: "50,100",
-  // exclude_additions: "true",
+  metacritic: "40,100",
 };
 
 const upcoming_games: Partial<GameParams> = {
