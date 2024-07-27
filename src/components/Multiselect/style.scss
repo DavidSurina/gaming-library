@@ -31,6 +31,7 @@
     overflow: auto;
     border: none;
     z-index: 1;
+    transition: opacity .2s ease-in-out;
 
     & li {
       padding: 8px 16px;
@@ -42,6 +43,10 @@
       &:hover {
         background-color: c.$background-dark_light;
       }
+    }
+
+    &_hidden {
+      opacity: 0;
     }
   }
 

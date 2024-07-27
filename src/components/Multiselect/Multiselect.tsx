@@ -83,7 +83,12 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
           />
         </span>
       </div>
-      <ul className="multiselect-list" {...getMenuProps()}>
+      <ul
+        className={clsx("multiselect-list", {
+          "multiselect-list_hidden": !isOpen,
+        })}
+        {...getMenuProps()}
+      >
         {isOpen &&
           props.items.map((item, index) => {
             return (
