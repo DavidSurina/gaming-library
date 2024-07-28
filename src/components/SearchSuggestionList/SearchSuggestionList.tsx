@@ -81,7 +81,7 @@ function SearchSuggestionList(props: PropTypes) {
       <div className="result-text_row">
         <span>Results: {data.count || "-"}</span>
         {data.count && data.count > 4 ? (
-          <Button onClick={handleMoreCLick}>
+          <Button variant="secondary" onClick={handleMoreCLick}>
             More <ChevronRightIcon />
           </Button>
         ) : (
