@@ -1,22 +1,23 @@
 import React, { FormEvent } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { UseSelectStateChange } from "downshift";
+import { Button, Form } from "react-bootstrap";
+
 import {
   CurrentQueryType,
   useLibContext,
 } from "../../globals/contexts/LibraryContext";
-import Select from "../Select/Select";
-import { genres, platform, publishers } from "../../globals/types/rawgParams";
-import { UseSelectStateChange } from "downshift";
-import { Button, Form } from "react-bootstrap";
-import { formatParams } from "../../globals/functions/rawgApi";
-import { currentQueryConvert } from "../../globals/functions/helpers";
-import Multiselect from "../Multiselect/Multiselect";
-import FilterSlider from "../FilterSlider/FilterSlider";
-import YearsInput from "../YearsInput/YearsInput";
 import {
   initialFilteringParams,
   useFilterContext,
 } from "../../globals/contexts/FilterContext";
+import { genres, platform, publishers } from "../../globals/types/rawgParams";
+import { formatParams } from "../../globals/functions/rawgApi";
+import { currentQueryConvert } from "../../globals/functions/helpers";
+import Select from "../Select/Select";
+import Multiselect from "../Multiselect/Multiselect";
+import FilterSlider from "../FilterSlider/FilterSlider";
+import YearsInput from "../YearsInput/YearsInput";
 import FilterChipBox from "../FilterChipBox/FitlerChipBox";
 import "./style.scss";
 
@@ -60,29 +61,23 @@ function FilterMenu(props: PropTypes) {
   return (
     <Offcanvas show={open} onHide={handleClose} placement="end" backdrop={true}>
       <Form onSubmit={handleSubmit} className="filter-form">
-        <Offcanvas.Header className="d-flex flex-column align-items-start">
-          <Offcanvas.Title className="py-3">Filtering</Offcanvas.Title>
+        <Offcanvas.Header>
+          <Offcanvas.Title>Filtering</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="d-flex flex-column justify-content-around py-3">
-            <label id="genres" className="pb-2">
-              Genre:
-            </label>
+          <div className="offcanvas-body-item">
+            <label id="genres">Genre:</label>
             <Multiselect labelId="genres" items={currentQueryConvert(genres)} />
           </div>
-          <div className="d-flex flex-column justify-content-around py-3">
-            <label id="platforms" className="pb-2">
-              Platforms:
-            </label>
+          <div className="offcanvas-body-item">
+            <label id="platforms">Platforms:</label>
             <Multiselect
               labelId="platform"
               items={currentQueryConvert(platform)}
             />
           </div>
-          <div className="d-flex flex-column justify-content-around py-3">
-            <label id="publishers" className="pb-2">
-              Publishers:
-            </label>
+          <div className="offcanvas-body-item">
+            <label id="publishers">Publishers:</label>
             <Select
               labelId="publishers"
               selectedItem={filteringParams.publishers[0]}
@@ -90,33 +85,28 @@ function FilterMenu(props: PropTypes) {
               onSelectedItemChange={(e) => onSelectItem(e, "publishers")}
             />
           </div>
-          <div className="d-flex flex-column justify-content-around py-3">
-            <div className="pb-2">Critic rating:</div>
+          <div className="offcanvas-body-item">
+            <label htmlFor="critic-rating-slider">Critic rating:</label>
             {/*Select with multiple or input from user between 0-100*/}
             <FilterSlider />
           </div>
-          <div className="d-flex flex-column justify-content-around py-3">
-            <div className="pb-2">Release year between:</div>
+          <div className="offcanvas-body-item">
+            <label htmlFor="release-year-input">Release year between:</label>
             {/*Date range input*/}
             <YearsInput />
           </div>
           <FilterChipBox />
         </Offcanvas.Body>
         <div className="offcanvas_button-wrapper">
-          <Button
-            type="submit"
-            variant="secondary"
-            className="p-2 ms-1 flex-grow-1"
-          >
+          <Button type="submit" variant="secondary">
             Confirm
           </Button>
           <Button
             type="button"
             variant="outline-secondary"
-            className="p-2 flex-grow-2 me-1"
             onClick={handleReset}
           >
-            Reset filters
+            Reset
           </Button>
         </div>
       </Form>
