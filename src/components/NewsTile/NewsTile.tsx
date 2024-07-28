@@ -32,7 +32,7 @@ function NewsTile(props: PropTypes) {
           {author} - {dateConvert}
         </h5>
         <section className="news-desc_container">
-          <h3 className="news-desc_item">{cleanedTitle}</h3>
+          <h4 className="news-desc_item">{cleanedTitle}</h4>
           <span className="news-desc_item">{cleanedDesc}</span>
         </section>
       </Card>
