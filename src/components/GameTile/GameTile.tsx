@@ -24,10 +24,10 @@ function GameTile(props: PropTypes) {
         </div>
         <Card.Header>
           <div className="card-header_title-wrapper">
-            <Card.Title>{name}</Card.Title>
             <MetaCriticBadge metaCriticRating={metacritic} />
+            <PlatformIconRow platforms={platforms} />
           </div>
-          <PlatformIconRow platforms={platforms} />
+          <Card.Title>{name}</Card.Title>
         </Card.Header>
       </Card>
     </Link>
