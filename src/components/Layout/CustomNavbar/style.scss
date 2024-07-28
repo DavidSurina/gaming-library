@@ -2,6 +2,7 @@
 @use '/src/globals/styles/constants' as c;
 
 .navbar {
+  height: c.$nav-height;
   padding: 0;
   background-color: c.$background-dark_darker;
 
@@ -38,6 +39,7 @@
     align-self: flex-start;
     color: c.$font-color_primary;
     font-size: x-large;
+    font-weight: 600;
 
     &:hover {
       color: c.$font-color_primary;
