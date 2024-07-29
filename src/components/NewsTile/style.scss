@@ -46,6 +46,10 @@
     background: c.$darkest-semi-opaque;
     color: c.$font-color_primary;
     border-radius: 20px 0;
+
+    & span {
+      font-weight: 400;
+    }
   }
 
   &-desc_item {

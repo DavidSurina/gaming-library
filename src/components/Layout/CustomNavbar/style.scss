@@ -39,7 +39,7 @@
     align-self: flex-start;
     color: c.$font-color_primary;
     font-size: x-large;
-    font-weight: 600;
+    font-weight: 800;
 
     &:hover {
       color: c.$font-color_primary;
@@ -55,7 +55,7 @@
 
     :nth-child(2n) {
       color: c.$background-dark_lightest;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 }
