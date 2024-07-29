@@ -2,8 +2,9 @@
 @use '/src/globals/styles/constants' as c;
 
 .navbar {
+  height: c.$nav-height;
   padding: 0;
-  background-color: c.$background-dark_light;
+  background-color: c.$background-dark_darker;
 
   & > .container {
     @include m.global-max-width;
@@ -19,9 +20,17 @@
         color: c.$font-color_primary;
         opacity: 1;
 
+        &:focus {
+          color: c.$font-color_primary;
+        }
+
         &::before {
           width: 100%;
         }
+      }
+
+      &:focus {
+        color: c.$font-color_secondary;
       }
     }
   }
@@ -30,8 +39,13 @@
     align-self: flex-start;
     color: c.$font-color_primary;
     font-size: x-large;
+    font-weight: 800;
 
     &:hover {
+      color: c.$font-color_primary;
+    }
+
+    &:focus {
       color: c.$font-color_primary;
     }
 
@@ -41,7 +55,7 @@
 
     :nth-child(2n) {
       color: c.$background-dark_lightest;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 }

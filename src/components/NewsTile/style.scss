@@ -43,9 +43,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: rgba(15, 18, 32, 0.9);
+    background: c.$darkest-semi-opaque;
     color: c.$font-color_primary;
     border-radius: 20px 0;
+
+    & span {
+      font-weight: 400;
+    }
   }
 
   &-desc_item {
@@ -57,7 +61,7 @@
     position: absolute;
     top: 10px;
     right: 1%;
-    background: rgba(15, 18, 32, 0.9);
+    background: c.$darkest-semi-opaque;
     color: c.$font-color_primary;
     border-radius: c.$border-radius;
     font-weight: lighter;

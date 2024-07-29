@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import Container from "react-bootstrap/Container";
+
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useRssFeed from "../../globals/hooks/useRssFeed";
 import NewsTile from "../../components/NewsTile/NewsTile";
+
 import "./style.scss";
 
 function Home() {

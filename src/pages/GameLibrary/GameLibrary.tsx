@@ -11,7 +11,6 @@ import { Button } from "react-bootstrap";
 import GameTile from "components/GameTile/GameTile";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import Select from "../../components/Select/Select";
-import SearchInput from "components/SearchInput/SearchInput";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import FilterContextProvider from "../../globals/contexts/FilterContext";
 
@@ -84,7 +83,6 @@ function GameLibrary() {
             (i) => i.queryKey === currentQuery.queryKey,
           )}
         />
-        <SearchInput />
         <Button
           className="filtering-button"
           onClick={() => setMenuOpen(!menuOpen)}

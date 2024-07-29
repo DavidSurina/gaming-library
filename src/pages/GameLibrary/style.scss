@@ -3,7 +3,8 @@
 
 .section-wrapper {
   @include m.global-page-padding;
-  min-height: 100%;
+  @include m.global-max-width;
+  min-height: 95vh;
   width: 100%;
 }
 
@@ -45,13 +46,10 @@
   &-wrapper {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: row;
-    gap: 10px;
-    padding: 1rem;
-    background-color: c.$grey-bg_main;
-    width: 100%;
+    gap: 25px;
     z-index: 250;
   }
 
@@ -59,6 +57,11 @@
     width: 40px;
     height: 40px;
     padding: 0;
+    background-color: c.$background-dark_dark;
     border-radius: 50%;
+
+    &:hover {
+      background-color: c.$background-dark_light;
+    }
   }
 }

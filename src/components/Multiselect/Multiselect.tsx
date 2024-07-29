@@ -5,11 +5,8 @@ import {
   UseSelectState,
   UseSelectStateChangeOptions,
 } from "downshift";
+import { ChevronDown as ChevronDownIcon } from "react-bootstrap-icons";
 import clsx from "clsx";
-import {
-  ChevronDown as ChevronDownIcon,
-  ChevronUp as ChevronUpIcon,
-} from "react-bootstrap-icons";
 
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
@@ -17,7 +14,7 @@ import "./style.scss";
 
 function stateReducer(
   state: UseSelectState<CurrentQueryType>,
-  actionAndChanges: UseSelectStateChangeOptions<CurrentQueryType>
+  actionAndChanges: UseSelectStateChangeOptions<CurrentQueryType>,
 ) {
   const { changes, type } = actionAndChanges;
   switch (type) {
@@ -39,39 +36,34 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
   const { filteringParams, setFilteringParams } = useFilterContext();
   const selectedItems = [...filteringParams[labelId + ""]];
 
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getMenuProps,
-    highlightedIndex,
-    getItemProps,
-  } = useSelect({
-    ...rest,
-    labelId: labelId,
-    stateReducer: stateReducer,
-    onSelectedItemChange: ({ selectedItem }) => {
-      if (!selectedItem) {
-        return;
-      }
-      let newSelectedItems = [];
-      const isCurrentlySelected = selectedItems.some(
-        (item) => item.queryKey === selectedItem.queryKey
-      );
-
-      if (isCurrentlySelected) {
-        newSelectedItems = selectedItems.filter(
-          (item) => item.queryKey !== selectedItem.queryKey
+  const { isOpen, getToggleButtonProps, getMenuProps, getItemProps } =
+    useSelect({
+      ...rest,
+      labelId: labelId,
+      stateReducer: stateReducer,
+      onSelectedItemChange: ({ selectedItem }) => {
+        if (!selectedItem) {
+          return;
+        }
+        let newSelectedItems = [];
+        const isCurrentlySelected = selectedItems.some(
+          (item) => item.queryKey === selectedItem.queryKey,
         );
-      } else {
-        newSelectedItems = [...selectedItems, selectedItem];
-      }
 
-      setFilteringParams({
-        ...filteringParams,
-        [labelId as string]: newSelectedItems,
-      });
-    },
-  });
+        if (isCurrentlySelected) {
+          newSelectedItems = selectedItems.filter(
+            (item) => item.queryKey !== selectedItem.queryKey,
+          );
+        } else {
+          newSelectedItems = [...selectedItems, selectedItem];
+        }
+
+        setFilteringParams({
+          ...filteringParams,
+          [labelId as string]: newSelectedItems,
+        });
+      },
+    });
 
   const selectItemText = selectedItems.length
     ? `${selectedItems.length} element${
@@ -80,51 +72,46 @@ function Multiselect(props: UseSelectProps<CurrentQueryType>) {
     : "";
 
   return (
-    <div className="position-relative w-100 m-auto justify-content-center multiselect">
-      <div
-        className="w-100 p-3 bg-body d-inline-flex justify-content-between pointer-event border border-white rounded-2"
-        {...getToggleButtonProps()}
-      >
+    <div className="multiselect rounded-1">
+      <div {...getToggleButtonProps()}>
         <span>{selectItemText}</span>
         <span className="px-2">
-          {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          <ChevronDownIcon
+            className={clsx("multiselect-icon", {
+              "multiselect-icon_rotate": isOpen,
+            })}
+          />
         </span>
       </div>
       <ul
-        className={clsx(
-          "position-absolute w-100 bg-body mt-1 shadow-sm overflow-auto p-0 border border-white multiselect-list",
-          {
-            "hidden border-0": !isOpen,
-          }
-        )}
+        className={clsx("multiselect-list", {
+          "multiselect-list_hidden": !isOpen,
+        })}
         {...getMenuProps()}
       >
         {isOpen &&
           props.items.map((item, index) => {
             return (
               <li
-                className={clsx("py-2 px-3 shadow-sm flex-col", {
-                  "bg-secondary": highlightedIndex === index,
-                })}
                 key={`${item.queryKey}`}
                 {...getItemProps({
                   item,
                   index,
                   "aria-selected": selectedItems.some(
-                    (i) => i.queryKey === item.queryKey
+                    (i) => i.queryKey === item.queryKey,
                   ),
                 })}
               >
                 <input
+                  className="form-check-input"
                   type="checkbox"
-                  className="p-2"
                   checked={selectedItems.some(
-                    (i) => i.queryKey === item.queryKey
+                    (i) => i.queryKey === item.queryKey,
                   )}
                   value={item.queryKey}
                   onChange={() => null}
                 />
-                <span className="mx-2">{item.queryKey}</span>
+                <span>{item.queryKey}</span>
               </li>
             );
           })}

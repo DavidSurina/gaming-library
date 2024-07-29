@@ -12,8 +12,22 @@
   width: 45%;
   margin: 0.5rem auto;
   z-index: auto;
+
   input {
     z-index: auto;
+  }
+}
+
+.years-input {
+  background-color: c.$background-dark_dark;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: c.$background-dark_light;
+  }
+
+  &:focus {
+    background-color: c.$background-dark_light;
   }
 }
 

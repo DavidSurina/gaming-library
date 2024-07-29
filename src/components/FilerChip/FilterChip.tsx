@@ -8,6 +8,7 @@ type PropTypes = {
   value: string;
   onClose: () => void;
 };
+
 function FilterChip(props: PropTypes) {
   const { value, onClose } = props;
 
@@ -15,7 +16,7 @@ function FilterChip(props: PropTypes) {
     <div className="filter-chip_wrapper">
       <span className="filter-chip_text small">{value}</span>
       <Button onClick={onClose} className="filter-chip_btn p-1">
-        <CloseIcon className="filter-chip_icon" />
+        <CloseIcon />
       </Button>
     </div>
   );

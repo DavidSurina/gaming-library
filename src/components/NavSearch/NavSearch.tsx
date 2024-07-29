@@ -10,7 +10,6 @@ import { RawgApiService, rawgSubUrls } from "../../globals/functions/rawgApi";
 import "./style.scss";
 
 function NavSearch() {
-  //TODO if you change the route - empty the search
   const [input, setInput] = useState("");
   const searchRef = useRef(null);
 
@@ -33,14 +32,11 @@ function NavSearch() {
   }, [input]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // TODO handle input whitespace
-    setInput(event.target.value);
+    setInput(event.target.value.trim());
   };
 
-  const handleSubmit = () => {
-    // TODO redirect and
-    console.log("fired");
-  };
+  // TODO redirect and add listener on enter or remove this at all
+  const handleSubmit = () => {};
 
   const clearInput = () => setInput("");
 

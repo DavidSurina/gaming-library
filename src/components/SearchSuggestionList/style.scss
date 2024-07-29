@@ -9,7 +9,7 @@
   position: absolute;
   top: 45px;
   left: 0;
-  background-color: c.$background-dark_darker;
+  background-color: c.$background-dark_dark;
   z-index: 10000000;
 }
 
@@ -17,9 +17,10 @@
   max-height: 80px;
   display: flex;
   flex-direction: row;
-  background-color: c.$background-dark_darker;
+  background-color: c.$background-dark_dark;
   color: c.$font-color_primary;
   font-weight: 600;
+  border: none;
   transition: all 0.3s;
 
   &:hover {
@@ -63,5 +64,5 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 1em 0 1em;
+  padding: 0.5em 1em 0 1em;
 }

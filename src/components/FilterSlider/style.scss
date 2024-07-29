@@ -3,7 +3,7 @@
 
 .slider {
   &-wrapper {
-    width: 90%;
+    width: 100%;
     margin: 0 auto 1.5rem auto;
     z-index: auto !important;
   }
@@ -11,21 +11,30 @@
   &-track {
     top: 12.5px;
     height: 10px;
-    background-color: c.$background-dark_lightest;
+    background-color: c.$background-dark_dark;
     border-radius: c.$border-radius;
     z-index: auto !important;
   }
 
   &-thumb {
     height: 35px;
-    line-height: 33px;
+    line-height: 35px;
     width: 35px;
     text-align: center;
     border-radius: 50%;
-    border: 1px solid c.$font-color_primary;
     color: c.$font-color_primary;
     background-color: c.$background-dark_light;
     z-index: auto !important;
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: c.$background-dark_lightest;
+    }
+
+    &:active {
+      color: c.$font-color_primary;
+      background-color: c.$background-dark_lightest;
+    }
   }
 }

@@ -15,6 +15,20 @@
   & > .form-control {
     padding-left: 35px;
     border-radius: c.$border-radius;
+    background-color: c.$background-dark_dark;
+    transition: background-color 0.2s ease-in-out;
+
+    &:active {
+      background-color: c.$background-dark_light;
+    }
+
+    &:focus {
+      background-color: c.$background-dark_light;
+    }
+
+    &:hover {
+      background-color: c.$background-dark_light;
+    }
   }
 }
 
