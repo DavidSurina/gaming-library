@@ -35,10 +35,8 @@ function NavSearch() {
     setInput(event.target.value.trim());
   };
 
-  const handleSubmit = () => {
-    // TODO redirect and add listener on enter
-    console.log("fired");
-  };
+  // TODO redirect and add listener on enter or remove this at all
+  const handleSubmit = () => {};
 
   const clearInput = () => setInput("");
 
