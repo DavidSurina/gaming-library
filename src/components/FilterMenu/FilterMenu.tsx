@@ -91,7 +91,7 @@ function FilterMenu(props: PropTypes) {
             <FilterSlider />
           </div>
           <div className="offcanvas-body-item">
-            <label htmlFor="release-year-input">Release year between:</label>
+            <label htmlFor="release-year-input">Release date between:</label>
             {/*Date range input*/}
             <YearsInput />
           </div>
