@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  gap: 2px;
   z-index: auto;
 }
 
@@ -21,6 +23,10 @@
 .years-input {
   background-color: c.$background-dark_dark;
   transition: background-color 0.2s ease-in-out;
+
+  & div {
+    width: 100%;
+  }
 
   &:hover {
     background-color: c.$background-dark_light;
