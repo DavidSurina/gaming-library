@@ -4,8 +4,9 @@ import { currentYear } from "../../globals/types/rawgParams";
 import "./style.scss";
 import { useFilterContext } from "../../globals/contexts/FilterContext";
 
-const initialFromVal = 1985;
-const initialToVal = currentYear;
+// const initialFromVal = `02/1985`;
+// const initialToVal = currentYear;
+const dateFormat = "MM/yyyy";
 
 function formatAndValidateYearsInput(
   from: number,
