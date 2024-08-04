@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { CurrentQueryType } from "./LibraryContext";
-import { currentYear } from "../types/rawgParams";
+import { currentDate, initialFromDate } from "../constants/rawgParams";
 
 export type FilteringParamsType = Record<string, CurrentQueryType[]>;
 
@@ -28,8 +28,8 @@ export const initialFilteringParams: FilteringParamsType = {
     { params: "100", queryKey: "metacritic-max" },
   ],
   dates: [
-    { params: "1985", queryKey: "filter-dates-from" },
-    { params: `${currentYear}`, queryKey: "filter-dates-to" },
+    { params: `${initialFromDate}`, queryKey: "filter-dates-from" },
+    { params: `${currentDate}`, queryKey: "filter-dates-to" },
   ],
 };
 
@@ -43,7 +43,7 @@ const FilterContext = createContext(defaultContextValue);
 function FilterContextProvider(props: FilterContextPropType) {
   const { children } = props;
   const [filteringParams, setFilteringParams] = useState<FilteringParamsType>(
-    initialFilteringParams
+    initialFilteringParams,
   );
 
   const context = (): FilterContextType => {

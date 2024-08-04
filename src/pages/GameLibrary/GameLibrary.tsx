@@ -16,7 +16,7 @@ import FilterContextProvider from "../../globals/contexts/FilterContext";
 
 import { RawgApiService } from "globals/functions/rawgApi";
 import { GamesResultsType } from "globals/types/rawgTypes";
-import { rawgParams } from "globals/types/rawgParams";
+import { rawgParams } from "globals/constants/rawgParams";
 import { currentQueryConvert } from "../../globals/functions/helpers";
 import "./style.scss";
 

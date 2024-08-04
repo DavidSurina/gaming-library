@@ -11,13 +11,17 @@ import {
   initialFilteringParams,
   useFilterContext,
 } from "../../globals/contexts/FilterContext";
-import { genres, platform, publishers } from "../../globals/types/rawgParams";
+import {
+  genres,
+  platform,
+  publishers,
+} from "../../globals/constants/rawgParams";
 import { formatParams } from "../../globals/functions/rawgApi";
 import { currentQueryConvert } from "../../globals/functions/helpers";
 import Select from "../Select/Select";
 import Multiselect from "../Multiselect/Multiselect";
 import FilterSlider from "../FilterSlider/FilterSlider";
-import YearsInput from "../YearsInput/YearsInput";
+import ReleaseDateInput from "../ReleaseDateInput/ReleaseDateInput";
 import FilterChipBox from "../FilterChipBox/FitlerChipBox";
 import "./style.scss";
 
@@ -93,7 +97,7 @@ function FilterMenu(props: PropTypes) {
           <div className="offcanvas-body-item">
             <label htmlFor="release-year-input">Release date between:</label>
             {/*Date range input*/}
-            <YearsInput />
+            <ReleaseDateInput />
           </div>
           <FilterChipBox />
         </Offcanvas.Body>
