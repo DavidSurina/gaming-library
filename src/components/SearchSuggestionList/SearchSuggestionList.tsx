@@ -47,7 +47,7 @@ function SearchSuggestionList(props: PropTypes) {
   const handleMoreCLick = () => {
     navigate(`${LIBRARY_ROUTE}`, {
       state: {
-        queryKey: `gameSearch=${input}`,
+        queryKey: `gameSearch=${input.trim()}`,
         params: `search=${input}`,
       },
     });

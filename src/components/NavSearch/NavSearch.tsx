@@ -17,7 +17,7 @@ function NavSearch() {
 
   const { getRawgData } = RawgApiService;
   const gameSearchMutation = useMutation<GamesResultsType>({
-    mutationKey: [`gameSearch=${input}`],
+    mutationKey: [`gameSearch=${input.trim}`],
     mutationFn: () => getRawgData(searchParam),
   });
 
@@ -32,7 +32,7 @@ function NavSearch() {
   }, [input]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value.trim());
+    setInput(event.target.value);
   };
 
   // TODO redirect and add listener on enter or remove this at all
