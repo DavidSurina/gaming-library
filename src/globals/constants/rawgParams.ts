@@ -1,33 +1,20 @@
-import { GameParams } from "./rawgTypes";
+import { GameParams } from "../types/rawgTypes";
 import { formatParams } from "../functions/rawgApi";
+import { getCurrentDay, getCurrentMonth } from "../functions/helpers";
 
-const getCurrentMonth = function () {
-  const month = new Date().getMonth() + 1;
-  if (month < 10) {
-    return `0${month}`;
-  } else {
-    return month;
-  }
-};
-const getCurrentDay = function () {
-  const day = new Date().getDate();
-  if (day < 10) {
-    return `0${day}`;
-  } else {
-    return day;
-  }
-};
-export const currentYear = new Date().getFullYear();
-const currentMonth = getCurrentMonth();
-const currentDay = getCurrentDay();
-const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+export const initialFromDate = new Date("1985");
+export const currentDate = new Date();
+export const currentYear = currentDate.getFullYear();
+export const currentMonth = getCurrentMonth();
+export const currentDay = getCurrentDay();
+export const currentFormattedDate = `${currentYear}-${currentMonth}-${currentDay}`;
 // const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
-const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
+const nextYear = `${currentYear + 1}-12-31`;
 
 const best_games: Partial<GameParams> = {
   ordering: "-rating",
   metacritic: "90,100",
-  dates: `1990,${currentDate}`,
+  dates: `1990,${currentFormattedDate}`,
 };
 
 const latest_releases: Partial<GameParams> = {
@@ -37,7 +24,7 @@ const latest_releases: Partial<GameParams> = {
 
 const upcoming_games: Partial<GameParams> = {
   ordering: "-added",
-  dates: `${currentDate},${nextYear}`,
+  dates: `${currentFormattedDate},${nextYear}`,
 };
 
 export const genres = {
