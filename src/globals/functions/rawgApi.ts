@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { CurrentQueryType } from "../contexts/LibraryContext";
+import { currentDay, currentMonth } from "../constants/rawgParams";
 
 export const baseRawgUrl = "https://api.rawg.io/api";
 export const rawgSubUrls = {
@@ -14,6 +15,10 @@ const rawgClient = axios.create({
   },
 });
 
+export const formatRawgDate = (date: Date) => {
+  return `${date.getFullYear()}-${currentMonth}-${currentDay}`;
+};
+
 export function formatParams(
   paramsObj: Record<string, string | CurrentQueryType[]>,
 ) {
@@ -23,9 +28,12 @@ export function formatParams(
         return "";
       }
       if (typeof paramsObj[param] === "object") {
-        const par = (paramsObj[param] as CurrentQueryType[]).map(
-          (item) => item.params,
-        );
+        const par = (paramsObj[param] as CurrentQueryType[]).map((item) => {
+          if (param === "dates") {
+            return formatRawgDate(new Date(item.params));
+          }
+          return item.params;
+        });
         return `&${param}=${par.join(",")}`;
       } else {
         return `&${param}=${paramsObj[param]}`;

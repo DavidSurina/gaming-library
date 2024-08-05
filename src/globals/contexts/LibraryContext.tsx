@@ -7,7 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import { rawgSubUrls } from "globals/functions/rawgApi";
-import { rawgParams } from "globals/types/rawgParams";
+import { rawgParams } from "globals/constants/rawgParams";
 import { Outlet, useLocation } from "react-router-dom";
 
 export type CurrentQueryType = {
@@ -23,6 +23,7 @@ export type LibContextType = {
   setCurrentQuery: Dispatch<SetStateAction<CurrentQueryType>>;
 };
 
+//TODO add best games key to key lib or create key lib because of cache
 const initialQuery = {
   queryKey: "Best Games",
   params: rawgParams["Best Games"],
