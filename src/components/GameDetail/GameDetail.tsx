@@ -32,7 +32,7 @@ function GameDetail() {
   if (isInitialLoading || screenshotsInitialLoading) {
     return <LoadingSpinner />;
   }
-  console.log(data);
+
   return (
     <div
       className="game-detail_wrapper"
