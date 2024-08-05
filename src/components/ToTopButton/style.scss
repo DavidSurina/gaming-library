@@ -7,13 +7,26 @@
   right: 50px;
   height: 50px;
   width: 50px;
-  background: c.$background-dark_light;
+  background: c.$background-dark_dark;
   color: c.$font-color_secondary;
   z-index: 100;
   border-radius: 50%;
 
   & > svg {
     transform: translateY(-2px);
+  }
+
+  &:hover {
+    background: c.$background-dark_light;
+  }
+
+  // TODO ADD override to btn-primary check if that can be overriden at top
+  &:active {
+    background-color: c.$background-dark_light !important;
+  }
+
+  &:focus-visible {
+    background: c.$background-dark_light;
   }
 }
 
