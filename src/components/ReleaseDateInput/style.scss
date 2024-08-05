@@ -30,7 +30,7 @@
   &__month-container {
     background-color: c.$background-dark_dark;
     color: c.$font-color_primary;
-    border-radius: 5px;
+    border-radius: c.$border-radius;
   }
 
   &__header {
