@@ -32,7 +32,7 @@ function GameDetail() {
   if (isInitialLoading || screenshotsInitialLoading) {
     return <LoadingSpinner />;
   }
-
+  console.log(data);
   return (
     <div
       className="game-detail_wrapper"
@@ -54,11 +54,17 @@ function GameDetail() {
           </Button>
 
           <div className="game-detail_main-heading">
-            <h1>{data?.name}</h1>
+            <h1>{data?.name || "-"}</h1>
             <div>
               <h5>
-                {data?.publishers[0].name} &#183;{" "}
-                {data?.genres.map((p) => p.name.toLowerCase()).join(" / ")}
+                {data?.publishers && data.publishers.length ? (
+                  <>{data.publishers[0].name}&#183; </>
+                ) : (
+                  ""
+                )}{" "}
+                {data?.genres && data?.genres.length
+                  ? data?.genres.map((p) => p.name.toLowerCase()).join(" / ")
+                  : ""}
               </h5>
             </div>
           </div>
