@@ -45,9 +45,14 @@ function Home() {
               return <NewsTile key={`${item.title}tile`} data={item} />;
             });
           })}
-        {isLoading || (isFetching && <LoadingSpinner />)}
-        {data && <span ref={colEndRef} />}
       </section>
+      {isLoading ||
+        (isFetching && (
+          <div className="loading-spacing">
+            <LoadingSpinner />
+          </div>
+        ))}
+      {data && <span ref={colEndRef} />}
     </Container>
   );
 }
