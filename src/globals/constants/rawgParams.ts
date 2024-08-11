@@ -19,7 +19,7 @@ const best_games: Partial<GameParams> = {
 
 const latest_releases: Partial<GameParams> = {
   ordering: "-released",
-  metacritic: "40,100",
+  metacritic: "30,100",
 };
 
 const upcoming_games: Partial<GameParams> = {
