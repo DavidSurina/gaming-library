@@ -13,5 +13,8 @@
     margin-top: auto;
     background-color: c.$background-dark_darker;
     z-index: 1000;
+    -webkit-box-shadow: 1px -8px 16px -3px rgba(5, 5, 5, 0.25);
+    -moz-box-shadow: 1px -8px 16px -3px rgba(5, 5, 5, 0.25);
+    box-shadow: 1px -8px 16px -3px rgba(5, 5, 5, 0.25);
   }
 }
