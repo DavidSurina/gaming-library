@@ -16,6 +16,12 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: linear-gradient(267deg, c.$background-dark_darkest, c.$background-dark_darker);
+  background-size: 1200% 1200%;
+
+  -webkit-animation: BackgroundGradient 10s ease infinite;
+  animation: BackgroundGradient 10s ease infinite;
 }
 
 main {
@@ -35,4 +41,28 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+@-webkit-keyframes BackgroundGradient {
+  0% {
+    background-position: 0% 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 51%
+  }
+}
+
+@keyframes BackgroundGradient {
+  0% {
+    background-position: 0% 51%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 51%
+  }
 }
