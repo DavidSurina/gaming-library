@@ -11,6 +11,7 @@ import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
 } from "react-bootstrap-icons";
+
 import { GameScreenshotResultsType } from "../../globals/types/rawgTypes";
 import "./style.scss";
 import "../ImageCarousel/style.scss";
