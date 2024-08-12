@@ -26,7 +26,7 @@ function GameTile(props: PropTypes) {
             <Image src={background_image} alt="game-img" />
           </div>
           <div className="rating-container">
-            <MetaCriticBadge metaCriticRating={metacritic} />
+            <MetaCriticBadge metaCriticRating={metacritic} color="primary" />
           </div>
           <Card.Header>
             <Card.Title>{name}</Card.Title>

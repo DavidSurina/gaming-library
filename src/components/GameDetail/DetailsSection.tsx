@@ -1,7 +1,9 @@
 import React from "react";
-import { Game } from "../../globals/types/rawgTypes";
 import { Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+import MetaCriticBadge from "../MetaCriticBadge/MetaCriticBadge";
+import { Game } from "../../globals/types/rawgTypes";
 
 type PropTypes = {
   data: Game | undefined;
@@ -21,19 +23,24 @@ function DetailsSection(props: PropTypes) {
           timeStyle: undefined,
         }).format(new Date(data?.released))
       : "-";
-  const metacritic = data?.metacritic ? `${data.metacritic}%` : "-";
 
   return (
     <section className="game-detail_bottom-section">
       <div className="game-detail_row">
         <div className="game-detail_rating-summary">
-          <div>
-            <span className="game-detail_main-rating">
-              {rating} <span>of</span> {ratingTop}
-            </span>
-            <span>{ratingsCount} total reviews</span>
+          <div className="game-detail_rating-summary-row">
+            <div className="game-detail_rating-summary-col">
+              <span className="game-detail_main-rating">
+                {rating} <span>of</span> {ratingTop}
+              </span>
+              <span>{ratingsCount} total reviews</span>
+            </div>
+            <MetaCriticBadge
+              metaCriticRating={data?.metacritic}
+              color="secondary"
+            />
           </div>
-          <div>
+          <div className="game-detail_rating-summary-col">
             {ratings && ratings.length ? (
               ratings.map((rating) => {
                 return (
@@ -52,12 +59,6 @@ function DetailsSection(props: PropTypes) {
           </div>
         </div>
         <div className="game-detail_details-summary">
-          <div className="game-detail_grid-column">
-            <span className="game-detail_grid-subheading">
-              Metacritic rating
-            </span>
-            <span className="game-detail_grid-text">{metacritic}</span>
-          </div>
           <div className="game-detail_grid-column">
             <span className="game-detail_grid-subheading">Release date</span>
             <span className="game-detail_grid-text">{dateConvert}</span>
