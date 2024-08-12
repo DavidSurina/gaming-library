@@ -1,0 +1,31 @@
+@use '/src/globals/styles/constants' as c;
+
+.swiper-slide {
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  width: 80%;
+
+  & img {
+    display: block;
+    width: 100%;
+    transform: translate(0, -5%);
+  }
+
+  &_caption {
+    position: absolute;
+    left: 1rem;
+    padding: 1rem;
+    background-color: c.$background-dark_darkest;
+    opacity: 0.9;;
+    border-radius: c.$border-radius;
+  }
+
+  & h2 {
+    top: 1rem;
+  }
+
+  & h5 {
+    top: 6rem;
+  }
+}

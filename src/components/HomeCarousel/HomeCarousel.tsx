@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Carousel } from "react-bootstrap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import { EffectCoverflow } from "swiper/modules";
 
 import { LIBRARY_ROUTE } from "../../MainRoute";
 import { Game } from "../../globals/types/rawgTypes";
+
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "./style.scss";
 
 type PropTypes = {
   data: Array<Game>;
@@ -11,46 +17,33 @@ type PropTypes = {
 
 function HomeCarousel(props: PropTypes) {
   const { data } = props;
-  const [carouselIndex, setCarouselIndex] = useState(0);
 
   return (
-    <Carousel
-      fade
-      activeIndex={carouselIndex}
-      interval={2000}
-      onSelect={(newIndex: number) => setCarouselIndex(newIndex)}
-      controls={false}
-      className="carousel-container"
+    <Swiper
+      modules={[EffectCoverflow, Autoplay]}
+      effect="coverflow"
+      coverflowEffect={{
+        rotate: 50,
+        stretch: 0,
+        depth: 50,
+        modifier: 1,
+        slideShadows: false,
+      }}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
     >
-      {" "}
-      {data.map((item) => {
-        return (
-          <Carousel.Item
-            key={`carouselItem${item.id}`}
-            style={{
-              background: `url(${item.background_image}) no-repeat`,
-              backgroundSize: "105%",
-            }}
-            onClick={() => {}}
-          >
-            <Link
-              to={`${LIBRARY_ROUTE}/${item.slug}`}
-              key={`carouselItem${item.id}Link`}
-            >
-              <Carousel.Caption className="carousel-caption_release">
-                <span>{`Release: ${item.released || "-"}`}</span>
-              </Carousel.Caption>
-              <Carousel.Caption className="carousel-caption_upcoming">
-                <h4>Upcoming games</h4>
-              </Carousel.Caption>
-              <Carousel.Caption className="carousel-caption_name">
-                <h3>{item.name}</h3>
-              </Carousel.Caption>
-            </Link>
-          </Carousel.Item>
-        );
-      })}
-    </Carousel>
+      {data.map((item) => (
+        <SwiperSlide key={`${item.name}slide`}>
+          <Link to={`${LIBRARY_ROUTE}/${item.slug}`}>
+            <img alt={`${item.name}Image`} src={item.background_image} />
+            <h2 className="swiper-slide_caption">{item.name}</h2>
+            <h5 className="swiper-slide_caption">{`Release date: ${item.released}`}</h5>
+          </Link>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
 
