@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Carousel, Container, Image } from "react-bootstrap";
+import React, { useEffect, useRef } from "react";
+import { Container } from "react-bootstrap";
 import { useQuery } from "@tanstack/react-query";
 import { Fade } from "react-awesome-reveal";
 
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import NewsTile from "../../components/NewsTile/NewsTile";
+import HomeCarousel from "../../components/HomeCarousel/HomeCarousel";
 
 import useRssFeed from "../../globals/hooks/useRssFeed";
 import { RawgApiService } from "../../globals/functions/rawgApi";
 import { rawgParams } from "../../globals/constants/rawgParams";
 import { GamesResultsType } from "../../globals/types/rawgTypes";
-import { LIBRARY_ROUTE } from "../../MainRoute";
 
 import "./style.scss";
 
@@ -26,7 +25,6 @@ function Home() {
   } = useRssFeed();
   const { getRawgData } = RawgApiService;
 
-  const [carouselIndex, setCarouselIndex] = useState(0);
   const colEndRef = useRef(null);
 
   const {
@@ -75,36 +73,7 @@ function Home() {
             {isUpcomingGamesLoading && !isUpcomingGamesInitialLoading ? (
               <LoadingSpinner />
             ) : (
-              <Carousel
-                fade
-                activeIndex={carouselIndex}
-                interval={2000}
-                onSelect={(newIndex: number) => setCarouselIndex(newIndex)}
-                controls={false}
-                className="carousel-container"
-              >
-                {" "}
-                {upcomingGamesData?.results.map((item) => {
-                  return (
-                    <Carousel.Item key={`carouselItem${item.id}`}>
-                      <Link to={`${LIBRARY_ROUTE}/${item.slug}`}>
-                        <Carousel.Caption className="carousel-caption_release">
-                          <span>{`Release: ${item.released || "-"}`}</span>
-                        </Carousel.Caption>
-                        <Carousel.Caption className="carousel-caption_upcoming">
-                          <h4>Upcoming games</h4>
-                        </Carousel.Caption>
-                        <Carousel.Caption className="carousel-caption_name">
-                          <h3>{item.name}</h3>
-                        </Carousel.Caption>
-                        <div>
-                          <Image src={item.background_image} />
-                        </div>
-                      </Link>
-                    </Carousel.Item>
-                  );
-                })}
-              </Carousel>
+              <HomeCarousel data={upcomingGamesData?.results || []} />
             )}
           </section>
           <h1>IGN News</h1>
