@@ -124,10 +124,17 @@
     gap: 1.5rem;
     background: c.$background-dark_darkest;
 
-    & > div {
+    &-col {
       display: flex;
       flex-direction: column;
       gap: 2px;
+    }
+
+    &-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
     }
   }
 
