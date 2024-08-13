@@ -18,13 +18,15 @@ type PropTypes = {
 function HomeCarousel(props: PropTypes) {
   const { data } = props;
 
+  // TODO change 'stretch' for mobile devices(and maybe more adjustments) - the font also
   return (
     <Swiper
       modules={[EffectCoverflow, Autoplay]}
+      speed={600}
       effect="coverflow"
       coverflowEffect={{
         rotate: 50,
-        stretch: 0,
+        stretch: 500,
         depth: 50,
         modifier: 1,
         slideShadows: false,
