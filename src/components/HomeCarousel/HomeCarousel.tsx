@@ -22,7 +22,7 @@ function HomeCarousel(props: PropTypes) {
   return (
     <Swiper
       modules={[EffectCoverflow, Autoplay]}
-      speed={600}
+      speed={800}
       effect="coverflow"
       coverflowEffect={{
         rotate: 50,
