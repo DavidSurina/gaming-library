@@ -87,7 +87,7 @@ function GameLibrary() {
           className="filtering-button"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <FilterIcon size="25" />
+          <FilterIcon size="30" />
         </Button>
       </div>
 

@@ -6,9 +6,17 @@
   @include m.global-max-width;
   min-height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.news-container {
+.carousel-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+.news-section {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minMax(600px, 1fr));
@@ -29,4 +37,8 @@
   &:hover > a > .card:not(:hover) {
     opacity: 0.5;
   }
+}
+
+.loading-spacing {
+  margin-top: 3rem;
 }
