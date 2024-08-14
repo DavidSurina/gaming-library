@@ -5,6 +5,7 @@ import { Fade } from "react-awesome-reveal";
 
 import PlatformIconRow from "../PlatformIconRow/PlatformIconRow";
 import MetaCriticBadge from "../MetaCriticBadge/MetaCriticBadge";
+
 import { Game } from "globals/types/rawgTypes";
 import { LIBRARY_ROUTE } from "../../MainRoute";
 

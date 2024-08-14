@@ -10,8 +10,10 @@ import {
 import { ChevronRight as ChevronRightIcon } from "react-bootstrap-icons";
 
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+
 import { GamesResultsType } from "../../globals/types/rawgTypes";
 import { LIBRARY_ROUTE } from "../../MainRoute";
+
 import "./style.scss";
 
 type PropTypes = {

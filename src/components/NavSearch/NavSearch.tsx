@@ -4,6 +4,7 @@ import { Search as SearchIcon, X as CloseIcon } from "react-bootstrap-icons";
 import { useMutation } from "@tanstack/react-query";
 
 import SearchSuggestionList from "../SearchSuggestionList/SearchSuggestionList";
+
 import { GamesResultsType } from "globals/types/rawgTypes";
 import { RawgApiService, rawgSubUrls } from "../../globals/functions/rawgApi";
 
