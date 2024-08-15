@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelect, UseSelectProps } from "downshift";
 import { ChevronDown as ChevronDownIcon } from "react-bootstrap-icons";
+import { useSelect, UseSelectProps } from "downshift";
 import clsx from "clsx";
 
 import { CurrentQueryType } from "../../globals/contexts/LibraryContext";
+
 import "./style.scss";
 
 function Select(props: UseSelectProps<CurrentQueryType>) {

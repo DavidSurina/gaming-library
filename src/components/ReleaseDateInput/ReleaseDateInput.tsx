@@ -1,10 +1,10 @@
 import React from "react";
-
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { useFilterContext } from "../../globals/contexts/FilterContext";
 import { initialFromDate } from "../../globals/constants/rawgParams";
+
+import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
 
 const dateFormat = "dd/MM/yyyy";
