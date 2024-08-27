@@ -76,7 +76,7 @@ function FilterMenu(props: PropTypes) {
           <div className="offcanvas-body-item">
             <label id="platforms">Platforms:</label>
             <Multiselect
-              labelId="platform"
+              labelId="platforms"
               items={currentQueryConvert(platform)}
             />
           </div>
