@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { ChevronUp as ChevronUpIcon } from "react-bootstrap-icons";
+
 import "./style.scss";
 
 function ToTopButton() {

@@ -1,6 +1,7 @@
 import React from "react";
-import { HOME_ROUTE } from "MainRoute";
 import { NavLink } from "react-router-dom";
+
+import { HOME_ROUTE } from "MainRoute";
 import "./style.scss";
 
 function NotFound() {

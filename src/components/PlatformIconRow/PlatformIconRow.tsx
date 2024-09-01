@@ -8,8 +8,11 @@ import {
   Android as AndroidIcon,
   Apple as AppleIcon,
 } from "react-bootstrap-icons";
+
 import IconWrapper from "./IconWrapper";
+
 import { iconSize, platformList } from "./constants";
+
 import "./style.scss";
 
 type PropTypes = {
