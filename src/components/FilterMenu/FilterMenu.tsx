@@ -56,10 +56,19 @@ function FilterMenu(props: PropTypes) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Format filter parameters and add precise search flag
+    const filterQueryParams =
+      formatParams(filteringParams) + "&search_precise=true";
+
+    // Update the current query with filter parameters
     setCurrentQuery({
       queryKey: "filter",
-      params: formatParams(filteringParams) + "&search_precise=true",
+      params: filterQueryParams,
     });
+
+    // Close the filter menu after submitting
+    handleClose();
   };
 
   return (
